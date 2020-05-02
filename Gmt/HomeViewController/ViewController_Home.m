@@ -289,7 +289,7 @@ bool hasCheckedVersionFirst = false;
         SBJsonParser *parser=[[SBJsonParser alloc]init];
         result =  [parser objectWithString:responseStr];
         
-        FishLink = [[result valueForKey:@"l"] intValue];
+        self->FishLink = [[result valueForKey:@"l"] intValue];
         ownAdVersion = [[result valueForKey:@"adv"] intValue];
         ownAdLink = [[result valueForKey:@"adl"] intValue];
         ownAdRatio = [[result valueForKey:@"adr"] intValue];
@@ -301,7 +301,7 @@ bool hasCheckedVersionFirst = false;
 
         
         pp_and_pp = [[result valueForKey:@"pp"] intValue];
-        [viewController_Shop loading_items];
+        [self->viewController_Shop loading_items];
 
         if(!seikeAvailableHasInit){
             seikeAvailable = [[result valueForKey:@"al"] intValue];
@@ -351,9 +351,8 @@ bool hasCheckedVersionFirst = false;
         }while(calLength > 0);
         
         int firstValue = combineValue / calDivide;
-        int secondValue = combineValue - firstValue * calDivide;
         
-        likeAwardToFish = firstValue;
+        self->likeAwardToFish = firstValue;
 
         
         bool canGoNext = true;
@@ -368,7 +367,7 @@ bool hasCheckedVersionFirst = false;
             if(_newLogin){
                 [self registerAUser];
             }else{
-                if(!loopChecking){
+                if(!self->loopChecking){
                     [self load_all_feed];
                 }
                 
@@ -378,13 +377,13 @@ bool hasCheckedVersionFirst = false;
             [self ask_update_version_to_new];
         }
         
-        loopChecking = false;
+        self->loopChecking = false;
         
         hasCheckedVersionFirst = true;
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-        if(!loopChecking){
+        if(!self->loopChecking){
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"There is an error in version checking. Please check the network and make sure it is turning on." delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
             [alert show];
             
@@ -395,7 +394,7 @@ bool hasCheckedVersionFirst = false;
             }
         }
         
-         loopChecking = false;
+        self->loopChecking = false;
     }];
 }
 
@@ -426,9 +425,6 @@ bool hasCheckedVersionFirst = false;
             [self.itag hideToastActivity];
             
             if ([title isEqualToString:@"SURE"]) {
-                NSDictionary *articleParams = [NSDictionary dictionaryWithObjectsAndKeys:
-                                               @"FeedWarning", @"From",
-                                               nil];
                 
                 //[ViewController_Shop.ssaPublisher showOfferWallWithApplicationKey:@"2f835d65" userId:[user_defaults valueForKey:kConstant_UID] delegate:self shouldGetLocation:NO extraParameters:nil parentViewController:self];
                 
@@ -464,18 +460,17 @@ bool hasCheckedVersionFirst = false;
         
         
         [httpClient postPath:@"" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
             
             if(isInSelectseikeView){
-                [inIncreaseVC press_back_button];
+                [self->inIncreaseVC press_back_button];
             }
             
-            refund_isGettingBack = false;
+            self->refund_isGettingBack = false;
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Failed to get the refund" message:@"Please try to logout then login again" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
             [alert show];
             
-            refund_isGettingBack = false;
+            self->refund_isGettingBack = false;
         }];
     }
     
@@ -497,10 +492,9 @@ bool hasCheckedVersionFirst = false;
         
         
         [httpClient postPath:@"" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
             
             if(isInSelectseikeView){
-                [inIncreaseVC press_back_button];
+                [self->inIncreaseVC press_back_button];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Failed to get the reward..." message:@"Please try to logout then login again" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
@@ -526,10 +520,9 @@ bool hasCheckedVersionFirst = false;
         
         
         [httpClient postPath:@"" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
             
             if(isInSelectseikeView){
-                [inIncreaseVC press_back_button];
+                [self->inIncreaseVC press_back_button];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Failed to get coins...." message:@"Please try to logout then login again" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
@@ -677,7 +670,7 @@ bool hasCheckedVersionFirst = false;
         NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         if (![responseStr isEqual:@"-1"]) {
             [self load_feed_history];
-            [viewController_Shop loadSuperS];
+            [self->viewController_Shop loadSuperS];
             
             NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
             [userDefaults setValue:responseStr forKey:kConstant_Session];
@@ -733,8 +726,8 @@ bool hasCheckedVersionFirst = false;
             [user_defaults setObject:unSaveIdArray forKey:kConstant_unsaveTagID];
             [user_defaults synchronize];
             
-            unsaveHistoryArray = [[NSMutableArray alloc] initWithArray:[user_defaults objectForKey:kConstant_unsaveTagID]];
-            saveArray = [[NSMutableArray alloc] initWithArray:[user_defaults objectForKey:kConstant_saveTagID]];
+            self->unsaveHistoryArray = [[NSMutableArray alloc] initWithArray:[user_defaults objectForKey:kConstant_unsaveTagID]];
+            self->saveArray = [[NSMutableArray alloc] initWithArray:[user_defaults objectForKey:kConstant_saveTagID]];
             
             [self delete_print_history];
         }else{
@@ -742,8 +735,8 @@ bool hasCheckedVersionFirst = false;
             [user_defaults setObject:[NSArray array] forKey:kConstant_unsaveTagID];
             [user_defaults synchronize];
             
-            unsaveHistoryArray = [[NSMutableArray alloc] initWithArray:[user_defaults objectForKey:kConstant_unsaveTagID]];
-            saveArray = [[NSMutableArray alloc] initWithArray:[user_defaults objectForKey:kConstant_saveTagID]];
+            self->unsaveHistoryArray = [[NSMutableArray alloc] initWithArray:[user_defaults objectForKey:kConstant_unsaveTagID]];
+            self->saveArray = [[NSMutableArray alloc] initWithArray:[user_defaults objectForKey:kConstant_saveTagID]];
             
             [self delete_print_history];
         }
@@ -789,13 +782,12 @@ bool hasCheckedVersionFirst = false;
         
         
         [httpClient postPath:@"" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
             
-            [saveArray addObjectsFromArray:unsaveHistoryArray];
-            [unsaveHistoryArray removeAllObjects];
+            [self->saveArray addObjectsFromArray:self->unsaveHistoryArray];
+            [self->unsaveHistoryArray removeAllObjects];
             
-            [user_defaults setObject:saveArray forKey:kConstant_saveTagID];
-            [user_defaults setObject:unsaveHistoryArray forKey:kConstant_unsaveTagID];
+            [user_defaults setObject:self->saveArray forKey:kConstant_saveTagID];
+            [user_defaults setObject:self->unsaveHistoryArray forKey:kConstant_unsaveTagID];
             [user_defaults synchronize];
             
             [self delete_print_history];
@@ -1332,7 +1324,7 @@ bool hasCheckedVersionFirst = false;
         SBJsonParser *parser=[[SBJsonParser alloc]init];
         result =  [parser objectWithString:responseStr];
         
-        isLoadingTag = false;
+        self->isLoadingTag = false;
         
         feedsArry = (NSMutableArray*)result;
         
@@ -1347,7 +1339,7 @@ bool hasCheckedVersionFirst = false;
         }else{
             
             if([self checkCanLikeEitherPhotoInFeed]){
-                noTagFeed = false;
+                self->noTagFeed = false;
                 [self.itag makeToastActivity];
                 [self checkAndLoadThisImg];
             }else{
@@ -1356,7 +1348,7 @@ bool hasCheckedVersionFirst = false;
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        isLoadingTag = false;
+        self->isLoadingTag = false;
     }];
 }
 
@@ -1739,8 +1731,8 @@ bool hasCheckedVersionFirst = false;
          //[self saveUserDataAndContinue];
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
          [self requestFail];
-         [self save_feed_history:tagmedia_ID_updating];
-         prev_id_update = qid_updateing;
+         [self save_feed_history:self->tagmedia_ID_updating];
+         self->prev_id_update = self->qid_updateing;
          [self load_next_tags];
          // NSString *errorBodyMessage = [[error userInfo] objectForKey:@"NSLocalizedRecoverySuggestion"];
      }];
@@ -1854,11 +1846,10 @@ bool hasCheckedVersionFirst = false;
     [operation setCompletionBlockWithSuccess:
      ^(AFHTTPRequestOperation *operation,
        id responseObject) {
-         NSString *response = [operation responseString];
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
          
-         failDiamond_fromserver++;
-         if(failDiamond_fromserver < 2){
+         self->failDiamond_fromserver++;
+         if(self->failDiamond_fromserver < 2){
              [self increase_diamond:1];
          }
      }];
@@ -1919,11 +1910,10 @@ bool hasCheckedVersionFirst = false;
     [operation setCompletionBlockWithSuccess:
      ^(AFHTTPRequestOperation *operation,
        id responseObject) {
-         NSString *response = [operation responseString];
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
          
-         failDiamond_fromserver++;
-         if(failDiamond_fromserver < 2){
+         self->failDiamond_fromserver++;
+         if(self->failDiamond_fromserver < 2){
              [self increase_diamond:1];
          }
      }];
@@ -1963,9 +1953,9 @@ bool hasCheckedVersionFirst = false;
             [user_defaults synchronize];
             
             if([[dict valueForKey:@"refundAmt"] intValue] > 0){
-                refundAmt = [[dict valueForKey:@"refundAmt"] intValue];
+                self->refundAmt = [[dict valueForKey:@"refundAmt"] intValue];
                 
-                refund_isGettingBack = true;
+                self->refund_isGettingBack = true;
                 
                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"You are getting REFUND" message:@"Your photo(s) can't be liked by others. Please login to Instagram and turn off the 'Posts are Private'. Make sure it is set in 'Public'." delegate:self cancelButtonTitle:@"GET REFUND" otherButtonTitles:nil, nil];
                 [alert show];
@@ -1974,7 +1964,7 @@ bool hasCheckedVersionFirst = false;
             }
             
             if([[dict valueForKey:@"rewardAmt"] intValue] > 0 && responseVersion == kVersion){
-                rewardAmt = [[dict valueForKey:@"rewardAmt"] intValue];
+                self->rewardAmt = [[dict valueForKey:@"rewardAmt"] intValue];
                 
                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"You are getting coins" message:@"You'll get coins every time when you update the app to the latest version." delegate:self cancelButtonTitle:@"GET COINS" otherButtonTitles:nil, nil];
                 [alert show];
@@ -1983,7 +1973,7 @@ bool hasCheckedVersionFirst = false;
             }
             
             if([[dict valueForKey:@"ownAdAmount"] intValue] > 0){
-                ownAmt = [[dict valueForKey:@"ownAdAmount"] intValue];
+                self->ownAmt = [[dict valueForKey:@"ownAdAmount"] intValue];
                 
                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"You are getting coins" message:@"You should get coins for both apps. Restart the apps if you don't get the coins." delegate:self cancelButtonTitle:@"GET COINS" otherButtonTitles:nil, nil];
                 [alert show];
@@ -2207,25 +2197,23 @@ bool hasCheckedVersionFirst = false;
         
         
         [httpClient postPath:@"" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+            [self->saveArray addObjectsFromArray:self->unsaveHistoryArray];
+            [self->unsaveHistoryArray removeAllObjects];
             
-            [saveArray addObjectsFromArray:unsaveHistoryArray];
-            [unsaveHistoryArray removeAllObjects];
-            
-            [user_defaults setObject:saveArray forKey:kConstant_saveTagID];
-            [user_defaults setObject:unsaveHistoryArray forKey:kConstant_unsaveTagID];
+            [user_defaults setObject:self->saveArray forKey:kConstant_saveTagID];
+            [user_defaults setObject:self->unsaveHistoryArray forKey:kConstant_unsaveTagID];
             [user_defaults synchronize];
             
             [self delete_print_history];
             [self tag_out];
             
-            tappingOut = false;
+            self->tappingOut = false;
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Log out failed" message:@"Please try again" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
             [alert show];
             
-            tappingOut = false;
+            self->tappingOut = false;
             
         }];
         
@@ -2670,7 +2658,7 @@ bool hasCheckedVersionFirst = false;
             NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
             
             if([responseStr integerValue] == 200){
-                if(prev_id_update != qid_updateing){
+                if(self->prev_id_update != self->qid_updateing){
                     [self successToSeike];
                 }
                 
@@ -2680,12 +2668,12 @@ bool hasCheckedVersionFirst = false;
                 
                 if ([responseStr integerValue] == 400){
                     [self requestFail];
-                    [self save_feed_history:tagmedia_ID_updating];
+                    [self save_feed_history:self->tagmedia_ID_updating];
                 }else{
                     [self popup_tag_out_warning];
                 }
                 
-                prev_id_update = qid_updateing;
+                self->prev_id_update = self->qid_updateing;
             }
             
             [self load_next_tags];
@@ -2881,13 +2869,13 @@ bool hasCheckedVersionFirst = false;
                 
                 [loadtagImg_pre[i] sd_setImageWithURL:[[feedsArry objectAtIndex:i] valueForKey:@"photo_url"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
                     if (error != nil) {
-                        loadFail_pre[i] = true;
-                        loading_pre[i] = false;
-                        inLoading_preload--;
+                        self->loadFail_pre[i] = true;
+                        self->loading_pre[i] = false;
+                        self->inLoading_preload--;
                     } else {
-                        successLoad_pre[i] = true;
-                        loading_pre[i] = false;
-                        inLoading_preload--;
+                        self->successLoad_pre[i] = true;
+                        self->loading_pre[i] = false;
+                        self->inLoading_preload--;
                     }
                 }];
             }
@@ -2913,16 +2901,16 @@ bool hasCheckedVersionFirst = false;
         [self.itag sd_setImageWithURL:[currentImageData valueForKey:@"photo_url"]  completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
             if (error != nil) {
                 [self.itag hideToastActivity];
-                can_nextTag = true;
-                photoLoading_url_timer = -1;
+                self->can_nextTag = true;
+                self->photoLoading_url_timer = -1;
                 
-                loaded_pre[idx_preload] = true;
+                self->loaded_pre[self->idx_preload] = true;
             } else {
                 [self.itag hideToastActivity];
-                can_nextTag = true;
-                photoLoading_url_timer = -1;
+                self->can_nextTag = true;
+                self->photoLoading_url_timer = -1;
                 
-                loaded_pre[idx_preload] = true;
+                self->loaded_pre[self->idx_preload] = true;
             }
         }];
     }
@@ -3245,7 +3233,7 @@ NSMutableString* _rank;
          NSString* responseStr =
          [responseStr2 stringByReplacingOccurrencesOfString:@"\\u" withString:@""];
          
-         item = 0;
+        self->item = 0;
 
          NSObject *result=nil;
          SBJsonParser *parser=[[SBJsonParser alloc]init];
@@ -3256,7 +3244,7 @@ NSMutableString* _rank;
              [self loadImages_scrollView_PR_ByNSURLConnection:_m_id];
              return;
          }else{
-             thumbnail_isloading = false;
+             self->thumbnail_isloading = false;
              [self.view hideToastActivity];
          }
          
@@ -3271,10 +3259,10 @@ NSMutableString* _rank;
              
              UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
              
-             button.frame = CGRectMake(col*kthumbnailWidth * ipadRatio + horizentalSpace * ipadRatio, row*kthumbnailHeight * ipadRatio + kverticalSpace * ipadRatio,kthumbnailWidth * ipadRatio,kthumbnailHeight * ipadRatio);
+             button.frame = CGRectMake(self->col*kthumbnailWidth * ipadRatio + horizentalSpace * ipadRatio, self->row*kthumbnailHeight * ipadRatio + kverticalSpace * ipadRatio,kthumbnailWidth * ipadRatio,kthumbnailHeight * ipadRatio);
              button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
              
-             button.tag = item + accumCount;
+             button.tag = self->item + self->accumCount;
              [button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
              
              CGRect buttonfram  = button.frame;
@@ -3286,7 +3274,7 @@ NSMutableString* _rank;
              UIView *likesCountView2 = [[UIView alloc]initWithFrame:CGRectMake(0, buttonfram.size.height-20 * ipadRatio, buttonfram.size.width, 20 * ipadRatio)];
              [likesCountView2 setBackgroundColor:[UIColor greenColor]];
              
-             HMedia *imgData = [self.images objectAtIndex:item];
+             HMedia *imgData = [self.images objectAtIndex:self->item];
              UIImageView *heartImgView;
              
              if(imgData.likes < 10){
@@ -3321,11 +3309,11 @@ NSMutableString* _rank;
              [button addSubview:likesCountView];
              [button addSubview:likesCountView2];
              
-             ++col;++item;horizentalSpace += 2;
+             ++self->col;++self->item;horizentalSpace += 2;
              
-             if (col >= kImagesPerRow) {
-                 row++;
-                 col = 0;
+             if (self->col >= kImagesPerRow) {
+                 self->row++;
+                 self->col = 0;
                  horizentalSpace = 10;
                  
                  if(isIpad){
@@ -3334,8 +3322,8 @@ NSMutableString* _rank;
                  
                  kverticalSpace += 2;
                  
-                 scrollHeight_basic = scrollHeight_basic + kthumbnailHeight * ipadRatio;
-                 scrolerHeight = scrollHeight_basic + kverticalSpace + 200* ipadRatio;
+                 self->scrollHeight_basic = self->scrollHeight_basic + kthumbnailHeight * ipadRatio;
+                 scrolerHeight = self->scrollHeight_basic + kverticalSpace + 200* ipadRatio;
              }
              //            [button.layer setCornerRadius:10];
              //            button.clipsToBounds = YES;
@@ -3348,7 +3336,7 @@ NSMutableString* _rank;
          self.scrollview.bounces = YES;
          self.Scrollview_2.bounces = YES;
          [self loadImages];
-         accumCount = (int)self.thumbnails.count;
+        self->accumCount = (int)self.thumbnails.count;
          
          //[self saveUserDataAndContinue];
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -3399,7 +3387,7 @@ NSMutableString* _rank;
             UIImage* image = [UIImage imageWithData:data];
             
             dispatch_async(dispatch_get_main_queue(), ^ {
-                if(currentThread == thisThread){
+                if(self->currentThread == thisThread){
                     UIButton* buttonForImg = [self.thumbnails objectAtIndex:itemForImg];
                     
                     //  buttonForImg.tag = itemForImg;
