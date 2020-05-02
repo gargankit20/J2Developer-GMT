@@ -24,10 +24,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-
-    
-    NSLog(@"startApp viewDidLoad");
     
     [self load_background];
     [self startApp];
@@ -37,11 +33,8 @@
 }
 
 
--(void) startApp{
-
-    NSLog(@"startApp");
-    
-    
+-(void) startApp
+{
     loaded_howmany++;
     if(loaded_howmany == 5){
         [load_timer invalidate];
@@ -163,8 +156,6 @@
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error.localizedDescription);
-        printf("FAIL start app\n");
         static int startAppFirstFAIL = 0;
         startAppFirstFAIL++;
         if(startAppFirstFAIL < 3){

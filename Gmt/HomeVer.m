@@ -59,7 +59,6 @@
 }
 
 - (IBAction)click_tag:(id)sender{
-    NSLog(@"click_tag");
     
     [self.view makeToastActivity];
      NSTimer* _timer = [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(click_tag_delay:) userInfo:nil repeats:NO];
@@ -67,7 +66,7 @@
 }
 
 - (IBAction)click_magic:(id)sender{
-   /* NSLog(@"click_magic");
+   /* 
     FirstViewController *view = [[FirstViewController alloc] initWithNibName:@"FirstViewController" bundle:nil];
     
     //UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:view];

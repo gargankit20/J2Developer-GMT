@@ -34,8 +34,6 @@
     NSMutableString* s_sessionid = [NSMutableString string];
     NSMutableString* returnCookie = [NSMutableString string];
     
-    // NSLog(@"cookie GOT:%@",s_cookie);
-    
     if([[NSUserDefaults standardUserDefaults]  valueForKey:kConstant_MID] == nil){
         [s_mid setString:[u getFkMd]];
     }else{
@@ -54,10 +52,6 @@
         [s_ccode setString:[[NSUserDefaults standardUserDefaults]  valueForKey:kConstant_Code]];
     }
     
-    //  NSLog(@"mid GOT:%@",s_mid);
-    //  NSLog(@"csrftoken GOT:%@",s_csrftoken);
-    // NSLog(@"ccode GOT:%@",s_ccode);
-    
     NSString* ds_user_string = @"ds_user";
     NSRange tokenRange = [s_cookie rangeOfString:ds_user_string];
     NSInteger tokenIdx = tokenRange.location + tokenRange.length;
@@ -68,27 +62,19 @@
     bool tokenFoundEndIdx = false;
     
     do{
-        
-        // printf("FUC:%i %i %i\n",tokenStartIdx, tokenEndIdx, (int)tokenIdx);
         if(!tokenFoundStartIdx){
-            // printf("NOT FOUND LOOP\n");
             NSString* fuckfuckString = [s_cookie substringWithRange:NSMakeRange(tokenStartIdx, 1)];
             
-            //  NSLog(fuckfuckString);
             if([fuckfuckString isEqualToString:@" "] || [fuckfuckString isEqualToString:@"="]){
                 tokenStartIdx++;
             }else{
-                //  printf("Found start\n");
                 tokenFoundStartIdx = true;
                 tokenEndIdx = tokenStartIdx;
             }
         }else{
-            //   printf("FUND LOOP\n");
             NSString* fuckfuckString = [s_cookie substringWithRange:NSMakeRange(tokenEndIdx, 1)];
-            //  NSLog(fuckfuckString);
             if(tokenFoundStartIdx){
                 if([fuckfuckString isEqualToString:@";"] || [fuckfuckString isEqualToString:@" "]){
-                    //    printf("Found End\n");
                     tokenFoundEndIdx = true;
                 }else{
                     tokenEndIdx++;
@@ -113,27 +99,19 @@
     tokenFoundEndIdx = false;
     
     do{
-        
-        // printf("FUC:%i %i %i\n",tokenStartIdx, tokenEndIdx, (int)tokenIdx);
         if(!tokenFoundStartIdx){
-            // printf("NOT FOUND LOOP\n");
             NSString* fuckfuckString = [s_cookie substringWithRange:NSMakeRange(tokenStartIdx, 1)];
             
-            //  NSLog(fuckfuckString);
             if([fuckfuckString isEqualToString:@" "] || [fuckfuckString isEqualToString:@"="]){
                 tokenStartIdx++;
             }else{
-                //  printf("Found start\n");
                 tokenFoundStartIdx = true;
                 tokenEndIdx = tokenStartIdx;
             }
         }else{
-            //   printf("FUND LOOP\n");
             NSString* fuckfuckString = [s_cookie substringWithRange:NSMakeRange(tokenEndIdx, 1)];
-            //  NSLog(fuckfuckString);
             if(tokenFoundStartIdx){
                 if([fuckfuckString isEqualToString:@";"] || [fuckfuckString isEqualToString:@" "]){
-                    //    printf("Found End\n");
                     tokenFoundEndIdx = true;
                 }else{
                     tokenEndIdx++;
@@ -157,27 +135,19 @@
     tokenFoundEndIdx = false;
     
     do{
-        
-        // printf("FUC:%i %i %i\n",tokenStartIdx, tokenEndIdx, (int)tokenIdx);
         if(!tokenFoundStartIdx){
-            // printf("NOT FOUND LOOP\n");
             NSString* fuckfuckString = [s_cookie substringWithRange:NSMakeRange(tokenStartIdx, 1)];
             
-            //  NSLog(fuckfuckString);
             if([fuckfuckString isEqualToString:@" "] || [fuckfuckString isEqualToString:@"="]){
                 tokenStartIdx++;
             }else{
-                //  printf("Found start\n");
                 tokenFoundStartIdx = true;
                 tokenEndIdx = tokenStartIdx;
             }
         }else{
-            //   printf("FUND LOOP\n");
             NSString* fuckfuckString = [s_cookie substringWithRange:NSMakeRange(tokenEndIdx, 1)];
-            //  NSLog(fuckfuckString);
             if(tokenFoundStartIdx){
                 if([fuckfuckString isEqualToString:@";"] || [fuckfuckString isEqualToString:@" "]){
-                    //    printf("Found End\n");
                     tokenFoundEndIdx = true;
                 }else{
                     tokenEndIdx++;
@@ -190,12 +160,6 @@
     [s_sessionid setString:[s_cookie substringWithRange:NSMakeRange(tokenStartIdx, tokenEndIdx - tokenStartIdx)]];
     
     [s_igfl setString:[NSString stringWithString:s_ds_user]];
-    
-    
-    //NSLog(@"s_ds_user GOT:%@",s_ds_user);
-    // NSLog(@"s_ds_user_id GOT:%@",s_ds_user_id);
-    // NSLog(@"s_igfl GOT:%@",s_igfl);
-    // NSLog(@"s_sessionid GOT:%@",s_sessionid);
     
     //[returnCookie setString:@"ccode="];
     //[returnCookie appendString:s_ccode];
@@ -214,13 +178,8 @@
     [returnCookie appendString:s_sessionid];
     //[returnCookie appendString:@";"];
     
-    //   NSLog(@"COOKIE:%@",returnCookie);
-    
-    
     return returnCookie;
-    
 }
-
 
 -(NSString*) getCk_27{
     NSString* s_cookie = [[[NSUserDefaults standardUserDefaults] valueForKey:kConstant_Cookie] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -234,8 +193,6 @@
     NSMutableString* s_urlgen = [NSMutableString string];
     NSMutableString* returnCookie = [NSMutableString string];
     
-    // NSLog(@"cookie GOT:%@",s_cookie);
-    
     if([[NSUserDefaults standardUserDefaults]  valueForKey:kConstant_MID] == nil){
         [s_mid setString:[u getFkMd]];
     }else{
@@ -247,12 +204,6 @@
     }else{
         [s_csrftoken setString:[[NSUserDefaults standardUserDefaults]  valueForKey:kConstant_Token]];
     }
-    
-    
-    
-    //  NSLog(@"mid GOT:%@",s_mid);
-    //  NSLog(@"csrftoken GOT:%@",s_csrftoken);
-    // NSLog(@"ccode GOT:%@",s_ccode);
     
     int searchIdx;
     int searchLength;
@@ -282,27 +233,19 @@
         bool tokenFoundEndIdx = false;
         
         do{
-            
-            // printf("FUC:%i %i %i\n",tokenStartIdx, tokenEndIdx, (int)tokenIdx);
             if(!tokenFoundStartIdx){
-                // printf("NOT FOUND LOOP\n");
                 NSString* fuckfuckString = [s_cookie substringWithRange:NSMakeRange(tokenStartIdx, 1)];
                 
-                //  NSLog(fuckfuckString);
                 if([fuckfuckString isEqualToString:@" "] || [fuckfuckString isEqualToString:@"="]){
                     tokenStartIdx++;
                 }else{
-                    //  printf("Found start\n");
                     tokenFoundStartIdx = true;
                     tokenEndIdx = tokenStartIdx;
                 }
             }else{
-                //   printf("FUND LOOP\n");
                 NSString* fuckfuckString = [s_cookie substringWithRange:NSMakeRange(tokenEndIdx, 1)];
-                //  NSLog(fuckfuckString);
                 if(tokenFoundStartIdx){
                     if([fuckfuckString isEqualToString:@";"] || [fuckfuckString isEqualToString:@" "]){
-                        //    printf("Found End\n");
                         tokenFoundEndIdx = true;
                     }else{
                         tokenEndIdx++;
@@ -317,7 +260,6 @@
             preventLoopForever++;
             
             if(preventLoopForever > 100){
-                printf("preventLoopForever END\n");
                 break;
             }
             
@@ -350,27 +292,19 @@
         bool tokenFoundEndIdx = false;
         
         do{
-            
-            // printf("FUC:%i %i %i\n",tokenStartIdx, tokenEndIdx, (int)tokenIdx);
             if(!tokenFoundStartIdx){
-                // printf("NOT FOUND LOOP\n");
                 NSString* fuckfuckString = [s_cookie substringWithRange:NSMakeRange(tokenStartIdx, 1)];
                 
-                //  NSLog(fuckfuckString);
                 if([fuckfuckString isEqualToString:@" "] || [fuckfuckString isEqualToString:@"="]){
                     tokenStartIdx++;
                 }else{
-                    //  printf("Found start\n");
                     tokenFoundStartIdx = true;
                     tokenEndIdx = tokenStartIdx;
                 }
             }else{
-                //   printf("FUND LOOP\n");
                 NSString* fuckfuckString = [s_cookie substringWithRange:NSMakeRange(tokenEndIdx, 1)];
-                //  NSLog(fuckfuckString);
                 if(tokenFoundStartIdx){
                     if([fuckfuckString isEqualToString:@";"] || [fuckfuckString isEqualToString:@" "]){
-                        //    printf("Found End\n");
                         tokenFoundEndIdx = true;
                     }else{
                         tokenEndIdx++;
@@ -387,13 +321,10 @@
         preventLoopForever++;
         
         if(preventLoopForever > 100){
-            printf("preventLoopForever END\n");
             break;
         }
         
     }
-    
-    
     
     [s_ds_user_id setString:[s_cookie substringWithRange:NSMakeRange(tokenStartIdx, tokenEndIdx - tokenStartIdx)]];
     
@@ -419,27 +350,20 @@
         bool tokenFoundEndIdx = false;
         
         do{
-            
-            // printf("FUC:%i %i %i\n",tokenStartIdx, tokenEndIdx, (int)tokenIdx);
             if(!tokenFoundStartIdx){
-                // printf("NOT FOUND LOOP\n");
                 NSString* fuckfuckString = [s_cookie substringWithRange:NSMakeRange(tokenStartIdx, 1)];
                 
-                //  NSLog(fuckfuckString);
                 if([fuckfuckString isEqualToString:@" "] || [fuckfuckString isEqualToString:@"="]){
                     tokenStartIdx++;
                 }else{
-                    //  printf("Found start\n");
                     tokenFoundStartIdx = true;
                     tokenEndIdx = tokenStartIdx;
                 }
             }else{
-                //   printf("FUND LOOP\n");
                 NSString* fuckfuckString = [s_cookie substringWithRange:NSMakeRange(tokenEndIdx, 1)];
-                //  NSLog(fuckfuckString);
+                
                 if(tokenFoundStartIdx){
                     if([fuckfuckString isEqualToString:@";"] || [fuckfuckString isEqualToString:@" "]){
-                        //    printf("Found End\n");
                         tokenFoundEndIdx = true;
                     }else{
                         tokenEndIdx++;
@@ -456,13 +380,9 @@
         preventLoopForever++;
         
         if(preventLoopForever > 100){
-            printf("preventLoopForever END\n");
             break;
         }
-        
     }
-    
-   
     
     [s_sessionid setString:[s_cookie substringWithRange:NSMakeRange(tokenStartIdx, tokenEndIdx - tokenStartIdx)]];
     
@@ -491,27 +411,19 @@
         bool tokenFoundEndIdx = false;
         
         do{
-            
-            // printf("FUC:%i %i %i\n",tokenStartIdx, tokenEndIdx, (int)tokenIdx);
             if(!tokenFoundStartIdx){
-                // printf("NOT FOUND LOOP\n");
                 NSString* fuckfuckString = [s_cookie substringWithRange:NSMakeRange(tokenStartIdx, 1)];
                 
-                //  NSLog(fuckfuckString);
                 if([fuckfuckString isEqualToString:@"="]){
                     tokenStartIdx++;
                 }else{
-                    //  printf("Found start\n");
                     tokenFoundStartIdx = true;
                     tokenEndIdx = tokenStartIdx;
                 }
             }else{
-                //   printf("FUND LOOP\n");
                 NSString* fuckfuckString = [s_cookie substringWithRange:NSMakeRange(tokenEndIdx, 1)];
-                //  NSLog(fuckfuckString);
                 if(tokenFoundStartIdx){
                     if([fuckfuckString isEqualToString:@";"]){
-                        //    printf("Found End\n");
                         tokenFoundEndIdx = true;
                     }else{
                         tokenEndIdx++;
@@ -528,24 +440,12 @@
         preventLoopForever++;
         
         if(preventLoopForever > 100){
-            printf("preventLoopForever END\n");
             break;
         }
-        
     }
     
-   
-    
     [s_urlgen setString:[s_cookie substringWithRange:NSMakeRange(tokenStartIdx, tokenEndIdx - tokenStartIdx)]];
-    
-    
     //-------------------------------------------------------------------------------------------------
-    
-    
-    //NSLog(@"s_ds_user GOT:%@",s_ds_user);
-    // NSLog(@"s_ds_user_id GOT:%@",s_ds_user_id);
-    // NSLog(@"s_igfl GOT:%@",s_igfl);
-    // NSLog(@"s_sessionid GOT:%@",s_sessionid);
     
     //[returnCookie setString:@"ccode="];
     //[returnCookie appendString:s_ccode];
@@ -571,14 +471,8 @@
     
     //[returnCookie appendString:@";"];
     
-       NSLog(@"COOKIE:%@",returnCookie);
-    
-    
     return returnCookie;
-    
 }
-
-
 
 -(NSString*) getFkCountryCode{
     NSLocale *locale = [NSLocale currentLocale];
@@ -657,7 +551,6 @@
     [ranDeviceString appendString:fuckString[7]];
     
     return ranDeviceString;
-    
 }
 
 -(NSString*) ran_hex:(int)_number{
@@ -680,8 +573,6 @@
     return hexString;
 }
 
-
-
 + (NSString *)escapeQueryString:(id)string {
     
     // convert to string if not.
@@ -700,9 +591,6 @@
                                             kCFStringEncodingUTF8);
     return CFBridgingRelease(escaped);
 }
-
-
-
 
 +(NSString*) getFkKey:(NSString*)_fk{
     
@@ -982,7 +870,6 @@ NSData *mfkda(NSString *k, NSString *d)
         NSString* c = [rr substringWithRange:rag];
         NSString* cc;
         
-        //  NSLog(@"ss:%@", c);
         if([c isEqualToString:@"A"]){
             cc = @"0";
         }
@@ -1082,7 +969,6 @@ NSData *mfkda(NSString *k, NSString *d)
             cc = @"a";
         }
         if([c isEqualToString:@"g"]){
-            printf("g input\n");
             cc = @"k";
         }
         if([c isEqualToString:@"h"]){
@@ -1195,7 +1081,6 @@ NSData *mfkda(NSString *k, NSString *d)
             cc = c;
         }
         
-        //    NSLog(@"ee:%@", cc);
         [rt appendString:cc];
     }
     

@@ -28,34 +28,25 @@
     isSessionExpired = true;
     ipadRatio = 1.0;
     
-    
-    printf("checkForIphone5 screenwidth:%4.8f height:%4.8f\n", [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
-    
     if([UIScreen mainScreen].bounds.size.height >= 1024.0)
     {
-        printf("is Ipad\n");
         isIpad = true;
         ipadRatio = 2.0;
         
     }else if([UIScreen mainScreen].bounds.size.height >= 812.0)
     {
-        printf("is iPhone X\n");
         isIphone6 = true;
         isIphoneX = true;
     }else if([UIScreen mainScreen].bounds.size.height >= 736.0)
     {
-        printf("is iPhone 6 Plus\n");
         isIphone6P = true;
     }else if([UIScreen mainScreen].bounds.size.height >= 667.0)
     {
-        printf("is iPhone 6\n");
         isIphone6 = true;
     }else if([UIScreen mainScreen].bounds.size.height >= 568.0)
     {
-        printf("is iPhone 5\n");
         isIphone5 = true;
     }else{
-        printf("is old iPHone\n");
         isOldIphone = true;
     }
     

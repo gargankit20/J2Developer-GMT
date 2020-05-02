@@ -33,7 +33,6 @@ NSUserDefaults* user_defaults;
 @implementation ViewController_Shop
 
 -(void) set_delegate:(id)_id{
-    printf("ViewController_Shop set_delegate\n");
     delegate = _id;
 }
 
@@ -48,14 +47,10 @@ NSUserDefaults* user_defaults;
         }
     }
     
-    printf("viewWillAppear storeviewcontroller2:%i\n", offset_OW_onemore);
-    
-    
     if(responseVersion < kVersion){
         allowSuperS = false;
     }else{
         allowSuperS = true;
-        printf("viewWillAppear storeviewcontroller2 allowSuperS\n");
     }
     
     if(!allowSuperS){
@@ -68,9 +63,6 @@ NSUserDefaults* user_defaults;
     }
     
     //headingLabel.text = [NSString stringWithFormat:@"%4.1f", 2.0];
-    
-    
-    
     
     if(allowSuperS && superAllow_server == 2){
         button_diamond2.frame = CGRectMake(buttonStartX, 283 * ipadRatio, 293 * ipadRatio, 33 * ipadRatio);
@@ -93,18 +85,13 @@ NSUserDefaults* user_defaults;
     }else{
         headingLabel.frame = CGRectMake(106, 288 + offset_OW_onemore, 100, 21);
     }
-
 }
-
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    printf("store view controller v2 initWithNibName :%i\n", superAllow_server);
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        
-       
         
         buttonStartX = 13;
         if(isIpad){
@@ -133,27 +120,20 @@ NSUserDefaults* user_defaults;
     return self;
 }
 
--(void) loadSuperS{
- 
-    printf("loadSuperS:%i %i\n", responseVersion, kVersion);
-    
+-(void) loadSuperS
+{
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     
     NSString *userId = [defaults objectForKey:kConstant_UID];
     
     if (!userId) {
         //[self load_tagview];
-        printf("no user id\n");
         return;
     }
     
     if(isLoadSuperS){
-        printf("isLoadSuperS\n");
         return;
     }
-    
-    
-    NSLog(@"%@", userId);
     
     if(responseVersion < kVersion){
         allowSuperS = false;
@@ -162,7 +142,6 @@ NSUserDefaults* user_defaults;
     }
     
     if(hasSuperS){
-        printf("diamond appear\n");
         button_diamond.frame = CGRectMake(buttonStartX, 242 * ipadRatio, 293 * ipadRatio, 33 * ipadRatio);
     }else{
         button_diamond.frame = CGRectMake(9999, 9999, 293 * ipadRatio, 33 * ipadRatio);
@@ -171,9 +150,6 @@ NSUserDefaults* user_defaults;
     if(!allowSuperS){
         button_diamond.frame = CGRectMake(9999, 9999, 293 * ipadRatio, 33 * ipadRatio);
     }
-    
-    printf("btn:%4.8f %4.8f %4.8f %4.8f\n",button_diamond.frame.origin.x, button_diamond.frame.origin.y, button_diamond.frame.size.width, button_diamond.frame.size.height);
-    
     
     isLoadSuperS = true;
     
@@ -193,7 +169,6 @@ NSUserDefaults* user_defaults;
     [IronSource setOfferwallDelegate:self];
     
     // After setting the delegates you can go ahead and initialize the SDK.
-    NSLog(@"user id:%@", [user_defaults valueForKey:kConstant_UID]);
     [IronSource setUserId:[user_defaults valueForKey:kConstant_UID]];
     [IronSource initWithAppKey:@"2f835d65"];
     
@@ -202,12 +177,8 @@ NSUserDefaults* user_defaults;
 }
 
 -(void) viewDidAppear:(BOOL)animated{
-    printf("store view v2 viewDidAppear\n");
     [self loadSuperS];
     [self loading_items];
-    
-    
-    
 }
 
 -(void) load_before_appearing_view{
@@ -222,10 +193,8 @@ NSUserDefaults* user_defaults;
     }
 }
 
-
 - (void)viewDidLoad
 {
-    printf("store view controller v2 viewDidLoad\n");
     [super viewDidLoad];
     
     UILabel* label=[[UILabel alloc] initWithFrame:CGRectMake(0,0, self.navigationItem.titleView.frame.size.width, 40)];
@@ -282,15 +251,9 @@ NSUserDefaults* user_defaults;
     //[self loading_items];
     
     [self load_conversation];
-    
-    
-    printf("end view did load in store view controller v2\n");
 }
 
 -(void) load_conversation{
-    printf("loadConversationDisplay\n");
-    
-    
     headingLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
     
     //headingLabel.text = [NSString stringWithFormat:@"%4.1f", 2.0];
@@ -325,12 +288,9 @@ NSUserDefaults* user_defaults;
      }else{
      self.coinsConversion_lbl.font = [UIFont fontWithName:@"Helvetica" size:14.0];
      }*/
-    
 }
 
 -(void) loading_items{
-    NSLog(@"loading_items loading_items:%i\n", pp_and_pp);
-    
     if(success_loadedItem){
         return;
     }
@@ -428,7 +388,6 @@ NSUserDefaults* user_defaults;
         button_diamond.frame = CGRectMake(9999, 9999, 293 * ipadRatio, 33 * ipadRatio);
     }
 
-    printf("init free coins 2\n");
     button_diamond2 = [UIButton buttonWithType:UIButtonTypeCustom];
     //[button_diamond2 setImage:[UIImage imageNamed:@"iap_btn_freecoins_2.png"] forState:UIControlStateNormal];
     [button_diamond2 setBackgroundColor:[self colorWithHex:0x957FE8]];
@@ -464,18 +423,12 @@ NSUserDefaults* user_defaults;
 }
 
 -(void) showSuper{
-    printf("showSuper\n");
-    
     [self.view makeToastActivity];
     [IronSource showOfferwallWithViewController:self placement:@"DefaultOfferWall"];
-
 }
-
-
 
 -(void) delayToLoadFreeCoinsContent{
    [self showSuper];
-    
 }
 
 -(void) press_back_button{

@@ -16,13 +16,11 @@
 @synthesize likes = _likes;
 
 +(NSArray*) initAttr:(NSArray*) attributesArray moreAvailable:(bool)_moreAvailable{
-    //NSLog(@"init fuck attributes:%lu", (unsigned long)attributesArray.count);
     NSMutableArray *mutableRecords = [NSMutableArray array];
     
     [maxID_thumbnail setString:@""];
 
     for(int i = 0 ; i < attributesArray.count ; i++){
-        //NSLog(@"init fuck iiii:%i", i);
         [mutableRecords addObject:[[HMedia alloc] initOneAttr:[attributesArray objectAtIndex:i] moreAvailable:_moreAvailable]];
     }
     
@@ -54,8 +52,6 @@
             minIdx = i;
         }
     }
-    
-    //NSLog(@"FKUCFUCKFUCK:%@", [[checkImgSize_Array objectAtIndex:minIdx] valueForKey:@"url"]);
     
     self.thumbnailUrl = [[checkImgSize_Array objectAtIndex:minIdx] valueForKey:@"url"];
     self.standardUrl = [[checkImgSize_Array objectAtIndex:minIdx] valueForKey:@"url"];

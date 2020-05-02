@@ -70,14 +70,6 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
 }
 
 -(void) aniLoop:(NSTimer*) timer{
-    // printf("aniLoopp:%i\n", aniTimer);
-    
-    /*printf("deliver:%4.8f %4.8f %4.8f %4.8f\n",self.status_lbl.frame.origin.x, self.status_lbl.frame.origin.y,
-     self.status_lbl.frame.size.width, self.status_lbl.frame.size.height);
-     printf("image:%4.8f %4.8f %4.8f %4.8f\n",self.imageView.frame.origin.x, self.imageView.frame.origin.y,
-     self.imageView.frame.size.width, self.imageView.frame.size.height);*/
-    
-    
     aniTimer++;
     
     //self.selectLikesTable.bounces = NO;
@@ -108,7 +100,6 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
     }
     
     if(!hasFirstGoneDown && aniTimer > 30){
-        // printf("set init go down\n");
         goingDown = true;
         hasFirstGoneDown = true;
     }
@@ -159,9 +150,8 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
     }
 }
 
--(void) getImageURL_20190215{
-    NSLog(@"getImageURL_20190215");
-    
+-(void) getImageURL_20190215
+{
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
     [params setValue:imgId forKey:@"p_mediaID"];
     
@@ -175,26 +165,20 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
     [httpClient postPath:@"" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         newImgURL = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         
-        NSLog(@"BB:%@\n", newImgURL);
         [self.imageView sd_setImageWithURL:[NSURL URLWithString:[newImgURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
             if (error != nil) {
-                printf("D\n");
                 // if(!buyingLikes){
                 [self.imageView hideToastActivity];
                 // }
             } else {
-                printf("C\n");
                 //if(!buyingLikes){
                 [self.imageView hideToastActivity];
                 // }
             }
         }];
-        printf("E\n");
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        printf("fail!\n");
     }];
-    
 }
 
 - (void)viewDidLoad
@@ -218,8 +202,6 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
         label.font = [UIFont fontWithName:@"Arial Rounded MT Bold" size:16.5];
     }
     
-    
-    
     label.textAlignment = NSTextAlignmentCenter;
     
     self.navigationItem.titleView=label;
@@ -237,12 +219,9 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
      //        self.imageView.clipsToBounds = YES;
      }*/
     
-    printf("A\n");
     [self.imageView makeToastActivity];
     
     [self getImageURL_20190215];
-    
-    
     
     [self check_tag_history];
     
@@ -256,11 +235,9 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
         [self.selectLikesTable registerNib:nib1 forCellReuseIdentifier:CellIdentifier1];
     }
     
-    
     if(!isIphone5 && !isIpad){
         self.selectLikesTable.contentOffset = CGPointMake(0, 10);
     }
-    
     
     //set right menu button
     button_store = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -290,7 +267,6 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
 }
 
 -(void) press_back_button{
-    printf("Back press\n");
     if(!buyingLikes){
         isInSelectseikeView = false;
         [self.navigationController popViewControllerAnimated:YES];
@@ -345,7 +321,6 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
 
 -(void) viewDidAppear:(BOOL)animated{
     isInSelectLikeView = true;
-    printf("viewDidAppear in select view\n");
     
     //  [(ViewController_Home*)delegate remove_shop_view];
 }
@@ -357,16 +332,13 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
     
     goingDown = false;
     hasFirstGoneDown = false;
-    printf("viewDidDisappear\n");
 }
-
 
 - (IBAction)goto_store:(id)sender {
     
 }
 
 -(void)check_tag_history{
-    NSLog(@"img id %@",imgId);
     [(ViewController_Home*)delegate getFreeDiamond];
     
     NSArray* unsave_feed_historyArray = [user_defaults valueForKey:kConstant_unsaveTagID];
@@ -379,7 +351,6 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
             hasInDB = true;
         }
     }
-    
     
     for(int i = 0 ; i < [saveArray count] ; i++){
         if([imgId isEqualToString:[saveArray objectAtIndex:i]]){
@@ -405,7 +376,6 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
     
     [httpClient postPath:@"" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"Request Successful 20 p_select_mediaInQueueInfo.php, response '%@'", responseStr);
         NSObject *result=nil;
         SBJsonParser *parser=[[SBJsonParser alloc]init];
         result =  [parser objectWithString:responseStr];
@@ -427,7 +397,6 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
             self.status_lbl.text = [NSString stringWithFormat:@"%@ %i/%i",@"Delivered Like count:",ctol - (col - cdl), ctol];
             
             isImageAlreadyExist = YES;
-            NSLog(@"successfully updated");
         }else
         {
             NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
@@ -442,7 +411,6 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
             
             [httpClient postPath:@"" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-                NSLog(@"Request Successful 21 p_select_orderInfo.php, response '%@'", responseStr);
                 NSObject *result=nil;
                 SBJsonParser *parser=[[SBJsonParser alloc]init];
                 result =  [parser objectWithString:responseStr];
@@ -466,7 +434,6 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
                     self.status_lbl.text = [NSString stringWithFormat:@"%@ %i/%i",@"Delivered Like count:",cdl, ctol];
                     
                     isImageAlreadyExist = YES;
-                    NSLog(@"successfully updated");
                 }else
                 {
                     self.status_lbl.text = [NSString stringWithFormat:@"%@ 0/0",@"Delivered Like count:"];
@@ -474,7 +441,6 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
                 }
                 
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                NSLog(@"Error: %@", error.localizedDescription);
                 
                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"There is an error happened 20. Please try again." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                 [alert show];
@@ -485,8 +451,6 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error.localizedDescription);
-        
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"There is an error happened 21. Please try again." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alert show];
         [self.view hideToastActivity];
@@ -604,10 +568,8 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
     }
 }
 
--(void) get_disamond_server{
-    
-    
-    printf("get_disamond_server\n");
+-(void) get_disamond_server
+{
     [self.view makeToastActivity];
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
@@ -620,7 +582,6 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
     
     [httpClient postPath:@"" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"Request Successful 4, response '%@'", responseStr);
         NSObject *result=nil;
         SBJsonParser *parser=[[SBJsonParser alloc]init];
         result =  [parser objectWithString:responseStr];
@@ -633,10 +594,8 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
             int bannedCheck = (int)[[dict valueForKey:@"banned"] integerValue];
             if(bannedCheck == 0){
                 coinsInServer = (int)[[dict valueForKey:@"coins"] integerValue];
-                printf("COINS IN SERVER:%i\n",(int)[[dict valueForKey:@"coins"] integerValue]);
                 
                 if((int)[[dict valueForKey:@"coins"] integerValue] >= howmnayLikesBuying * 2){
-                    printf("Coins in server satisfy\n");
                     [self try_order_tag];
                     
                     self.diamond_lbl.text = [dict valueForKey:@"coins"];
@@ -645,7 +604,6 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
                     
                 }else if([[user_defaults valueForKey:kConstant_Diamond] intValue] >=  howmnayLikesBuying * 2 &&
                          [[user_defaults valueForKey:kConstant_Diamond] intValue] - (int)[[dict valueForKey:@"coins"] integerValue] <  4){
-                    printf("Coins in server NOT satisfy but User Default satisfy\n");
                     [self try_order_tag];
                 }else{
                     //[self warn_you];
@@ -686,7 +644,6 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
 
 
 -(void) try_order_tag{
-    printf("try_order_tag\n");
     //[self.view makeToastActivity];
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
@@ -698,7 +655,6 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
     
     [httpClient postPath:@"" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"Request Successful 5, response '%@'", responseStr);
         NSObject *result=nil;
         SBJsonParser *parser=[[SBJsonParser alloc]init];
         result =  [parser objectWithString:responseStr];
@@ -733,7 +689,6 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
             
             [httpClient postPath:@"" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-                NSLog(@"Request Successful 6, response '%@'", responseStr);
                 
                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"Order completed. Kindly to remind you that you MUST turn off 'Posts are Private' in your Instagrtam account. Likes can only be delivered to public photos. Thanks." delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
                 [alert show];
@@ -758,7 +713,6 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
                 
                 
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                NSLog(@"Error: %@", error.localizedDescription);
                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"There is an error happened 2. Please try again." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                 [alert show];
                 [self.view hideToastActivity];
@@ -797,7 +751,6 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
             
             [httpClient postPath:@"" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-                NSLog(@"Request Successful 7, response '%@'", responseStr);
                 
                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"Order completed. Kindly to remind you that you MUST turn off 'Posts are Private' in your Instagrtam account. Likes can only be delivered to public photos. Thanks." delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
                 [alert show];
@@ -826,7 +779,6 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
                 
                 
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                NSLog(@"Error: %@", error.localizedDescription);
                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"There is an error happened 22. Please try again." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                 [alert show];
                 [self.view hideToastActivity];
