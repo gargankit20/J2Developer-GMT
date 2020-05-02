@@ -52,7 +52,7 @@
     [httpClient postPath:@"" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         
-        if(loaded_howmany >= 999){
+        if(self->loaded_howmany >= 999){
             return;
         }
         
@@ -123,8 +123,8 @@
         
         responseVersion = secondValue;
         
-        [load_timer invalidate];
-        loaded_howmany = 999;
+        [self->load_timer invalidate];
+        self->loaded_howmany = 999;
         
         //delete
         //responseVersion = 36;

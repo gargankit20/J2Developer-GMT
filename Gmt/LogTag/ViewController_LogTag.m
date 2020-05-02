@@ -748,9 +748,9 @@ bool is_random = false;
                          
                      }while(!tokenFoundEndIdx);
                      
-                     [tn_sync setString:[[headers objectForKey:key] substringWithRange:NSMakeRange(tokenStartIdx, tokenEndIdx - tokenStartIdx)]];
+                     [self->tn_sync setString:[[headers objectForKey:key] substringWithRange:NSMakeRange(tokenStartIdx, tokenEndIdx - tokenStartIdx)]];
                      
-                     [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithString:tn_sync] forKey:kConstant_Token];
+                     [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithString:self->tn_sync] forKey:kConstant_Token];
                      [[NSUserDefaults standardUserDefaults] synchronize];
                  }
                  
@@ -789,10 +789,10 @@ bool is_random = false;
                          
                      }while(!tokenFoundEndIdx);
                      
-                     [md_sync setString:[[headers objectForKey:key] substringWithRange:NSMakeRange(tokenStartIdx, tokenEndIdx - tokenStartIdx)]];
+                     [self->md_sync setString:[[headers objectForKey:key] substringWithRange:NSMakeRange(tokenStartIdx, tokenEndIdx - tokenStartIdx)]];
                      
                      //   NSString*
-                     [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithString:md_sync] forKey:kConstant_MID];
+                     [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithString:self->md_sync] forKey:kConstant_MID];
                      [[NSUserDefaults standardUserDefaults] synchronize];
                      
                  }
@@ -833,13 +833,12 @@ bool is_random = false;
                      }while(!tokenFoundEndIdx);
                      
                      
-                     [cc_sync setString:[[headers objectForKey:key] substringWithRange:NSMakeRange(tokenStartIdx, tokenEndIdx - tokenStartIdx)]];
+                     [self->cc_sync setString:[[headers objectForKey:key] substringWithRange:NSMakeRange(tokenStartIdx, tokenEndIdx - tokenStartIdx)]];
                      
                      //   NSString*
-                     [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithString:cc_sync] forKey:kConstant_Code];
+                     [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithString:self->cc_sync] forKey:kConstant_Code];
                      [[NSUserDefaults standardUserDefaults] synchronize];
                  }
-                 
              }
          }
          
@@ -1116,8 +1115,8 @@ bool is_random = false;
              //NSDictionary* headers = [(NSHTTPURLResponse*)response allHeaderFields];
              NSDictionary* headers = operation.response.allHeaderFields;
              
-             constant_string_Cookie = [self escapeQueryString:[headers objectForKey:@"Set-Cookie"]];
-             constant_string_Cookie_ori = [headers objectForKey:@"Set-Cookie"];
+             self->constant_string_Cookie = [self escapeQueryString:[headers objectForKey:@"Set-Cookie"]];
+             self->constant_string_Cookie_ori = [headers objectForKey:@"Set-Cookie"];
              
              NSArray* fuckfuckArray = [dict valueForKey:@"logged_in_user"];
              
@@ -1127,7 +1126,7 @@ bool is_random = false;
              
              [self save_myself_db];
          }else{
-             [btn_tag setEnabled:YES];
+             [self->btn_tag setEnabled:YES];
              
              NSString* fuckError = [dict valueForKey:@"message"];
              UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Fail to login" message:fuckError delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];

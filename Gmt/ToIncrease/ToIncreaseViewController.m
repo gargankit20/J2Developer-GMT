@@ -163,9 +163,9 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
     
     
     [httpClient postPath:@"" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        newImgURL = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        self->newImgURL = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         
-        [self.imageView sd_setImageWithURL:[NSURL URLWithString:[newImgURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        [self.imageView sd_setImageWithURL:[NSURL URLWithString:[self->newImgURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
             if (error != nil) {
                 // if(!buyingLikes){
                 [self.imageView hideToastActivity];
@@ -400,7 +400,7 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
         }else
         {
             NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
-            [params setValue:imgId forKey:@"p_mediaID"];
+            [params setValue:self->imgId forKey:@"p_mediaID"];
             [params setValue:[NSString stringWithFormat:@"%i", kLV]  forKey:@"p_LV"];
             [params setValue:[NSString stringWithFormat:@"%i", kVersion]  forKey:@"p_Version"];
             
@@ -446,7 +446,7 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
                 [alert show];
                 [self.view hideToastActivity];
                 
-                buyingLikes = false;
+                self->buyingLikes = false;
             }];
         }
         
@@ -455,7 +455,7 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
         [alert show];
         [self.view hideToastActivity];
         
-        buyingLikes = false;
+        self->buyingLikes = false;
     }];
 }
 
@@ -593,16 +593,16 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
             
             int bannedCheck = (int)[[dict valueForKey:@"banned"] integerValue];
             if(bannedCheck == 0){
-                coinsInServer = (int)[[dict valueForKey:@"coins"] integerValue];
+                self->coinsInServer = (int)[[dict valueForKey:@"coins"] integerValue];
                 
-                if((int)[[dict valueForKey:@"coins"] integerValue] >= howmnayLikesBuying * 2){
+                if((int)[[dict valueForKey:@"coins"] integerValue] >= self->howmnayLikesBuying * 2){
                     [self try_order_tag];
                     
                     self.diamond_lbl.text = [dict valueForKey:@"coins"];
                     [user_defaults setValue:[dict valueForKey:@"coins"] forKey:kConstant_Diamond];
                     [user_defaults synchronize];
                     
-                }else if([[user_defaults valueForKey:kConstant_Diamond] intValue] >=  howmnayLikesBuying * 2 &&
+                }else if([[user_defaults valueForKey:kConstant_Diamond] intValue] >=  self->howmnayLikesBuying * 2 &&
                          [[user_defaults valueForKey:kConstant_Diamond] intValue] - (int)[[dict valueForKey:@"coins"] integerValue] <  4){
                     [self try_order_tag];
                 }else{
@@ -611,7 +611,7 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
                     [alert show];
                     [self.view hideToastActivity];
                     
-                    buyingLikes = false;
+                    self->buyingLikes = false;
                     
                     self.diamond_lbl.text = [dict valueForKey:@"coins"];
                     [user_defaults setValue:[dict valueForKey:@"coins"] forKey:kConstant_Diamond];
@@ -621,7 +621,7 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
                 
             }else{
                 [self warn_you];
-                buyingLikes = false;
+                self->buyingLikes = false;
             }
             
             
@@ -631,7 +631,7 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"Failed to connect to database 1. Try again later" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alert show];
         [self.view hideToastActivity];
-        buyingLikes = false;
+        self->buyingLikes = false;
     }];
     
 }
@@ -665,9 +665,9 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
             //update queue
             
             NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
-            [params setValue:imgId forKey:@"p_mediaID"];
+            [params setValue:self->imgId forKey:@"p_mediaID"];
             [params setValue:[user_defaults valueForKey:kConstant_UID]  forKey:@"p_userID"];
-            [params setValue:[NSString stringWithFormat:@"%i", selectedTableRow + 1] forKey:@"p_buyLevel"];
+            [params setValue:[NSString stringWithFormat:@"%i", self->selectedTableRow + 1] forKey:@"p_buyLevel"];
             [params setValue:[NSString stringWithFormat:@"%i", kLV] forKey:@"p_LV"];
             [params setValue:[NSString stringWithFormat:@"%i", kVersion]  forKey:@"p_Version"];
             [params setValue:[user_defaults valueForKey:kConstant_Session]  forKey:@"p_sessionID"];
@@ -692,17 +692,17 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
                 
                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"Order completed. Kindly to remind you that you MUST turn off 'Posts are Private' in your Instagrtam account. Likes can only be delivered to public photos. Thanks." delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
                 [alert show];
-                buyingLikes = false;
+                self->buyingLikes = false;
                 counterForRate++;
                 
                 
                 int curntCoins = (int)[[self.diamond_lbl text] integerValue];
-                self.diamond_lbl.text = [NSString stringWithFormat:@"%i",curntCoins - howmnayLikesBuying*2];
+                self.diamond_lbl.text = [NSString stringWithFormat:@"%i",curntCoins - self->howmnayLikesBuying*2];
                 
-                [user_defaults setValue:[NSString stringWithFormat:@"%i",curntCoins  - howmnayLikesBuying*2] forKey:kConstant_Diamond];
+                [user_defaults setValue:[NSString stringWithFormat:@"%i",curntCoins  - self->howmnayLikesBuying*2] forKey:kConstant_Diamond];
                 [user_defaults synchronize];
                 
-                [(ViewController_Home*)delegate display_update:curntCoins  - howmnayLikesBuying*2];
+                [(ViewController_Home*)self->delegate display_update:curntCoins  - self->howmnayLikesBuying*2];
                 
                 [self.view hideToastActivity];
                 
@@ -717,7 +717,7 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
                 [alert show];
                 [self.view hideToastActivity];
                 
-                buyingLikes = false;
+                self->buyingLikes = false;
             }];
             
             
@@ -725,11 +725,11 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
             //not in queue, then check if it has been billed the order in Ordered table
             
             NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
-            [params setValue:imgId forKey:@"p_mediaID"];
+            [params setValue:self->imgId forKey:@"p_mediaID"];
             [params setValue:[user_defaults valueForKey:kConstant_UID]  forKey:@"p_userID"];
-            [params setValue:[NSString stringWithFormat:@"%i", selectedTableRow + 1] forKey:@"p_buyLevel"];
-            [params setValue:imgUrl forKey:@"p_imgURL"];
-            [params setValue:imgThumnailUrl forKey:@"p_imgThumnailURL"];
+            [params setValue:[NSString stringWithFormat:@"%i", self->selectedTableRow + 1] forKey:@"p_buyLevel"];
+            [params setValue:self->imgUrl forKey:@"p_imgURL"];
+            [params setValue:self->imgThumnailUrl forKey:@"p_imgThumnailURL"];
             [params setValue:[NSString stringWithFormat:@"%i", kLV] forKey:@"p_LV"];
             [params setValue:[NSString stringWithFormat:@"%i", kVersion]  forKey:@"p_Version"];
             [params setValue:[user_defaults valueForKey:kConstant_Session]  forKey:@"p_sessionID"];
@@ -756,18 +756,18 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
                 [alert show];
                 [self.view hideToastActivity];
                 
-                [(ViewController_Home*)delegate save_feed_history:imgId];
-                buyingLikes = false;
+                [(ViewController_Home*)self->delegate save_feed_history:self->imgId];
+                self->buyingLikes = false;
                 counterForRate++;
                 
                 
                 int curntCoins = (int)[[self.diamond_lbl text] integerValue];
-                self.diamond_lbl.text = [NSString stringWithFormat:@"%i",curntCoins - howmnayLikesBuying*2];
+                self.diamond_lbl.text = [NSString stringWithFormat:@"%i",curntCoins - self->howmnayLikesBuying*2];
                 
-                [user_defaults setValue:[NSString stringWithFormat:@"%i",curntCoins  - howmnayLikesBuying*2] forKey:kConstant_Diamond];
+                [user_defaults setValue:[NSString stringWithFormat:@"%i",curntCoins  - self->howmnayLikesBuying*2] forKey:kConstant_Diamond];
                 [user_defaults synchronize];
                 
-                [(ViewController_Home*)delegate display_update:curntCoins  - howmnayLikesBuying*2];
+                [(ViewController_Home*)self->delegate display_update:curntCoins  - self->howmnayLikesBuying*2];
                 
                 [self.view hideToastActivity];
                 
@@ -783,7 +783,7 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
                 [alert show];
                 [self.view hideToastActivity];
                 
-                buyingLikes = false;
+                self->buyingLikes = false;
             }];
             
         }
@@ -792,7 +792,7 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"Failed to connect to database 2. Try again later" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alert show];
         [self.view hideToastActivity];
-        buyingLikes = false;
+        self->buyingLikes = false;
     }];
 }
 

@@ -301,9 +301,7 @@ NSUserDefaults* user_defaults;
         return;
     }
     
-    
     success_loadedItem = true;
-    
 }
 
 -(UIColor *)colorWithHex:(long)hexColor
@@ -314,9 +312,10 @@ NSUserDefaults* user_defaults;
     return [UIColor colorWithRed:red green:green blue:blue alpha:1.0f];
 }
 
--(void) load_buttons{
-    
-    if(isIphone6){
+-(void) load_buttons
+{
+    if(isIphone6)
+    {
         //title_more = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"getmore_i_i6.png"]];
         //title_tocoins = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"two_i_coin_i6.png"]];
         title_tocoins = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, DeviceWidth, 30)];
@@ -325,13 +324,14 @@ NSUserDefaults* user_defaults;
         title_tocoins.textAlignment = NSTextAlignmentCenter;
         title_tocoins.backgroundColor = [self colorWithHex:0xEFEEEF];
         
-        
         title_more = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, DeviceWidth, 30)];
         title_more.text = @"Get More Coins?";
         title_more.font = [UIFont systemFontOfSize:12];
         title_more.textAlignment = NSTextAlignmentCenter;
         title_more.backgroundColor = [self colorWithHex:0xEFEEEF];
-    }else{
+    }
+    else
+    {
         //title_more = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"getmore_i.png"]];
         //title_tocoins = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"two_i_coin.png"]];
         title_tocoins = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, DeviceWidth, 40)];
@@ -347,13 +347,11 @@ NSUserDefaults* user_defaults;
         title_more.backgroundColor = [self colorWithHex:0xEFEEEF];
     }
 
-    
     [self.view addSubview:title_more];
     
     CGRect twoCoinsFrame = title_tocoins.frame;
     twoCoinsFrame.origin.y = 285 * ipadRatio + offset_OW_onemore * ipadRatio;
 
-    
     title_tocoins.frame = twoCoinsFrame;
     
     button_next = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -363,28 +361,28 @@ NSUserDefaults* user_defaults;
     [button_next setBackgroundColor:[self colorWithHex:0x0CA5E5]];
     [button_next addTarget:self action:@selector(next:) forControlEvents:UIControlEventTouchUpInside];
     
-    
     [self.view addSubview:title_tocoins];
     [self.view addSubview:button_next];
-    
-    
     
     button_diamond = [UIButton buttonWithType:UIButtonTypeCustom];
     //[button_diamond setImage:[UIImage imageNamed:@"iap_btn_freeCoins.png"] forState:UIControlStateNormal];
     [button_diamond setBackgroundColor:[self colorWithHex:0x957FE8]];
     [button_diamond setTitle:@"Free Coins" forState:UIControlStateNormal];
     
-    if(!isIpad){
+    if(!isIpad)
+    {
         button_diamond.titleLabel.font = [UIFont systemFontOfSize:15];
     }
 
-    
     [button_diamond addTarget:self action:@selector(freeCoins:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button_diamond];
     
-    if(hasSuperS){
+    if(hasSuperS)
+    {
         button_diamond.frame = CGRectMake(buttonStartX, 242 * ipadRatio, 293 * ipadRatio, 33 * ipadRatio);
-    }else{
+    }
+    else
+    {
         button_diamond.frame = CGRectMake(9999, 9999, 293 * ipadRatio, 33 * ipadRatio);
     }
 
@@ -395,45 +393,37 @@ NSUserDefaults* user_defaults;
     [button_diamond2 addTarget:self action:@selector(freeCoins2:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:button_diamond2];
     
-    if(!isIpad){
+    if(!isIpad)
+    {
         button_diamond2.titleLabel.font = [UIFont systemFontOfSize:15];
     }
-    
 }
 
-
-
-
-- (IBAction)freeCoins:(id)sender {
-    NSDictionary *articleParams = [NSDictionary dictionaryWithObjectsAndKeys:
-                                   @"SetLiking", @"From",
-                                   nil];
-
+- (IBAction)freeCoins:(id)sender
+{
     [self showSuper];
-    
 }
 
-- (IBAction)freeCoins2:(id)sender {
-    NSDictionary *articleParams = [NSDictionary dictionaryWithObjectsAndKeys:
-                                   @"SetLiking", @"From",
-                                   nil];
-
+- (IBAction)freeCoins2:(id)sender
+{
    [self showSuper];
-    
 }
 
--(void) showSuper{
+-(void) showSuper
+{
     [self.view makeToastActivity];
     [IronSource showOfferwallWithViewController:self placement:@"DefaultOfferWall"];
 }
 
--(void) delayToLoadFreeCoinsContent{
+-(void) delayToLoadFreeCoinsContent
+{
    [self showSuper];
 }
 
--(void) press_back_button{
-
-    if(isLoadingWebview){
+-(void) press_back_button
+{
+    if(isLoadingWebview)
+    {
         [webview removeFromSuperview];
         isLoadingWebview = false;
         return;
@@ -442,15 +432,14 @@ NSUserDefaults* user_defaults;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-
-
-- (IBAction)next:(id)sender {
-    
+- (IBAction)next:(id)sender
+{
    // [self press_back_button];
     [(ViewController_Home*) delegate popup_toincrease_view];
 }
 
--(void)increase_diamondFromII{
+-(void)increase_diamondFromII
+{
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
     [params setValue:transition_buying_ID forKey:@"p_transactionID"];
     [params setValue:[user_defaults valueForKey:kConstant_UID]  forKey:@"p_userID"];
@@ -469,15 +458,15 @@ NSUserDefaults* user_defaults;
         if ([responseStr integerValue] == 999) {
             
             int curntCoins = (int)[[self.diamond_lbl text] integerValue];
-            self.diamond_lbl.text = [NSString stringWithFormat:@"%i",curntCoins + coinsFrom_A[item_buy_Idx]];
+            self.diamond_lbl.text = [NSString stringWithFormat:@"%i",curntCoins + self->coinsFrom_A[self->item_buy_Idx]];
             
-            [user_defaults setValue:[NSString stringWithFormat:@"%i",curntCoins + coinsFrom_A[item_buy_Idx]] forKey:kConstant_Diamond];
+            [user_defaults setValue:[NSString stringWithFormat:@"%i",curntCoins + self->coinsFrom_A[self->item_buy_Idx]] forKey:kConstant_Diamond];
             [user_defaults synchronize];
             
             UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Success" message:@"In-App Purchase done successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alertView show];
             
-            [delegate display_update:curntCoins + coinsFrom_A[item_buy_Idx]];
+            [self->delegate display_update:curntCoins + self->coinsFrom_A[self->item_buy_Idx]];
             
             [self.view hideToastActivity];
             
@@ -726,7 +715,7 @@ bool isLoadingWebview = false;
                 [alertView show];
             }
             
-            [delegate display_update:[[user_defaults valueForKey:kConstant_Diamond] intValue]];
+            [self->delegate display_update:[[user_defaults valueForKey:kConstant_Diamond] intValue]];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
