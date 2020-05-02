@@ -287,8 +287,6 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
     }
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(press_back_button)];
-    
-    // Do any additional setup after loading the view from its nib.
 }
 
 -(void) press_back_button{
@@ -298,12 +296,6 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
         [self.navigationController popViewControllerAnimated:YES];
         //[(ViewController_Home*)delegate remove_shop_view];
     }
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 -(void)viewWillAppear:(BOOL)animated{

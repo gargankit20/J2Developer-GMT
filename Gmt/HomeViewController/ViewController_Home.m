@@ -1593,14 +1593,6 @@ NSLog(@"delete for testing: 2");
 
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
-
 - (IBAction)skipTag:(id)sender {
     if(isLogged){
         printf("can't go next 0\n");

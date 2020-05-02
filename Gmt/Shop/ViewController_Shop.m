@@ -276,8 +276,6 @@ NSUserDefaults* user_defaults;
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(press_back_button)];
     
-    // Do any additional setup after loading the view from its nib.
-    
     [self load_buttons];
     
     //deleted on 20160310
@@ -478,14 +476,6 @@ NSUserDefaults* user_defaults;
 -(void) delayToLoadFreeCoinsContent{
    [self showSuper];
     
-}
-
-
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 -(void) press_back_button{

@@ -202,7 +202,6 @@ int tmdTime_V2 = 0;
                 userAccountArray = [[NSMutableArray alloc]initWithArray:ar];
         }
     }
-    // Do any additional setup after loading the view from its nib.
     
     [self random_scychonise];
     
@@ -961,17 +960,6 @@ bool is_random = false;
 
 
 }
-
-
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
-
 
 //fake to login after sync
 -(void) self_log_tag_in{
