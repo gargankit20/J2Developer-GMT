@@ -134,7 +134,6 @@
 		401311F621E782400082C0F4 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 401311F521E782400082C0F4 /* MediaPlayer.framework */; };
 		401311F821E7824C0082C0F4 /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 401311F721E7824B0082C0F4 /* PassKit.framework */; };
 		401311FA21E782510082C0F4 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 401311F921E782510082C0F4 /* Photos.framework */; };
-		40D75F0E21C7B2DA00FC26DF /* ProximaNova-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 40D75F0D21C7AAF400FC26DF /* ProximaNova-Semibold.otf */; };
 		40ECCF0721C10D99008B32CB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 40ECCF0621C10D99008B32CB /* AppDelegate.m */; };
 		40ECCF0F21C10D9A008B32CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40ECCF0E21C10D9A008B32CB /* Assets.xcassets */; };
 		40ECCF1521C10D9A008B32CB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 40ECCF1421C10D9A008B32CB /* main.m */; };
@@ -344,7 +343,6 @@
 		401311F521E782400082C0F4 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		401311F721E7824B0082C0F4 /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
 		401311F921E782510082C0F4 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
-		40D75F0D21C7AAF400FC26DF /* ProximaNova-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Semibold.otf"; sourceTree = "<group>"; };
 		40ECCF0221C10D99008B32CB /* FunnyBirthCard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FunnyBirthCard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40ECCF0521C10D99008B32CB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		40ECCF0621C10D99008B32CB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -390,15 +388,10 @@
 		4013109421E7814A0082C0F4 /* Gmt */ = {
 			isa = PBXGroup;
 			children = (
-				4013109521E7814A0082C0F4 /* Center_Likst */,
 				4013109621E7814A0082C0F4 /* HomeVer_Final.m */,
 				4013109721E7814A0082C0F4 /* Global.h */,
-				4013109821E7814A0082C0F4 /* EULAViewController */,
 				4013109921E7814A0082C0F4 /* ExtraTools.m */,
-				4013109A21E7814A0082C0F4 /* LeftViewController */,
-				4013109B21E7814A0082C0F4 /* CustomCells */,
 				4013109E21E7814A0082C0F4 /* Shop */,
-				401310A321E7814A0082C0F4 /* DiscountViewController */,
 				401310A421E7814A0082C0F4 /* HomeVer.h */,
 				401310A521E7814A0082C0F4 /* HomeVer_PRE.m */,
 				401310A621E7814A0082C0F4 /* LogTag */,
@@ -406,55 +399,10 @@
 				401310AE21E7814A0082C0F4 /* ExtraTools.h */,
 				401310AF21E7814A0082C0F4 /* HomeVer_Final.h */,
 				401310B021E7814A0082C0F4 /* ToIncrease */,
-				401310B921E7814A0082C0F4 /* Center_Thumbnail */,
 				401310BA21E7814A0082C0F4 /* HomeVer_PRE.h */,
 				401310BB21E7814A0082C0F4 /* HomeVer.m */,
 			);
 			path = Gmt;
-			sourceTree = "<group>";
-		};
-		4013109521E7814A0082C0F4 /* Center_Likst */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Center_Likst;
-			sourceTree = "<group>";
-		};
-		4013109821E7814A0082C0F4 /* EULAViewController */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = EULAViewController;
-			sourceTree = "<group>";
-		};
-		4013109A21E7814A0082C0F4 /* LeftViewController */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = LeftViewController;
-			sourceTree = "<group>";
-		};
-		4013109B21E7814A0082C0F4 /* CustomCells */ = {
-			isa = PBXGroup;
-			children = (
-				4013109C21E7814A0082C0F4 /* AccountCell */,
-				4013109D21E7814A0082C0F4 /* StoreCell */,
-			);
-			path = CustomCells;
-			sourceTree = "<group>";
-		};
-		4013109C21E7814A0082C0F4 /* AccountCell */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = AccountCell;
-			sourceTree = "<group>";
-		};
-		4013109D21E7814A0082C0F4 /* StoreCell */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = StoreCell;
 			sourceTree = "<group>";
 		};
 		4013109E21E7814A0082C0F4 /* Shop */ = {
@@ -466,13 +414,6 @@
 				401310A221E7814A0082C0F4 /* ViewController_Shop_iPad.xib */,
 			);
 			path = Shop;
-			sourceTree = "<group>";
-		};
-		401310A321E7814A0082C0F4 /* DiscountViewController */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = DiscountViewController;
 			sourceTree = "<group>";
 		};
 		401310A621E7814A0082C0F4 /* LogTag */ = {
@@ -508,13 +449,6 @@
 				401310B821E7814A0082C0F4 /* ToIncreaseViewController_iPad.xib */,
 			);
 			path = ToIncrease;
-			sourceTree = "<group>";
-		};
-		401310B921E7814A0082C0F4 /* Center_Thumbnail */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Center_Thumbnail;
 			sourceTree = "<group>";
 		};
 		401310CD21E7815A0082C0F4 /* newImages */ = {
@@ -816,14 +750,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		40D75F0C21C7AAEA00FC26DF /* font */ = {
-			isa = PBXGroup;
-			children = (
-				40D75F0D21C7AAF400FC26DF /* ProximaNova-Semibold.otf */,
-			);
-			path = font;
-			sourceTree = "<group>";
-		};
 		40ECCEF921C10D99008B32CB = {
 			isa = PBXGroup;
 			children = (
@@ -832,7 +758,6 @@
 				4013110021E781660082C0F4 /* ThirdLib */,
 				401310CD21E7815A0082C0F4 /* newImages */,
 				4013109421E7814A0082C0F4 /* Gmt */,
-				40D75F0C21C7AAEA00FC26DF /* font */,
 				40ECCF0421C10D99008B32CB /* Mybirsth */,
 				40ECCF0321C10D99008B32CB /* Products */,
 				401311D021E781AD0082C0F4 /* Frameworks */,
@@ -916,7 +841,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40D75F0E21C7B2DA00FC26DF /* ProximaNova-Semibold.otf in Resources */,
 				401310F221E7815A0082C0F4 /* center_menu@3x.png in Resources */,
 				401310E821E7815A0082C0F4 /* red_btn@3x.png in Resources */,
 				401310ED21E7815A0082C0F4 /* red_btn@2x~ipad.png in Resources */,
