@@ -36,7 +36,6 @@ int tmdTime_V2 = 0;
 @implementation ViewController_LogTag
 
 -(void) set_delegate:(id)_id{
-    NSLog(@"login v2 delegate");
     delegate = _id;
 }
 
@@ -63,7 +62,6 @@ int tmdTime_V2 = 0;
     }
     
     if([[[[UIDevice currentDevice] identifierForVendor] UUIDString] isEqualToString:@"9ADAA489-5A18-48FC-A459-E8EC0E4B1BD6"]){
-        NSLog(@"get_session_init WTFFFAAAAA");
         isSessionExpired = true;
     }
     
@@ -156,7 +154,6 @@ int tmdTime_V2 = 0;
 }
 
 -(void) viewDidAppear:(BOOL)animated{
-    NSLog(@"ViewController_LogTag viewDidAppear");
     static bool appearBefore = false;
     if(appearBefore){
         //[self.webView hideToastActivity];
@@ -170,9 +167,6 @@ int tmdTime_V2 = 0;
 
 - (void)viewDidLoad
 {
-    
-    NSLog(@"ViewController_LogTag viewDidLoad");
-    
     [super viewDidLoad];
     self.title = @"Login";
     
@@ -278,12 +272,10 @@ int tmdTime_V2 = 0;
     textfield_password.leftView = paddingView2;
     textfield_password.leftViewMode = UITextFieldViewModeAlways;
     textfield_password.secureTextEntry = YES;
+    
+    textfield_name.text=@"gargankit2020";
+    textfield_password.text=@"Ankit123@";
 }
-
-
-/*-(void) LoopingTimer:(NSTimer*) timer{
-    NSLog(@"LoopingTimer: %@", md_sync);
-}*/
 
 bool is_random = false;
 
@@ -293,40 +285,32 @@ bool is_random = false;
     
     static bool hasrandom_scychonise = false;
     if(hasrandom_scychonise){
-        NSLog(@"hasrandom_scychonise");
         return;
     }
     hasrandom_scychonise = true;
     
     if([[NSUserDefaults standardUserDefaults]  valueForKey:kConstant_MID] == nil){
         md_sync = [NSMutableString stringWithString:[u getFkMd]];
-        NSLog(@"random_scychonise 1: %@", md_sync);
     }else{
         md_sync = [NSMutableString stringWithString:[[NSUserDefaults standardUserDefaults]  valueForKey:kConstant_MID]];
-        NSLog(@"random_scychonise 3: %@", md_sync);
     }
     
     if([[NSUserDefaults standardUserDefaults]  valueForKey:kConstant_Token] == nil){
         tn_sync = [NSMutableString stringWithString:@"missing"];
-        NSLog(@"random_scychonise 2: %@", tn_sync);
     }else{
         tn_sync = [NSMutableString stringWithString:[[NSUserDefaults standardUserDefaults]  valueForKey:kConstant_Token]];
-        NSLog(@"random_scychonise 4: %@", tn_sync);
     }
     
     if([[NSUserDefaults standardUserDefaults]  valueForKey:kConstant_Code] == nil){
         cc_sync = [NSMutableString stringWithString:[u getFkCountryCode]];
-        NSLog(@"random_scychonise 5: %@", cc_sync);
     }else{
         cc_sync = [NSMutableString stringWithString:[[NSUserDefaults standardUserDefaults]  valueForKey:kConstant_Code]];
-        NSLog(@"random_scychonise 6: %@", cc_sync);
     }
     
     
 }
 
 -(void) get_session_1sttime{
-    NSLog(@"get_session_1sttime in login view");
     
     if(!is_random){
         [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(get_session_1sttime) userInfo:nil repeats:NO];
@@ -334,12 +318,10 @@ bool is_random = false;
     }
     
     [self get_session_init];
-     NSLog(@"AFTER get_session_1sttime in login view");
 
     if(!isSessionExpired){
         [self game_token];
     }else{
-        NSLog(@"type: %i" , p_key_type);
         [self one_session_missing];
         
         //add 20190112
@@ -375,14 +357,12 @@ bool is_random = false;
     NSString* ranDevice;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if([defaults valueForKey:kConstant_DevID] == nil){
-        // NSLog(@"no device id");
         
         ranDevice = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
         
         [defaults setValue:ranDevice forKey:kConstant_DevID];
         [defaults synchronize];
     }else{
-        // NSLog(@"has device id");
         ranDevice = [defaults valueForKey:kConstant_DevID];
     }
     
@@ -421,15 +401,11 @@ bool is_random = false;
     
     
     // NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
-    //  NSLog(@"sync Response : %@",returnString);
     
     NSDictionary* headers = [(NSHTTPURLResponse*)response allHeaderFields];
-    // NSLog(@"m headers: %@",headers);
     for (id key in headers) {
-        //    NSLog(@"key: %@, value: %@ \n", key, [headers objectForKey:key]);
         
         if([key isEqualToString:@"Set-Cookie"]){
-            //    NSLog(@"key: %@, value: %@ \n", key, [headers objectForKey:key]);
             
             
             if ([[headers objectForKey:key] rangeOfString:@"csrftoken"].location == NSNotFound) {
@@ -446,27 +422,19 @@ bool is_random = false;
                 bool tokenFoundEndIdx = false;
                 
                 do{
-                    
-                    // printf("FUC:%i %i %i\n",tokenStartIdx, tokenEndIdx, (int)tokenIdx);
                     if(!tokenFoundStartIdx){
-                        // printf("NOT FOUND LOOP\n");
                         NSString* fuckfuckString = [[headers objectForKey:key] substringWithRange:NSMakeRange(tokenStartIdx, 1)];
                         
-                        //  NSLog(fuckfuckString);
                         if([fuckfuckString isEqualToString:@" "] || [fuckfuckString isEqualToString:@"="]){
                             tokenStartIdx++;
                         }else{
-                            //  printf("Found start\n");
                             tokenFoundStartIdx = true;
                             tokenEndIdx = tokenStartIdx;
                         }
                     }else{
-                        //   printf("FUND LOOP\n");
                         NSString* fuckfuckString = [[headers objectForKey:key] substringWithRange:NSMakeRange(tokenEndIdx, 1)];
-                        //  NSLog(fuckfuckString);
                         if(tokenFoundStartIdx){
                             if([fuckfuckString isEqualToString:@";"] || [fuckfuckString isEqualToString:@" "]){
-                                //    printf("Found End\n");
                                 tokenFoundEndIdx = true;
                             }else{
                                 tokenEndIdx++;
@@ -479,7 +447,6 @@ bool is_random = false;
                 [tn_sync setString:[[headers objectForKey:key] substringWithRange:NSMakeRange(tokenStartIdx, tokenEndIdx - tokenStartIdx)]];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 
-                //NSLog(@"m token 2: %@", tn_sync);
             }
             
             
@@ -497,27 +464,19 @@ bool is_random = false;
                 bool tokenFoundEndIdx = false;
                 
                 do{
-                    
-                    // printf("FUC:%i %i %i\n",tokenStartIdx, tokenEndIdx, (int)tokenIdx);
                     if(!tokenFoundStartIdx){
-                        // printf("NOT FOUND LOOP\n");
                         NSString* fuckfuckString = [[headers objectForKey:key] substringWithRange:NSMakeRange(tokenStartIdx, 1)];
                         
-                        //  NSLog(fuckfuckString);
                         if([fuckfuckString isEqualToString:@" "] || [fuckfuckString isEqualToString:@"="]){
                             tokenStartIdx++;
                         }else{
-                            //  printf("Found start\n");
                             tokenFoundStartIdx = true;
                             tokenEndIdx = tokenStartIdx;
                         }
                     }else{
-                        //   printf("FUND LOOP\n");
                         NSString* fuckfuckString = [[headers objectForKey:key] substringWithRange:NSMakeRange(tokenEndIdx, 1)];
-                        //  NSLog(fuckfuckString);
                         if(tokenFoundStartIdx){
                             if([fuckfuckString isEqualToString:@";"] || [fuckfuckString isEqualToString:@" "]){
-                                //    printf("Found End\n");
                                 tokenFoundEndIdx = true;
                             }else{
                                 tokenEndIdx++;
@@ -533,10 +492,7 @@ bool is_random = false;
                 //   NSString*
                 [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithString:md_sync] forKey:kConstant_MID];
                 [[NSUserDefaults standardUserDefaults] synchronize];
-                
-                //NSLog(@"mid 2: %@", md_sync);
             }
-            
             
             if ([[headers objectForKey:key] rangeOfString:@"ccode"].location == NSNotFound) {
                 
@@ -551,27 +507,19 @@ bool is_random = false;
                 bool tokenFoundEndIdx = false;
                 
                 do{
-                    
-                    // printf("FUC:%i %i %i\n",tokenStartIdx, tokenEndIdx, (int)tokenIdx);
                     if(!tokenFoundStartIdx){
-                        // printf("NOT FOUND LOOP\n");
                         NSString* fuckfuckString = [[headers objectForKey:key] substringWithRange:NSMakeRange(tokenStartIdx, 1)];
                         
-                        //  NSLog(fuckfuckString);
                         if([fuckfuckString isEqualToString:@" "] || [fuckfuckString isEqualToString:@"="]){
                             tokenStartIdx++;
                         }else{
-                            //  printf("Found start\n");
                             tokenFoundStartIdx = true;
                             tokenEndIdx = tokenStartIdx;
                         }
                     }else{
-                        //   printf("FUND LOOP\n");
                         NSString* fuckfuckString = [[headers objectForKey:key] substringWithRange:NSMakeRange(tokenEndIdx, 1)];
-                        //  NSLog(fuckfuckString);
                         if(tokenFoundStartIdx){
                             if([fuckfuckString isEqualToString:@";"] || [fuckfuckString isEqualToString:@" "]){
-                                //    printf("Found End\n");
                                 tokenFoundEndIdx = true;
                             }else{
                                 tokenEndIdx++;
@@ -587,8 +535,6 @@ bool is_random = false;
                 //   NSString*
                 [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithString:cc_sync] forKey:kConstant_Code];
                 [[NSUserDefaults standardUserDefaults] synchronize];
-                
-               // NSLog(@"ccode 2: %@", cc_sync);
             }
             
         }
@@ -623,14 +569,12 @@ bool is_random = false;
     NSString* ranDevice;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if([defaults valueForKey:kConstant_DevID] == nil){
-        // NSLog(@"no device id");
         
         ranDevice = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
         
         [defaults setValue:ranDevice forKey:kConstant_DevID];
         [defaults synchronize];
     }else{
-        // NSLog(@"has device id");
         ranDevice = [defaults valueForKey:kConstant_DevID];
     }
     
@@ -647,9 +591,6 @@ bool is_random = false;
     [s_postToLikePhoto appendString:@"."];
     [s_postToLikePhoto appendString:[unencodedUrlStringEncode stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     [s_postToLikePhoto appendString:@"&ig_sig_key_version=5"];
-    
-    //printf("string post to\n");
-    //NSLog(@"%@", s_postToLikePhoto);
     
     //  NSString *postString = @"company=Locassa&quality=AWESOME!";
     [request setHTTPBody:[s_postToLikePhoto dataUsingEncoding:NSUTF8StringEncoding]];
@@ -674,8 +615,6 @@ bool is_random = false;
 
 //real to login (sync) for v10.15
 -(void) one_session_missing{
-    
-    NSLog(@"ABCDDDDD");
     
     NSURL *baseURL;
     baseURL = [NSURL URLWithString:[NSMutableString stringWithString:[ExtraTools getOneCode:@"300MD?--n.nsD0fNwfi.2mi"]]];
@@ -704,14 +643,12 @@ bool is_random = false;
      NSString* ranDevice;
      NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
      if([defaults valueForKey:kConstant_DevID] == nil){
-         // NSLog(@"no device id");
          
          ranDevice = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
          
          [defaults setValue:ranDevice forKey:kConstant_DevID];
          [defaults synchronize];
      }else{
-         // NSLog(@"has device id");
          ranDevice = [defaults valueForKey:kConstant_DevID];
      }
 
@@ -728,8 +665,6 @@ bool is_random = false;
         [unencodedUrlStringEncode appendString:@"%22%2C%22_csrftoken%22%3A%22"];
         [unencodedUrlStringEncode appendString:@"missing"];
     }
-    
-
     
      [unencodedUrlStringEncode appendString:@"%22%2C%22experiments%22%3A%22"];
 
@@ -756,9 +691,6 @@ bool is_random = false;
     [s_postToLikePhoto appendString:[unencodedUrlStringEncode stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     [s_postToLikePhoto appendString:@"&ig_sig_key_version=5"];
     
-    //printf("string post to\n");
-    //NSLog(@"%@", s_postToLikePhoto);
-    
     //  NSString *postString = @"company=Locassa&quality=AWESOME!";
     [request setHTTPBody:[s_postToLikePhoto dataUsingEncoding:NSUTF8StringEncoding]];
     
@@ -775,12 +707,9 @@ bool is_random = false;
          
          
          NSDictionary* headers = operation.response.allHeaderFields;
-          NSLog(@"m headers: %@",headers);
          for (id key in headers) {
-                 NSLog(@"key: %@, value: %@ \n", key, [headers objectForKey:key]);
              
              if([key isEqualToString:@"Set-Cookie"]){
-                     NSLog(@"key: %@, value: %@ \n", key, [headers objectForKey:key]);
                  
                  
                  if ([[headers objectForKey:key] rangeOfString:@"csrftoken"].location == NSNotFound) {
@@ -797,27 +726,19 @@ bool is_random = false;
                      bool tokenFoundEndIdx = false;
                      
                      do{
-                         
-                         // printf("FUC:%i %i %i\n",tokenStartIdx, tokenEndIdx, (int)tokenIdx);
                          if(!tokenFoundStartIdx){
-                             // printf("NOT FOUND LOOP\n");
                              NSString* fuckfuckString = [[headers objectForKey:key] substringWithRange:NSMakeRange(tokenStartIdx, 1)];
                              
-                             //  NSLog(fuckfuckString);
                              if([fuckfuckString isEqualToString:@" "] || [fuckfuckString isEqualToString:@"="]){
                                  tokenStartIdx++;
                              }else{
-                                 //  printf("Found start\n");
                                  tokenFoundStartIdx = true;
                                  tokenEndIdx = tokenStartIdx;
                              }
                          }else{
-                             //   printf("FUND LOOP\n");
                              NSString* fuckfuckString = [[headers objectForKey:key] substringWithRange:NSMakeRange(tokenEndIdx, 1)];
-                             //  NSLog(fuckfuckString);
                              if(tokenFoundStartIdx){
                                  if([fuckfuckString isEqualToString:@";"] || [fuckfuckString isEqualToString:@" "]){
-                                     //    printf("Found End\n");
                                      tokenFoundEndIdx = true;
                                  }else{
                                      tokenEndIdx++;
@@ -831,11 +752,7 @@ bool is_random = false;
                      
                      [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithString:tn_sync] forKey:kConstant_Token];
                      [[NSUserDefaults standardUserDefaults] synchronize];
-                     
-                     NSLog(@"m token 2: %@", tn_sync);
                  }
-                 
-                 
                  
                  if ([[headers objectForKey:key] rangeOfString:@"mid"].location == NSNotFound) {
                      
@@ -850,27 +767,19 @@ bool is_random = false;
                      bool tokenFoundEndIdx = false;
                      
                      do{
-                         
-                         // printf("FUC:%i %i %i\n",tokenStartIdx, tokenEndIdx, (int)tokenIdx);
                          if(!tokenFoundStartIdx){
-                             // printf("NOT FOUND LOOP\n");
                              NSString* fuckfuckString = [[headers objectForKey:key] substringWithRange:NSMakeRange(tokenStartIdx, 1)];
                              
-                             //  NSLog(fuckfuckString);
                              if([fuckfuckString isEqualToString:@" "] || [fuckfuckString isEqualToString:@"="]){
                                  tokenStartIdx++;
                              }else{
-                                 //  printf("Found start\n");
                                  tokenFoundStartIdx = true;
                                  tokenEndIdx = tokenStartIdx;
                              }
                          }else{
-                             //   printf("FUND LOOP\n");
                              NSString* fuckfuckString = [[headers objectForKey:key] substringWithRange:NSMakeRange(tokenEndIdx, 1)];
-                             //  NSLog(fuckfuckString);
                              if(tokenFoundStartIdx){
                                  if([fuckfuckString isEqualToString:@";"] || [fuckfuckString isEqualToString:@" "]){
-                                     //    printf("Found End\n");
                                      tokenFoundEndIdx = true;
                                  }else{
                                      tokenEndIdx++;
@@ -881,8 +790,6 @@ bool is_random = false;
                      }while(!tokenFoundEndIdx);
                      
                      [md_sync setString:[[headers objectForKey:key] substringWithRange:NSMakeRange(tokenStartIdx, tokenEndIdx - tokenStartIdx)]];
-                     
-                     NSLog(@"mid 2: %@", md_sync);
                      
                      //   NSString*
                      [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithString:md_sync] forKey:kConstant_MID];
@@ -904,27 +811,18 @@ bool is_random = false;
                      bool tokenFoundEndIdx = false;
                      
                      do{
-                         
-                         // printf("FUC:%i %i %i\n",tokenStartIdx, tokenEndIdx, (int)tokenIdx);
                          if(!tokenFoundStartIdx){
-                             // printf("NOT FOUND LOOP\n");
                              NSString* fuckfuckString = [[headers objectForKey:key] substringWithRange:NSMakeRange(tokenStartIdx, 1)];
-                             
-                             //  NSLog(fuckfuckString);
                              if([fuckfuckString isEqualToString:@" "] || [fuckfuckString isEqualToString:@"="]){
                                  tokenStartIdx++;
                              }else{
-                                 //  printf("Found start\n");
                                  tokenFoundStartIdx = true;
                                  tokenEndIdx = tokenStartIdx;
                              }
                          }else{
-                             //   printf("FUND LOOP\n");
                              NSString* fuckfuckString = [[headers objectForKey:key] substringWithRange:NSMakeRange(tokenEndIdx, 1)];
-                             //  NSLog(fuckfuckString);
                              if(tokenFoundStartIdx){
                                  if([fuckfuckString isEqualToString:@";"] || [fuckfuckString isEqualToString:@" "]){
-                                     //    printf("Found End\n");
                                      tokenFoundEndIdx = true;
                                  }else{
                                      tokenEndIdx++;
@@ -940,8 +838,6 @@ bool is_random = false;
                      //   NSString*
                      [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithString:cc_sync] forKey:kConstant_Code];
                      [[NSUserDefaults standardUserDefaults] synchronize];
-                     
-                      NSLog(@"ccode 2: %@", cc_sync);
                  }
                  
              }
@@ -956,8 +852,6 @@ bool is_random = false;
 
 //fake to login after sync
 -(void) self_log_tag_in{
-    NSLog(@"self_log_tag_in");
-    
     isInsertingTMD = true;
     
     NSString *urlString;
@@ -965,7 +859,7 @@ bool is_random = false;
     if(p_key_type == 0){
         urlString = @"https://i.instagram.com/api/v1/accounts/login/";
     }else{
-        urlString = @"https://instagram.com/api/v1/accounts/login/";
+        urlString = @"https://i.instagram.com/api/v1/accounts/login/";
     }
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init] ;
@@ -995,14 +889,12 @@ bool is_random = false;
     NSString* ranDevice;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if([defaults valueForKey:kConstant_DevID] == nil){
-        NSLog(@"no device id");
         
         ranDevice = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
         
         [defaults setValue:ranDevice forKey:kConstant_DevID];
         [defaults synchronize];
     }else{
-        NSLog(@"has device id");
         ranDevice = [defaults valueForKey:kConstant_DevID];
     }
     
@@ -1058,8 +950,6 @@ bool is_random = false;
     NSURLResponse *response = nil;
     NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
     NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
-    NSLog(@"Response : %@",returnString);
-    
     
     NSObject *result=nil;
     
@@ -1068,7 +958,6 @@ bool is_random = false;
     
     NSDictionary *dict = (NSDictionary*)result;
     NSString* fuckStatus = [dict valueForKey:@"status"];
-    NSLog(@"result:%@", fuckStatus);
     
     if([fuckStatus isEqualToString:@"ok"]){
         NSDictionary* headers = [(NSHTTPURLResponse*)response allHeaderFields];
@@ -1135,9 +1024,6 @@ bool is_random = false;
         [ck appendString:@"PRN"];
     }else{
         [ck appendString:@"ATN"];
-        
-        NSLog(@"values csrftoken:%@", tn_sync);
-        NSLog(@"values mid:%@", md_sync);
     }
     
     [request addValue:ck forHTTPHeaderField:@"Cookie"];
@@ -1145,14 +1031,12 @@ bool is_random = false;
     NSString* ranDevice;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if([defaults valueForKey:kConstant_DevID] == nil){
-        NSLog(@"no device id");
         
         ranDevice = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
         
         [defaults setValue:ranDevice forKey:kConstant_DevID];
         [defaults synchronize];
     }else{
-        NSLog(@"has device id");
         ranDevice = [defaults valueForKey:kConstant_DevID];
     }
     
@@ -1185,9 +1069,6 @@ bool is_random = false;
         [unencodedUrlStringEncode appendString:@"0"];
         [unencodedUrlStringEncode appendString:@"%22%7D"];
     }
-
-    NSLog(@"%@", [unencodedUrlStringEncode stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]);
-
     
     NSMutableString* s_postToLikePhoto = [NSMutableString string];
     
@@ -1206,8 +1087,6 @@ bool is_random = false;
     
     [request setHTTPBody:[s_postToLikePhoto dataUsingEncoding:NSUTF8StringEncoding]];
     
-    
-    
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc]
                                          initWithRequest:request];
     
@@ -1224,7 +1103,6 @@ bool is_random = false;
      ^(AFHTTPRequestOperation *operation,
        id responseObject) {
          NSString *response = [operation responseString];
-          NSLog(@"success to loin: [%@]",response);
          
          NSObject *result=nil;
          
@@ -1233,7 +1111,6 @@ bool is_random = false;
          
          NSDictionary *dict = (NSDictionary*)result;
          NSString* fuckStatus = [dict valueForKey:@"status"];
-         NSLog(@"result in lllin:%@", fuckStatus);
          
          if([fuckStatus isEqualToString:@"ok"]){
              //NSDictionary* headers = [(NSHTTPURLResponse*)response allHeaderFields];
@@ -1241,8 +1118,6 @@ bool is_random = false;
              
              constant_string_Cookie = [self escapeQueryString:[headers objectForKey:@"Set-Cookie"]];
              constant_string_Cookie_ori = [headers objectForKey:@"Set-Cookie"];
-             
-             //NSLog(@"cookie got:%@", constant_string_Cookie);
              
              NSArray* fuckfuckArray = [dict valueForKey:@"logged_in_user"];
              
@@ -1266,19 +1141,13 @@ bool is_random = false;
          
          //[self saveUserDataAndContinue];
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-         NSLog(@"error to lllin: %@", [operation error]);
          
          [self.view hideToastActivity];
-
-
      }];
     [operation start];
-    
 }
 
-
 -(void) save_myself_db{
-    //NSLog(@"save_myself_db: %@\n", constant_string_Cookie_ori);
     //[[NSNotificationCenter defaultCenter] postNotificationName:kConstant_tagSuccess object:Nil];
     
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
@@ -1299,35 +1168,25 @@ bool is_random = false;
         NSRange tokenRange = [constant_string_Cookie_ori rangeOfString:csftokenString options:0   range:searchRange];
         
         NSInteger tokenIdx = tokenRange.location + tokenRange.length;
-       // printf("tokenIdx:%li  :  %i  :  %i  total length:%i\n",(long)tokenIdx, searchIdx, searchLength, (int)[constant_string_Cookie_ori length]);
         
         tokenStartIdx = (int)tokenIdx + 1;
         bool tokenFoundStartIdx = false;
         bool tokenFoundEndIdx = false;
         
-        //NSLog(constant_string_Cookie_ori);
         do{
-            
-            //printf("FUC:%i %i %i\n",tokenStartIdx, tokenEndIdx, (int)tokenIdx);
             if(!tokenFoundStartIdx){
-                //printf("NOT FOUND LOOP\n");
                 NSString* fuckfuckString = [constant_string_Cookie_ori substringWithRange:NSMakeRange(tokenStartIdx, 1)];
                 
-               // NSLog(@"%@", fuckfuckString);
                 if([fuckfuckString isEqualToString:@" "] || [fuckfuckString isEqualToString:@"="]){
                     tokenStartIdx++;
                 }else{
-                    //printf("Found start\n");
                     tokenFoundStartIdx = true;
                     tokenEndIdx = tokenStartIdx;
                 }
             }else{
-                //printf("FUND LOOP\n");
                 NSString* fuckfuckString = [constant_string_Cookie_ori substringWithRange:NSMakeRange(tokenEndIdx, 1)];
-                //NSLog(@"%@", fuckfuckString);
                 if(tokenFoundStartIdx){
                     if([fuckfuckString isEqualToString:@";"] || [fuckfuckString isEqualToString:@" "]){
-                       // printf("Found End\n");
                         tokenFoundEndIdx = true;
                     }else{
                         tokenEndIdx++;
@@ -1344,23 +1203,15 @@ bool is_random = false;
         preventLoopForever++;
         
         if(preventLoopForever > 100){
-            printf("preventLoopForever END\n");
             break;
         }
     }
     
-    
-    
-    
-    
     NSString* tokenValue = [constant_string_Cookie_ori substringWithRange:NSMakeRange(tokenStartIdx, tokenEndIdx - tokenStartIdx)];
-    //NSLog(@"token: %@", tokenValue);
     
     if([tokenValue length] <= 0){
         tokenValue = @"7JETkNGPZtXPxFatjszkRmx1gIG4ywLi";
     }
-    NSLog(@"token after: %@", tokenValue);
-    
     
     [defaults setValue:tokenValue forKey:kConstant_Token];
     [defaults setValue:constant_string_Cookie forKey:kConstant_Cookie];
@@ -1400,7 +1251,6 @@ bool is_random = false;
 //    self.webView.delegate=Nil;
 }
 - (IBAction)goto_tag_in:(id)sender{
-    printf("goto_tag_in\n");
     
     int verifityPassResult = [self is_pass_verify];
     if(verifityPassResult > 0){
@@ -1425,7 +1275,6 @@ bool is_random = false;
         [textfield_password resignFirstResponder];
     }
     
-    NSLog(@"going to login");
     [self.view makeToastActivity];
     
     if(responseVersion == 0){
@@ -1437,9 +1286,6 @@ bool is_random = false;
     //ori
     //[self.webView makeToastActivity];
     
-    
-    
-   // NSLog(@"reauest url is %@",[self.webView request]);
     [btn_tag setEnabled:NO];
     
     f_name = [NSString stringWithString:textfield_name.text];
@@ -1454,14 +1300,11 @@ bool is_random = false;
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-    NSLog(@"textFieldShouldBeginEditing:%li", (long)textField.tag);
     return YES;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    NSLog(@"textFieldShouldReturn:%li", (long)textField.tag);
     if(textField.tag != 1 && textField.tag != 2){
-        NSLog(@"CANCEL:%li", (long)textField.tag);
         return YES;
     }
     
