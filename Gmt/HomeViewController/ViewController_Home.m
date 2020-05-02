@@ -142,7 +142,6 @@ int canAskRate;
     }
     
     if([[[[UIDevice currentDevice] identifierForVendor] UUIDString] isEqualToString:@"9ADAA489-5A18-48FC-A459-E8EC0E4B1BD6"]){
-         NSLog(@"CS FIRST");
         isSessionExpired = true;
     }
     
@@ -230,16 +229,12 @@ NSData *hmac_key_data(NSString *key, NSString *data)
     }
     if ([[notification name] isEqualToString:kConstant_tagSuccess])
     {
-        NSLog(@"V check 1");
         [self getVersion:true];
         [self registerAUser];
     }
 }
 
-
 -(void) getFirstVersion{
-    NSLog(@"first checking:%i %i" , responseVersion, kVersion);
-    
     [viewController_Shop loading_items];
     
     if(kVersion <= responseVersion){
@@ -249,7 +244,6 @@ NSData *hmac_key_data(NSString *key, NSString *data)
     
     //add on 20190112
     /*if(hasIniit_tag_VC){
-        NSLog(@"hasIniit_tag_VC");
         [viewController_LogTag get_session_1sttime];
     }*/
     
@@ -261,9 +255,7 @@ NSData *hmac_key_data(NSString *key, NSString *data)
 //add on 20190112
 int aaa = 0;
 -(void) get_session_11sttime:(NSTimer*) timer{
-     NSLog(@"check get syn");
     if(hasIniit_tag_VC || aaa == 20){
-         NSLog(@"final get syn and stop loop");
         [viewController_LogTag get_session_1sttime];
         [get_session_1sttime_timer invalidate];
     }
@@ -293,7 +285,6 @@ bool hasCheckedVersionFirst = false;
         
        // responseStr = @"3500102";
         
-        NSLog(@"Request Successful 23, response '%@'", responseStr);
         NSObject *result=nil;
         SBJsonParser *parser=[[SBJsonParser alloc]init];
         result =  [parser objectWithString:responseStr];
@@ -311,8 +302,6 @@ bool hasCheckedVersionFirst = false;
         
         pp_and_pp = [[result valueForKey:@"pp"] intValue];
         [viewController_Shop loading_items];
-        
-        printf("ownAD T:%i %i %i p:%i\n",ownAdVersion, ownAdLink, ownAdRatio, pp_and_pp);
 
         if(!seikeAvailableHasInit){
             seikeAvailable = [[result valueForKey:@"al"] intValue];
@@ -364,8 +353,6 @@ bool hasCheckedVersionFirst = false;
         int firstValue = combineValue / calDivide;
         int secondValue = combineValue - firstValue * calDivide;
         
-        printf("first:%i second:%i\n",firstValue, secondValue);
-        
         likeAwardToFish = firstValue;
 
         
@@ -381,9 +368,7 @@ bool hasCheckedVersionFirst = false;
             if(_newLogin){
                 [self registerAUser];
             }else{
-                NSLog(@"can go A1");
                 if(!loopChecking){
-                    NSLog(@"can go A2: load_all_feed");
                     [self load_all_feed];
                 }
                 
@@ -398,8 +383,6 @@ bool hasCheckedVersionFirst = false;
         hasCheckedVersionFirst = true;
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error.localizedDescription);
-        printf("FAIL version check\n");
         
         if(!loopChecking){
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"There is an error in version checking. Please check the network and make sure it is turning on." delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
@@ -413,18 +396,14 @@ bool hasCheckedVersionFirst = false;
         }
         
          loopChecking = false;
-        
     }];
-    
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if(alertView.tag == 11){
-        NSLog(@"V check 2");
         [self getVersion:true];
     }
     if(alertView.tag == 12){
-        NSLog(@"V check 3");
         [self getVersion:false];
     }
     if(alertView.tag == 13){
@@ -436,7 +415,6 @@ bool hasCheckedVersionFirst = false;
     if(alertView.tag == 104){
         [self gotoUpdateVersion];
     }
-    
     
     if(responseVersion < kVersion){
         
@@ -462,12 +440,8 @@ bool hasCheckedVersionFirst = false;
             }
             
         }
-        
     }
    
-    
-   
-    
     if(alertView.tag == 1006){
         [self tag_out];
     }
@@ -491,23 +465,17 @@ bool hasCheckedVersionFirst = false;
         
         [httpClient postPath:@"" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-            NSLog(@"Request Successful 45, response '%@'", responseStr);
             
             if(isInSelectseikeView){
                 [inIncreaseVC press_back_button];
             }
             
             refund_isGettingBack = false;
-            
-            
-            
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Error: %@", error.localizedDescription);
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Failed to get the refund" message:@"Please try to logout then login again" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
             [alert show];
             
             refund_isGettingBack = false;
-            
         }];
     }
     
@@ -530,19 +498,13 @@ bool hasCheckedVersionFirst = false;
         
         [httpClient postPath:@"" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-            NSLog(@"Request Successful 45, response '%@'", responseStr);
             
             if(isInSelectseikeView){
                 [inIncreaseVC press_back_button];
             }
-            
-            
-            
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Error: %@", error.localizedDescription);
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Failed to get the reward..." message:@"Please try to logout then login again" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
             [alert show];
-            
         }];
     }
     
@@ -565,22 +527,16 @@ bool hasCheckedVersionFirst = false;
         
         [httpClient postPath:@"" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-            NSLog(@"Request Successful own ad coins, response '%@'", responseStr);
             
             if(isInSelectseikeView){
                 [inIncreaseVC press_back_button];
             }
-            
-            
-            
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Error: %@", error.localizedDescription);
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Failed to get coins...." message:@"Please try to logout then login again" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
             [alert show];
             
         }];
     }
-
 
     if(alertView.tag == 1009){
  
@@ -595,8 +551,6 @@ bool hasCheckedVersionFirst = false;
             [user_defaults setValue:[NSString stringWithFormat:@"%i", kVersion] forKey:kConstant_VersionRate];
             [user_defaults synchronize];
         }
-
-
     }
     
     if(alertView.tag == 1010){
@@ -612,10 +566,7 @@ bool hasCheckedVersionFirst = false;
             [user_defaults setValue:[NSString stringWithFormat:@"%i", ownAdVersion] forKey:kConstant_VersionOwn];
             [user_defaults synchronize];
         }
-        
-        
     }
-
 }
 
 - (void)pressedOwn{
@@ -624,7 +575,6 @@ bool hasCheckedVersionFirst = false;
         
         // Here is the app id from itunesconnect
         str = [NSString stringWithFormat:@"%@id%@", str, [NSString stringWithFormat:@"%i",ownAdLink]];
-        // NSLog(@"%@", str);
         
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
     }else{
@@ -654,7 +604,6 @@ bool hasCheckedVersionFirst = false;
     
     [httpClient postPath:@"" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"Request Successful p_updateCoinsFromOwnAD.php, response '%@'", responseStr);
         
        // [user_defaults setValue:[NSString stringWithFormat:@"%i", ownAdVersion] forKey:kConstant_VersionOwn];
         [user_defaults setValue:[NSString stringWithFormat:@"%i",[[user_defaults valueForKey:kConstant_Diamond] intValue] + [responseStr integerValue]] forKey:kConstant_Diamond];
@@ -664,18 +613,13 @@ bool hasCheckedVersionFirst = false;
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error in toIncrease_rate: %@", error.localizedDescription);
-        
         static int toIncreaseFromOwnFailTime = 0;
         toIncreaseFromOwnFailTime++;
         if(toIncreaseFromOwnFailTime < 4){
             [self toIncreaseFromOwn];
         }
-        
     }];
-
 }
-
 
 -(void) toIncrease_rate{
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
@@ -692,7 +636,6 @@ bool hasCheckedVersionFirst = false;
     
     [httpClient postPath:@"" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"Request Successful toIncrease_rate, response '%@'", responseStr);
         
         [user_defaults setValue:[NSString stringWithFormat:@"%i", kVersion] forKey:kConstant_VersionRate];
         [user_defaults setValue:[NSString stringWithFormat:@"%i",[[user_defaults valueForKey:kConstant_Diamond] intValue] + [responseStr integerValue]] forKey:kConstant_Diamond];
@@ -700,20 +643,14 @@ bool hasCheckedVersionFirst = false;
 
         self.diamond_lbl.text = [NSString stringWithFormat:@"%i",[responseStr integerValue] + (int)[self.diamond_lbl.text integerValue]];
         
-        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error in toIncrease_rate: %@", error.localizedDescription);
-        
         static int toIncrease_rateFailTime = 0;
         toIncrease_rateFailTime++;
         if(toIncrease_rateFailTime < 4){
             [self toIncrease_rate];
         }
-        
     }];
-
 }
-
 
 //encrypt add new user p_registerAUser_cid.php in next update
 -(void) registerAUser{
@@ -721,8 +658,6 @@ bool hasCheckedVersionFirst = false;
        // [self presentEULA];
     }
     
-    
-    printf("registerAUser:%i\n",cid_from);
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
@@ -740,9 +675,7 @@ bool hasCheckedVersionFirst = false;
     
     [httpClient postPath:@"" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"Request Successful 1, response '%@'", responseStr);
         if (![responseStr isEqual:@"-1"]) {
-            printf("registered\n");
             [self load_feed_history];
             [viewController_Shop loadSuperS];
             
@@ -751,8 +684,6 @@ bool hasCheckedVersionFirst = false;
             [userDefaults synchronize];
             
         }else{
-            printf("registered.\n");
-            
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Failed" message:@"Please try to login again" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
             [alert show];
             
@@ -761,7 +692,6 @@ bool hasCheckedVersionFirst = false;
 
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error.localizedDescription);
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Failed" message:@"Please try to login again" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
         [alert show];
         
@@ -771,8 +701,6 @@ bool hasCheckedVersionFirst = false;
 }
 
 -(void) load_feed_history{
-    printf("load_feed_history\n");
-    
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
@@ -787,7 +715,6 @@ bool hasCheckedVersionFirst = false;
     
     [httpClient postPath:@"" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"Request Successful 18, response '%@'", responseStr);
         NSObject *result=nil;
         SBJsonParser *parser=[[SBJsonParser alloc]init];
         result =  [parser objectWithString:responseStr];
@@ -799,7 +726,6 @@ bool hasCheckedVersionFirst = false;
         if (resultArray.count > 0) {
             for(int i = 0 ; i < resultArray.count ; i++){
                 NSDictionary *dict = (NSDictionary*)[resultArray objectAtIndex:i];
-                // printf("ABC:%s\n",[[dict valueForKey:@"media_id"] UTF8String]);
                 [saveIdArray addObject:[dict valueForKey:@"media_id"]];
             }
             
@@ -827,7 +753,6 @@ bool hasCheckedVersionFirst = false;
         [self pressDiamond:nil];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error.localizedDescription);
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Failed" message:@"Please try to login again" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
         [alert show];
         
@@ -837,12 +762,10 @@ bool hasCheckedVersionFirst = false;
 
 
 -(void) save_feed_history:(NSString*)_mediaId{
-    printf("save_feed_history:%s\n",[_mediaId UTF8String]);
     
     [unsaveHistoryArray addObject:_mediaId];
     
     // for (int i = 0 ; i < [unsaveHistoryArray count]; i++) {
-    //  printf("unsaveHistoryArray:%s\n",[[unsaveHistoryArray objectAtIndex:i] UTF8String]);
     // }
     
     [user_defaults setObject:unsaveHistoryArray forKey:kConstant_unsaveTagID];
@@ -867,7 +790,6 @@ bool hasCheckedVersionFirst = false;
         
         [httpClient postPath:@"" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-            NSLog(@"Request Successful 16, response '%@'", responseStr);
             
             [saveArray addObjectsFromArray:unsaveHistoryArray];
             [unsaveHistoryArray removeAllObjects];
@@ -879,7 +801,6 @@ bool hasCheckedVersionFirst = false;
             [self delete_print_history];
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Error: %@", error.localizedDescription);
         }];
         
     }
@@ -893,15 +814,10 @@ bool hasCheckedVersionFirst = false;
         return;
    // }
     
-    /*printf("UNSAVE:\n");
     for(int i = 0 ; i < [unsaveHistoryArray count] ; i++){
-        printf("%s\n",[[unsaveHistoryArray objectAtIndex:i] UTF8String]);
     }
     
-    printf("-----.-----\n");
-    printf("SAVE:\n");
     for(int i = 0 ; i < [saveArray count] ; i++){
-        printf("%s\n",[[saveArray objectAtIndex:i] UTF8String]);
     }*/
     
 }
@@ -929,7 +845,6 @@ bool hasCheckedVersionFirst = false;
     [super viewDidLoad];
     
     //delete
-    NSLog(@"delete for testing: 0");
     
     //F44233
     [self.tagDia_2_btn setTitle:@"Get Likes" forState:UIControlStateNormal];
@@ -949,8 +864,6 @@ bool hasCheckedVersionFirst = false;
         self.msg_btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         //[self.msg_btn setTitleEdgeInsets:UIEdgeInsetsMake(46, 44, 0, 0)];
     }
-NSLog(@"delete for testing: 1");
-    
     
     [self.msg_btn setTitle:@"Like +1" forState:UIControlStateNormal];
     [self.msg_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -966,19 +879,8 @@ NSLog(@"delete for testing: 1");
     [self.loginOut setTitle:@"Log Out" forState:UIControlStateNormal];
     
     [self.tagDiamond_btn setSelected:true];
-
-    NSLog(@"DDEVICE ID:%@", [[[UIDevice currentDevice] identifierForVendor] UUIDString]);
     
-    //FUCK
     user_defaults = [NSUserDefaults standardUserDefaults];
-    
-  
-    printf("get view did load:\n");
-    
-    
-    //NSLog(@"did load centerview view:%i\n",[[user_defaults valueForKey:kCid] intValue]);
-    //printf("version compare:%i %i\n",[[user_defaults valueForKey:kPrevVersion] intValue], kVersion);
-
     
     viewController_Shop = [[ViewController_Shop alloc]initWithNibName:@"ViewController_Shop" bundle:nil];
    // [self.navigationController pushViewController:ViewController_Shop animated:YES];
@@ -989,7 +891,6 @@ NSLog(@"delete for testing: 1");
    // [user_defaults setValue:[NSString stringWithFormat:@"%i",0] forKey:kConstant_ownQidIDX];
     qidIdx_own = [[user_defaults valueForKey:kConstant_ownQidIDX] intValue];
     //qidIdx_own = 0;
-    printf("qidIdx_own:%i\n",qidIdx_own);
     
     max_preload = 40;
     max_load = 10;
@@ -1035,12 +936,8 @@ NSLog(@"delete for testing: 1");
     isFish = false;
     hasShownOwnAdInThisSession = false;
     
-NSLog(@"delete for testing: 2");
-    
-    
     /* NSArray* aa = [[NSArray alloc] initWithObjects:@"ABC", @"DEF", nil];
      for(int i = 0 ; i < [aa count] ; i++){
-     printf("II:%s\n",[[aa objectAtIndex:i] UTF8String]);
      }*/
     
     
@@ -1080,7 +977,6 @@ NSLog(@"delete for testing: 2");
     
     NSString *accessToken = [defaults objectForKey:kConstant_AccessKey];
     if (accessToken) {
-        NSLog(@"V check 4:%@", accessToken);
        
         //delete
         //p_key_type_forceToLogout = true;
@@ -1110,8 +1006,6 @@ NSLog(@"delete for testing: 2");
     
     self.Scrollview_2.contentSize=CGSizeMake(320, 10);
     
-
-    
     if(isIphone6){
         self.itag.frame = CGRectMake(32 + 27, 40, 256, 256);
         self.itagThumnail.frame = CGRectMake(32 + 27, 40, 256, 256);
@@ -1140,7 +1034,6 @@ NSLog(@"delete for testing: 2");
                                         self.img_btn.frame.size.width,
                                         self.img_btn.frame.size.height);
     }else if(isOldIphone){
-        printf("old iPhone setting for itag\n");
         self.itag.frame = CGRectMake(32, 6, 256, 256);
         self.itagThumnail.frame = CGRectMake(32, 6, 256, 256);
         
@@ -1202,8 +1095,6 @@ NSLog(@"delete for testing: 2");
     //set center menu fram
     //    self.center_uiview.frame =CGRectMake(0, self.view.frame.size.height, 320, 130);
     
-    // Do any additional setup after loading the view from its nib.
-    
     [self setTopBar];
     
     //init
@@ -1214,10 +1105,6 @@ NSLog(@"delete for testing: 2");
     [self getFirstVersion];
     //[NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(getFirstVersion) userInfo:nil repeats:NO];
     [self.view makeToastActivity];
-    
-    NSLog(@"end view did load on ViewCotroller_Home");
-    NSLog(@"delete for testing: 3");
-
 }
 
 -(void) setTopBar{
@@ -1270,7 +1157,6 @@ NSLog(@"delete for testing: 2");
     
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.translucent = NO;
-    
 }
 
 -(void) press_back_button{
@@ -1278,8 +1164,6 @@ NSLog(@"delete for testing: 2");
 }
 
 -(void) pressedMenuButton{
-    printf("menu press  top\n");
-    
     UIButton *btn = self.centermenu_btn;
     [btn setSelected:!btn.isSelected];
     
@@ -1304,18 +1188,13 @@ NSLog(@"delete for testing: 2");
         
         [btn_donotandDonot setAlpha:1];
     }
-
 }
-
-
 
 -(void) LoopingTimer:(NSTimer*) timer{
     
     if(isAutomatic){
         if(can_nextTag){
             automaticTimer++;
-            
-            printf("automatic:%i\n",automaticTimer);
             
             if(automaticTimer % automacticInterval == 0){
                 [self TagImage:nil];
@@ -1340,10 +1219,8 @@ NSLog(@"delete for testing: 2");
         }
         seikeAvailableTimer = 0;
     }
-   // printf("seikeAvailable:%i %i\n",seikeAvailable,seikeAvailableTimer);
     
     if(!preloading){
-         //printf("LoopingTimer:%i timer_preload:%i\n",photoLoading_url_timer, timer_preload);
         
         if(photoLoading_url_timer >= 0){
             photoLoading_url_timer++;
@@ -1360,21 +1237,15 @@ NSLog(@"delete for testing: 2");
             
             if(photoLoading_url_timer == 1){
                 
-                /*printf("!!!!!!!!!!!!!!!!LOADING THUMBNAIL \n");
-                
+                /*
                 self.itagThumnail.frame = CGRectMake(32, 6, 256, 256);
                 
                 [self.itagThumnail setImageWithURL:[currentImageData valueForKey:@"photo_thumnailurl"] success:^(UIImage *image, BOOL cached) {
-                    printf("THUMNAL: successfully display photo_thumnailurl url\n");
                 } failure:^(NSError *error) {
-                    printf("THUMNAL: fail display photo_thumnailurl:%s\n", [[currentImageData valueForKey:@"photo_thumnailurl"] UTF8String]);
-                    
                 }];*/
             }
         }
     }else{
-           printf("IN PRELOADING LoopingTimer:%i timer_preload:%i\n",photoLoading_url_timer, timer_preload);
-        
         timer_preload++;
         
         if(timer_preload >= timeAim_preload){
@@ -1413,49 +1284,33 @@ NSLog(@"delete for testing: 2");
     
     if(!refund_isGettingBack){
         refundChecking_counter--;
-         //printf("refundChecking_counter:%i\n", refundChecking_counter);
     }
     
     if(refundChecking_counter == 0){
         loopChecking = true;
         refundChecking_counter = 180;
-        NSLog(@"V check 5");
         [self getVersion:false];
     }
-
 }
 
 -(void) thumbnail_load_for_mainimg{
-    printf("!!!!!!!!!!!!!!!!LOADING THUMBNAIL \n");
-    
     //[self.itagThumnail setImageWithURL:@"liker.j2sighte.com/api/IMG_SMALL.png" success:^(UIImage *image, BOOL cached) {
 //    [self.itagThumnail sd_setImageWithURL:[currentImageData valueForKey:@"photo_url"] success:^(UIImage *image, BOOL cached) {
-//        printf("THUMNAL: successfully display photo_thumnailurl url:%s\n", [[currentImageData valueForKey:@"photo_thumnailurl"] UTF8String]);
 //    } failure:^(NSError *error) {
-//        printf("THUMNAL: fail display photo_thumnailurl:%s\n", [[currentImageData valueForKey:@"photo_thumnailurl"] UTF8String]);
-//
 //    }];   old
     
     [self.itagThumnail sd_setImageWithURL:[currentImageData valueForKey:@"photo_url"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-        printf("THUMNAL: successfully display photo_thumnailurl url:%s\n", [[currentImageData valueForKey:@"photo_thumnailurl"] UTF8String]);
     }];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    printf("viewWillAppear\n");
     [super viewWillAppear:animated];
     //[self check_tag_status];
     [self hideCenterMenu:0.1];
 }
 
-
-
 -(void)load_all_feed{
-    NSLog(@"load Feeds:%@", [NSString stringWithFormat:@"%i",qidIdx_own]);
-
-    
     if(isLoadingTag){
-        printf("WTF loading feed , stop\n");
         return;
     }
     isLoadingTag = true;
@@ -1479,14 +1334,12 @@ NSLog(@"delete for testing: 2");
         
         isLoadingTag = false;
         
-        //NSLog(@"ABC: %@\n",responseStr);
         feedsArry = (NSMutableArray*)result;
         
         [self.view hideToastActivity];
         
         if (feedsArry.count <= 0)
         {
-            printf("No feeds found:\n");
             [self.view hideToastActivity];
             [self.itag hideToastActivity];
             [self popup_nofeed_alert];
@@ -1494,51 +1347,31 @@ NSLog(@"delete for testing: 2");
         }else{
             
             if([self checkCanLikeEitherPhotoInFeed]){
-                printf("Feeds found...\n");
                 noTagFeed = false;
                 [self.itag makeToastActivity];
                 [self checkAndLoadThisImg];
             }else{
-                
-                printf("No feeds found... \n");
                 [self.view hideToastActivity];
                 [self popup_nofeed_alert];
             }
-            
         }
-        
-
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error in load feed: %@", error.localizedDescription);
-        printf("Fail to load feed\n");
-        
         isLoadingTag = false;
-        
     }];
-
 }
 
-
-
 -(void)check_tag_status{
-    printf("check_tag_status\n");
-    
     if ([user_defaults objectForKey:kConstant_AccessKey] == nil || [user_defaults valueForKey:kConstant_UID] == nil || [user_defaults valueForKey:kConstant_Cookie] == nil || [user_defaults valueForKey:kConstant_DevID] == nil || [user_defaults valueForKey:kConstant_Session] == nil) {
         
         if ([user_defaults objectForKey:kConstant_AccessKey] == nil){
-            NSLog(@"NULL kConstant_AccessKey");
         }
         if ([user_defaults valueForKey:kConstant_UID] == nil){
-            NSLog(@"NULL kConstant_UID");
         }
         if ([user_defaults valueForKey:kConstant_Cookie] == nil){
-            NSLog(@"NULL kConstant_Cookie");
         }
         if ([user_defaults valueForKey:kConstant_DevID] == nil){
-            NSLog(@"NULL kConstant_DevID");
         }
         if ([user_defaults valueForKey:kConstant_Session] == nil){
-            NSLog(@"NULL kConstant_Session");
         }
         
         [self load_tagview];
@@ -1546,15 +1379,9 @@ NSLog(@"delete for testing: 2");
 }
 
 -(void) load_tagview{
-    
-    
-    printf("load_tagview\n");
-    
     //LoginViewController *vc;
     hasIniit_tag_VC = true;
     
-    
-
     static bool hasInitLoginBefore = false;
     
     if(!hasInitLoginBefore){
@@ -1563,63 +1390,46 @@ NSLog(@"delete for testing: 2");
             [viewController_LogTag set_delegate:self];
             //[self.view addSubview:ViewController_LogTag.view];
             [self presentViewController:viewController_LogTag animated:YES completion:^{
-                NSLog(@"completed load login v2 view");
             }];
-
-            
         }else{
-            NSLog(@"test 11");
             viewController_LogTag = [[ViewController_LogTag alloc] init];
-            NSLog(@"test 12");
             [viewController_LogTag set_delegate:self];
-            NSLog(@"test 13");
             //[self.view addSubview:ViewController_LogTag.view];
             [self presentViewController:viewController_LogTag animated:YES completion:^{
-                NSLog(@"completed load login v2 view");
             }];
-            NSLog(@"test 14");
-
-            
         }
         
         hasInitLoginBefore = true;
     }else{
         [self presentViewController:viewController_LogTag animated:NO completion:^{
-            NSLog(@"completed load login v2 view");
         }];
     }
 }
 
 - (IBAction)skipTag:(id)sender {
     if(isLogged){
-        printf("can't go next 0\n");
         [self ask_update_version_to_new];
         return;
     }
     
     if(!can_nextTag){
-        printf("can't go next 1\n");
         [self.itag makeToastActivity];
         return;
     }
     
     if(tappingOut){
-        printf("can't go next 3\n");
         return;
     }
     
     if([self checkIfNullUser]){
-        printf("can't go next 4\n");
         return;
     }
     
     if(isBlocked){
-        printf("can't go next 5\n");
         return;
     }
     
     if(isInsertingTMD){
-        printf("can't go next 6\n");
         return;
     }
     
@@ -1637,13 +1447,11 @@ NSLog(@"delete for testing: 2");
     }
     
     if(!can_nextTag){
-        printf("can't go next 2\n");
         [self.itag makeToastActivity];
         return;
     }
     
     if(tappingOut){
-        printf("can't go next is logging out\n");
         return;
     }
     
@@ -1656,7 +1464,6 @@ NSLog(@"delete for testing: 2");
     }
     
     if(noTagFeed){
-        printf("can't like, no feed and reload feed\n");
         [self load_all_feed];
         return;
     }
@@ -1666,7 +1473,6 @@ NSLog(@"delete for testing: 2");
     }
     
     if(isADEnable){
-        printf("adInterval:%i\n",adInterval);
         if(adInterval % 3 == 0){
             //can add revmomb ad here later
 
@@ -1675,7 +1481,6 @@ NSLog(@"delete for testing: 2");
     }
     
     can_nextTag = false;
-    printf("liking an image\n");
     
     [self.itag makeToastActivity];
     
@@ -1690,8 +1495,6 @@ NSLog(@"delete for testing: 2");
     tagdelivered_updating = [[currentImageData valueForKey:@"delivered_like"] intValue];
     tagmedia_ID_updating = [currentImageData valueForKey:@"media_id"];
     totaltagordered_updating = [[currentImageData valueForKey:@"totalOrdered_like"] intValue];
-    printf("qid_updateing:%i %i %i %i\n",qid_updateing,orderedtag_updating,tagdelivered_updating, totaltagordered_updating);
-    NSLog(@"%@", tagmedia_ID_updating);
     
     seikeAvailable--;
     if(seikeAvailable < 0){
@@ -1699,10 +1502,8 @@ NSLog(@"delete for testing: 2");
     }
     
     if(orderedtag_updating >= 9999999){
-        printf("Directly eat image\n");
         
         if(prev_id_update != qid_updateing){
-            NSLog(@"success");
             
             failDiamond_fromserver = 0;
             [self updateCurrentLikes];
@@ -1718,7 +1519,6 @@ NSLog(@"delete for testing: 2");
             if(seikeAvailable <= 0){
                 seikeAvailable = 1;
                 own_time_running++;
-                printf("own_time_running:%i\n",own_time_running);
                 
                 if(own_time_running >= 7){
                     own_time_running = 0;
@@ -1730,7 +1530,6 @@ NSLog(@"delete for testing: 2");
                 [user_defaults setValue:[NSString stringWithFormat:@"%i",qidIdx_own] forKey:kConstant_ownQidIDX];
                 [user_defaults synchronize];
             }
-            
         }
         
         [self load_next_tags];
@@ -1738,7 +1537,6 @@ NSLog(@"delete for testing: 2");
         return;
     }
     
-    printf("WTTFFFFFFF\n");
     [self get_session_init];
     if(!isSessionExpired){
         [self cointue_tag_increase];
@@ -1747,9 +1545,7 @@ NSLog(@"delete for testing: 2");
     }
 }
 
-//fake
 -(void) cointue_tag_increase{
-    NSLog(@"cointue_tag_increase");
     NSMutableString* likeString = [NSMutableString string];
     
     if(p_key_type == 0){
@@ -1763,21 +1559,17 @@ NSLog(@"delete for testing: 2");
     // [likeString appendString:@"724778629267393281_385764545"];
     [likeString appendString:@"/like/"];
     
-    NSLog(@"likeString %@",likeString);
-    
     NSURL *aUrl = [NSURL URLWithString:likeString];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:aUrl];
     
     [request setHTTPMethod:@"POST"];
     
     if ([user_defaults objectForKey:kConstant_AccessKey] == nil || [user_defaults valueForKey:kConstant_UID] == nil || [user_defaults valueForKey:kConstant_Cookie] == nil || [user_defaults valueForKey:kConstant_DevID] == nil) {
-        // NSLog(@"BB:%@",[user_defaults valueForKey:kConstant_Cookie]);
         [self popup_tag_out_warning];
         return;
     }
     
     NSString *unencodedCookie = [[user_defaults valueForKey:kConstant_Cookie] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSLog(@"%@", unencodedCookie);
     [request setValue:unencodedCookie forHTTPHeaderField:@"Cookie"];
     
     if(p_key_type == 27){
@@ -1790,7 +1582,6 @@ NSLog(@"delete for testing: 2");
     }
     [request addValue:cap forHTTPHeaderField: @"X-IG-Capabilities"];
     
-    printf("\n");
     NSMutableString* s_postToLikePhoto = [NSMutableString string];
     
     
@@ -1812,10 +1603,7 @@ NSLog(@"delete for testing: 2");
         [unencodedUrlStringEncode appendString:@"%22%2C%22media_id%22%3A%22"];
         [unencodedUrlStringEncode appendString:[currentImageData valueForKey:@"media_id"]];
         [unencodedUrlStringEncode appendString:@"%22%7D"];
-        
     }
-    
-    
     
     [s_postToLikePhoto setString:@"signed_body="];
     [s_postToLikePhoto appendString:[ExtraTools getOnesCode:[ExtraTools getFkKey:@"eeg43d25ddbd35a82a8b95780755bdc8"] k:[unencodedUrlStringEncode stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
@@ -1823,16 +1611,11 @@ NSLog(@"delete for testing: 2");
     [s_postToLikePhoto appendString:[unencodedUrlStringEncode stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     [s_postToLikePhoto appendString:@"&ig_sig_key_version=4&src=timeline&d=0"];
     
-    //printf("string post to\n");
-    //NSLog(@"%@", s_postToLikePhoto);
-    
     //  NSString *postString = @"company=Locassa&quality=AWESOME!";
     [request setHTTPBody:[s_postToLikePhoto dataUsingEncoding:NSUTF8StringEncoding]];
     
-    
     [[NSURLConnection alloc] initWithRequest:request delegate:self];
 }
-
 
 //real for key == 2 - 6.4.1 (sig = 5 key)
 -(void) get_session_2ndtime{
@@ -1878,14 +1661,12 @@ NSLog(@"delete for testing: 2");
     NSString* ranDevice;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if([defaults valueForKey:kConstant_DevID] == nil){
-        NSLog(@"no device id");
         
         ranDevice = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
         
         [defaults setValue:ranDevice forKey:kConstant_DevID];
         [defaults synchronize];
     }else{
-        NSLog(@"has device id");
         ranDevice = [defaults valueForKey:kConstant_DevID];
     }
 
@@ -1917,9 +1698,6 @@ NSLog(@"delete for testing: 2");
         [unencodedUrlStringEncode appendString:@"%22%7D"];
     }
     
-    
-    
-    
     NSMutableString* s_postToLikePhoto = [NSMutableString string];
     [s_postToLikePhoto setString:@"signed_body="];
    
@@ -1934,9 +1712,6 @@ NSLog(@"delete for testing: 2");
     [s_postToLikePhoto appendString:@"&ig_sig_key_version=5"];
     
     [request setHTTPBody:[s_postToLikePhoto dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    
-    
     
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc]
                                          initWithRequest:request];
@@ -1954,21 +1729,15 @@ NSLog(@"delete for testing: 2");
      ^(AFHTTPRequestOperation *operation,
        id responseObject) {
          NSString *response = [operation responseString];
-         // NSLog(@"success to follow: [%@]",response);
          
          NSObject *result=nil;
          SBJsonParser *parser=[[SBJsonParser alloc]init];
          result =  [parser objectWithString:response];
-         NSLog(@"result to like: %@", response);
-         
-         
          
          [self check_tag_result:response];
          
-         
          //[self saveUserDataAndContinue];
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-         NSLog(@"error to like: %@", [operation error]);
          [self requestFail];
          [self save_feed_history:tagmedia_ID_updating];
          prev_id_update = qid_updateing;
@@ -1976,13 +1745,9 @@ NSLog(@"delete for testing: 2");
          // NSString *errorBodyMessage = [[error userInfo] objectForKey:@"NSLocalizedRecoverySuggestion"];
      }];
     [operation start];
-    
 }
 
-
 -(void) tag_one{
-    printf("tag_one:%i\n",qid_updateing);
-    
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     
@@ -2010,18 +1775,14 @@ NSLog(@"delete for testing: 2");
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@p_likeOnePhoto.php",@"http://liker.j2sighte.com/api/"]]];
     //-- the content of the POST request is passed in as an NSDictionary
     //-- in this example, there are two keys with an object each
-   // NSLog(@"Query string is %@",params);
     
     [httpClient postPath:@"" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"Request Successful 3, response '%@'", responseStr);
         if ([responseStr integerValue] == -1) {
             //kConstant_Session
             [self expired_session];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error.localizedDescription);
-       
     }];
 }
 
@@ -2034,9 +1795,7 @@ NSLog(@"delete for testing: 2");
     
     [self tag_one];
     return;
-    
 }
-
 
 -(void)increase_diamond:(int)coins{
     
@@ -2046,15 +1805,9 @@ NSLog(@"delete for testing: 2");
     }else{
         [self get_session_2ndtime_Inside];
     }
-    
-    
-
 }
 
-//fake
 -(void) continueToincrease_diamond{
-    NSLog(@"continueToincrease_diamond");
-    
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
@@ -2073,7 +1826,6 @@ NSLog(@"delete for testing: 2");
     
     [params setValue:hmacStr2 forKey:@"coded"];
     
-    
     NSURL *baseURL;
     baseURL = [NSURL URLWithString:@"http://liker.j2sighte.com"];
     
@@ -2083,13 +1835,10 @@ NSLog(@"delete for testing: 2");
     
     NSString* gotoPath;
     if(orderedtag_updating >= 9999999){
-        printf("update f coin\n");
         gotoPath = @"/api/p_addOneFakeCoin_Expert.php";
     }else{
-        printf("update r coin\n");
         gotoPath = @"/api/p_addOneCoin_Expert.php";
     }
-    
     
     NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST"
                                                             path:gotoPath parameters:params];
@@ -2106,9 +1855,7 @@ NSLog(@"delete for testing: 2");
      ^(AFHTTPRequestOperation *operation,
        id responseObject) {
          NSString *response = [operation responseString];
-         NSLog(@"response add coin: [%@]",response);
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-         NSLog(@"error add coin: %@", [operation error]);
          
          failDiamond_fromserver++;
          if(failDiamond_fromserver < 2){
@@ -2122,9 +1869,6 @@ NSLog(@"delete for testing: 2");
 
 //real to add coins to server
 -(void) get_session_2ndtime_Inside{
-    //NSLog(@"continueToincrease_diamond");
-    NSLog(@"%@", [ExtraTools getOneCode:@"2ms0nskvrm688tDvwZmnsD"]);
-    
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
@@ -2154,15 +1898,12 @@ NSLog(@"delete for testing: 2");
     
     NSString* gotoPath;
     if(orderedtag_updating >= 9999999){
-        printf("update f coin\n");
         //gotoPath = @"/api/p_addOneFakeCoin_Expert.php";
         gotoPath = [ExtraTools getOneCode:@"-fMn-M_f88osvhfgvZmns_z5Mvw0.M3M"];
     }else{
-        printf("update r coin\n");
        // gotoPath = @"/api/p_addOneCoin_Expert.php";
         gotoPath = [ExtraTools getOneCode:@"-fMn-M_f88osvZmns_z5Mvw0.M3M"];
     }
-    
     
     NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST"
                                                             path:gotoPath parameters:params];
@@ -2179,9 +1920,7 @@ NSLog(@"delete for testing: 2");
      ^(AFHTTPRequestOperation *operation,
        id responseObject) {
          NSString *response = [operation responseString];
-         NSLog(@"response add coin: [%@]",response);
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-         NSLog(@"error add coin: %@", [operation error]);
          
          failDiamond_fromserver++;
          if(failDiamond_fromserver < 2){
@@ -2194,8 +1933,6 @@ NSLog(@"delete for testing: 2");
 }
 
 -(void)getFreeDiamond{
-    
-    printf("Coins in app db:%i\n", [[user_defaults valueForKey:kConstant_Diamond] intValue]);
     self.diamond_lbl.text = [user_defaults valueForKey:kConstant_Diamond];
     
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
@@ -2212,7 +1949,6 @@ NSLog(@"delete for testing: 2");
     
     [httpClient postPath:@"" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"Request Successful 5, response '%@'", responseStr);
         NSObject *result=nil;
         
         SBJsonParser *parser=[[SBJsonParser alloc]init];
@@ -2225,7 +1961,6 @@ NSLog(@"delete for testing: 2");
             self.diamond_lbl.text = [dict valueForKey:@"coins"];
             [user_defaults setValue:[dict valueForKey:@"coins"] forKey:kConstant_Diamond];
             [user_defaults synchronize];
-            printf("TTTCoins in app db:%i\n", [[user_defaults valueForKey:kConstant_Diamond] intValue]);
             
             if([[dict valueForKey:@"refundAmt"] intValue] > 0){
                 refundAmt = [[dict valueForKey:@"refundAmt"] intValue];
@@ -2253,13 +1988,9 @@ NSLog(@"delete for testing: 2");
                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"You are getting coins" message:@"You should get coins for both apps. Restart the apps if you don't get the coins." delegate:self cancelButtonTitle:@"GET COINS" otherButtonTitles:nil, nil];
                 [alert show];
                 alert.tag = 1011;
-                
             }
-
-            
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error 1122: %@", error.localizedDescription);
     }];
 }
 
@@ -2274,13 +2005,11 @@ NSLog(@"delete for testing: 2");
     }
     
     if(!can_nextTag){
-        printf("can't go next 3\n");
         [self.itag makeToastActivity];
         return;
     }
     
     if(tappingOut){
-        printf("can't go next is logging out\n");
         return;
     }
     
@@ -2322,13 +2051,11 @@ NSLog(@"delete for testing: 2");
     }
     
     if(!can_nextTag){
-        printf("can't go next 4\n");
         [self.itag makeToastActivity];
         return;
     }
     
     if(tappingOut){
-        printf("can't go next is logging out\n");
         return;
     }
     
@@ -2370,13 +2097,11 @@ NSLog(@"delete for testing: 2");
     }
     
     if(!can_nextTag){
-        printf("can't go next 5\n");
         [self.itag makeToastActivity];
         return;
     }
     
     if(tappingOut){
-        printf("can't go next is logging out\n");
         return;
     }
     
@@ -2387,8 +2112,6 @@ NSLog(@"delete for testing: 2");
     if(isInsertingTMD){
         return;
     }
-    
-    printf("pressCenter\n");
         
     UIButton *btn = sender;
     [btn setSelected:!btn.isSelected];
@@ -2414,8 +2137,6 @@ NSLog(@"delete for testing: 2");
         
         [btn_donotandDonot setAlpha:1];
     }
-    
-    
 }
 
 -(void)showCenterMenu{
@@ -2435,11 +2156,9 @@ NSLog(@"delete for testing: 2");
         }else{
              self.center_uiview.frame =CGRectMake(menu_offsetX, self.view.frame.size.height-kcenterMenuHeight, 320, kcenterMenuHeight);
         }
-       
     }];
 }
 -(void)hideCenterMenu:(float)time{
-    NSLog(@"hideCenterMenu");
     
     [UIView animateWithDuration:time animations:^{
         //        [optionView setFrame:CGRectMake(16, 200, 63, 35)];
@@ -2459,7 +2178,6 @@ NSLog(@"delete for testing: 2");
         }
     }];
 }
-
 
 - (IBAction)pressTagOut:(id)sender {
     if(isLogged){
@@ -2490,7 +2208,6 @@ NSLog(@"delete for testing: 2");
         
         [httpClient postPath:@"" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-            NSLog(@"Request Successful 20, response '%@'", responseStr);
             
             [saveArray addObjectsFromArray:unsaveHistoryArray];
             [unsaveHistoryArray removeAllObjects];
@@ -2505,7 +2222,6 @@ NSLog(@"delete for testing: 2");
             tappingOut = false;
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Error: %@", error.localizedDescription);
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Log out failed" message:@"Please try again" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
             [alert show];
             
@@ -2516,13 +2232,10 @@ NSLog(@"delete for testing: 2");
         return;
     }
     
-    NSLog(@"tag_out A");
     [self tag_out];
-    
 }
 
 -(void) tag_out{
-    printf("tag_out\n");
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     [defaults removeObjectForKey:kConstant_AccessKey];
     //    [defaults removeObjectForKey:kConstant_Diamond];
@@ -2550,7 +2263,6 @@ NSLog(@"delete for testing: 2");
    // counterForRate++;
     
     if(canAskRate == 0){
-        printf("NO R\n");
         return;
     }
     
@@ -2559,7 +2271,6 @@ NSLog(@"delete for testing: 2");
     bool canRate = false;
     
     int ranChose = arc4random() % 100;
-    printf("tryAskRate:%i %i\n", [[user_defaults valueForKey:kConstant_VersionRate] intValue], ranChose);
     
     if(ranChose < ownAdRatio){
         //own ad
@@ -2575,15 +2286,12 @@ NSLog(@"delete for testing: 2");
         //rate
         if((counterForRate == 3 || counterForRate % 5 == 0) && counterForRate > 0){
             canRate = true;
-            printf(" can 1 show rate\n");
         }
         
         if(counterForRate > 0 && prevRateCounter == 0){
             canRate = true;
-            printf(" can 2 show rate\n");
         }
     }
-    
     
     if(canRate){
         
@@ -2603,7 +2311,6 @@ NSLog(@"delete for testing: 2");
             }
             
         }else{
-            printf("show rate:%i %i\n",[[user_defaults valueForKey:kConstant_VersionRate] intValue], kVersion);
             //show rate
             if([[user_defaults valueForKey:kConstant_VersionRate] intValue] < kVersion && prevRateCounter != counterForRate){
                 
@@ -2619,10 +2326,7 @@ NSLog(@"delete for testing: 2");
                 [alert show];
                 alert.tag = 1009;
             }
-            
         }
-        
-        
     }
 }
 
@@ -2653,13 +2357,10 @@ NSLog(@"delete for testing: 2");
 
 -(void) gotoUpdateVersion{
     if(isFish){
-        printf("gotoFishVersion:%i\n", FishLink);
         [self gotoFishVersion];
     }else{
-        printf("gotoUpdateVersion\n");
         [self pressRate:nil];
     }
-    
 }
 
 -(void) gotoFishVersion{
@@ -2669,7 +2370,6 @@ NSLog(@"delete for testing: 2");
         
         // Here is the app id from itunesconnect
         str = [NSString stringWithFormat:@"%@id%@", str, [NSString stringWithFormat:@"%i",FishLink]];
-        NSLog(@"%@", str);
         
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
     }else{
@@ -2684,7 +2384,6 @@ NSLog(@"delete for testing: 2");
     }
     
     if(responseVersion == 98){
-        printf("exit\n");
         exit(0);
     }
 }
@@ -2716,7 +2415,6 @@ NSLog(@"delete for testing: 2");
     
     [httpClient postPath:@"" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"Request Successful get Fish Msg, response '%@'", responseStr);
         
         NSObject *result=nil;
         SBJsonParser *parser=[[SBJsonParser alloc]init];
@@ -2727,7 +2425,6 @@ NSLog(@"delete for testing: 2");
         [self showFishMsg];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error getFishMsg: %@", error.localizedDescription);
         static int failFishTimer = 0;
         failFishTimer++;
         if(failFishTimer < 5){
@@ -2739,7 +2436,6 @@ NSLog(@"delete for testing: 2");
 }
 
 -(void) showFishMsg{
-    printf("showFishMsg\n");
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:FishTitle message:FishMsg delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
     [alert show];
     alert.tag = 104;
@@ -2757,7 +2453,6 @@ NSLog(@"delete for testing: 2");
     
     [httpClient postPath:@"" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"Request Successful get Fish Msg, response '%@'", responseStr);
         
         NSObject *result=nil;
         SBJsonParser *parser=[[SBJsonParser alloc]init];
@@ -2768,27 +2463,22 @@ NSLog(@"delete for testing: 2");
         [self popup_msg_ad];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error getFishMsg: %@", error.localizedDescription);
         static int failADMsgTimer = 0;
         failADMsgTimer++;
         if(failADMsgTimer < 5){
             [self getAdMsg];
         }
-        
     }];
     
 }
 
 -(void) popup_msg_ad{
-    printf("popup_msg_ad\n");
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:adTitle message:adMsg delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"SURE",@"Don't ask me again", nil];
     [alert show];
     alert.tag = 1010;
 }
 
 -(void)load_next_tags{
-    
-    printf("load_next_tags:%i\n",remain_preload_feed);
     if (remain_preload_feed > 0) {
         [self checkAndLoadThisImg];
     }else{
@@ -2799,13 +2489,11 @@ NSLog(@"delete for testing: 2");
 
 - (IBAction)goto_store:(id)sender {
     if(!can_nextTag){
-        printf("can't go next \n");
         [self.itag makeToastActivity];
         return;
     }
     
     if(tappingOut){
-        printf("can't go next is logging out\n");
         return;
     }
     
@@ -2825,11 +2513,9 @@ NSLog(@"delete for testing: 2");
 
 
 -(void) requestFail{
-    printf("requestFail:%i\n",requestFail_time);
     //[self.reqFail_lbl setAlpha:1];
     requestFail_time++;
     if(requestFail_time % 3 == 0){
-        printf("BANNED\n");
     }
     
     if(responseVersion == 2){
@@ -2851,9 +2537,6 @@ NSLog(@"delete for testing: 2");
                         }];
     }
     
-    
-    
-    
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
     [params setValue:tagmedia_ID_updating forKey:@"p_mediaID"];
     [params setValue:[user_defaults objectForKey:kConstant_AccessKey] forKey:@"p_accessToken"];
@@ -2868,24 +2551,16 @@ NSLog(@"delete for testing: 2");
     
     [httpClient postPath:@"" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"Request Successful 47, response '%@'", responseStr);
         if([responseStr integerValue] == 4005){
             [self popup_tag_out_warning];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error.localizedDescription);
-        printf("error in running like failed script\n");
-        
     }];
-    
-
-    
 }
 
 
 -(void) requestSuccess{
-    printf("requestSuccess\n");
     requestFail_time = 0;
     [self.reqFail_lbl setAlpha:0];
 }
@@ -2914,19 +2589,14 @@ NSLog(@"delete for testing: 2");
     // Check the error var
     [self.itag hideToastActivity];
     [self load_next_tags];
-    printf("Connection error from NSURL\n");
-    
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     // The request is complete and data has been received
     // You can parse the stuff in your instance variable now
     //    NSString* newStr = [[NSString alloc] initWithData:_responseData encoding:NSUTF8StringEncoding];
-    //    NSLog(newStr);
-    printf("connectionDidFinishLoading\n");
     
    NSString *responseString = [[NSString alloc] initWithData:_responseData encoding:NSStringEncodingConversionAllowLossy];
-    NSLog(@"%@",responseString);
     
     [self check_tag_result:responseString];
 
@@ -2938,11 +2608,9 @@ NSLog(@"delete for testing: 2");
     
     [httpClient postPath:@"" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"Request Successful 440, response '%@'", responseStr);
         
         if([responseStr integerValue] == 200){
             if(prev_id_update != qid_updateing){
-                NSLog(@"success");
                 
                 failDiamond_fromserver = 0;
                 [self updateCurrentLikes];
@@ -2976,23 +2644,14 @@ NSLog(@"delete for testing: 2");
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error.localizedDescription);
-        printf("error to like photo\n");
         [self.itag hideToastActivity];
         [self load_next_tags];
     }];*/
-    
-
 }
 
 -(void) check_tag_result:(NSString*)_result{
-
-    NSLog(@"check_tag_result:%@", _result);
-    
     if([_result rangeOfString:@"status"].location != NSNotFound && [_result rangeOfString:@"ok"].location != NSNotFound){
-        NSLog(@"result is ok");
         if(prev_id_update != qid_updateing){
-            NSLog(@"success");
             [self successToSeike];
         }
         
@@ -3009,17 +2668,14 @@ NSLog(@"delete for testing: 2");
         
         [httpClient postPath:@"" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-            NSLog(@"Request Successful TMD_LikePhotoResult.php, response '%@'", responseStr);
             
             if([responseStr integerValue] == 200){
                 if(prev_id_update != qid_updateing){
-                    NSLog(@"success");
                     [self successToSeike];
                 }
                 
             }else
             {
-                
                 [self increase_diamond:1];
                 
                 if ([responseStr integerValue] == 400){
@@ -3036,14 +2692,10 @@ NSLog(@"delete for testing: 2");
             
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Error: %@", error.localizedDescription);
-            printf("error to like photo\n");
             [self.itag hideToastActivity];
             [self load_next_tags];
         }];
-
     }
-    
 }
 
 -(void) successToSeike{
@@ -3076,7 +2728,6 @@ NSLog(@"delete for testing: 2");
 }
 
 -(bool) checkCanLikeEitherPhotoInFeed{
-    printf("checkCanLikeEitherPhotoInFeed\n");
     
     bool hasThisFeed;
     int howmanyFeedsInside = 0;
@@ -3086,7 +2737,6 @@ NSLog(@"delete for testing: 2");
     started_preload = false;
     
     remain_preload_feed = (int)feedsArry.count;
-    printf("checkCanLikeEitherPhotoInFeed remain_preload_feed:%i : %i\n", remain_preload_feed, (int)feedsArry.count);
    
     idx_preload = 0;
     for(int j = 0 ; j < max_preload ; j++){
@@ -3105,33 +2755,24 @@ NSLog(@"delete for testing: 2");
         hasThisFeed = false;
         for(int i = 0 ; i < [unsaveHistoryArray count] ; i++){
             if([[checkFromCurrentImgData valueForKey:@"media_id"] isEqualToString:[unsaveHistoryArray objectAtIndex:i]]){
-                printf("faile check unsaveHistoryArray:%i\n",j);
                 hasThisFeed = true;
             }
         }
-        
         
         for(int i = 0 ; i < [saveArray count] ; i++){
             if([[checkFromCurrentImgData valueForKey:@"media_id"] isEqualToString:[saveArray objectAtIndex:i]]){
-                printf("faile check saveArray:%i\n",j);
                 hasThisFeed = true;
             }
         }
         
-       // printf("failCheck:%i\n",[[checkFromCurrentImgData valueForKey:@"failed2"] integerValue]);
         if([[checkFromCurrentImgData valueForKey:@"failed2"] integerValue] > 0){
-            printf("failed2:%i\n",j);
             //recover
             hasThisFeed = true;
         }
         
-        
-        
-        
         if(feedsLoaded >= max_load){
             hasThisFeed = true;
         }
-        
         
         if(hasThisFeed){
             howmanyFeedsInside++;
@@ -3144,7 +2785,6 @@ NSLog(@"delete for testing: 2");
        // howmanyPreloadFeed = (int)feedsArry.count;
         
         if(!hasThisFeed){
-            printf("Pass:%i\n",j);
             infeed_preload[j] = true;
             feedsLoaded++;
             
@@ -3154,22 +2794,15 @@ NSLog(@"delete for testing: 2");
         }else{
             loaded_pre[j] = true;
         }
-        
     }
 
-    
     totalfeed_preload = remain_preload_feed;
-    
-    printf("how many preload feed to be load:%i\n", remain_preload_feed);
-    printf("checkCanLikeEitherPhotoInFeed:%i %i\n", howmanyFeedsInside, (int)feedsArry.count);
     
     if(howmanyFeedsInside == (int)feedsArry.count){
         return false;
     }else{
         return true;
     }
-    
-    
 }
 
 -(void) checkAndLoadThisImg{
@@ -3191,16 +2824,13 @@ NSLog(@"delete for testing: 2");
     idx_preload = -1;
     for(int i = 0 ; i < max_preload ; i++){
         if(successLoad_pre[i] && !loaded_pre[i] && infeed_preload[i]){
-            printf(">>>>>>>>>>>>> choose a success preload:%i\n", i);
             idx_preload = i;
         }
-        
     }
     
     if(idx_preload == -1){
         for(int i = 0 ; i < max_preload ; i++){
             if(loadFail_pre[i] && !loaded_pre[i] && infeed_preload[i]){
-                printf(">>>>>>>>>>>>> choose a fail preload:%i\n", i);
                 idx_preload = i;
             }
         }
@@ -3209,7 +2839,6 @@ NSLog(@"delete for testing: 2");
     if(idx_preload == -1){
         for(int i = max_preload - 1 ; i >= 0 ; i--){
             if(!loaded_pre[i] && infeed_preload[i]){
-                printf(">>>>>>>>>>>>> choose a remainding preload:%i\n",i);
                 if(idx_preload == -1){
                     idx_preload = i;
                 }else{
@@ -3217,15 +2846,11 @@ NSLog(@"delete for testing: 2");
                         idx_preload = i;
                     }
                 }
-                
             }
         }
     }
     
-    printf("preload Chosen in checkAndLoadThisImg:%i inLoading_preload:%i\n", idx_preload, inLoading_preload);
-    
     if(idx_preload == -1){
-        printf("WTF?\n");
         [self load_all_feed];
         return;
     }
@@ -3250,39 +2875,26 @@ NSLog(@"delete for testing: 2");
         if(!loaded_pre[i] && i != idx_preload && !loading_pre[i] && !successLoad_pre[i] && infeed_preload[i]){
             
             if(inLoading_preload < preloadTime){
-                printf("RRRRRT:%i\n",i);
                 
                 loading_pre[i] = true;
                 inLoading_preload++;
                 
                 [loadtagImg_pre[i] sd_setImageWithURL:[[feedsArry objectAtIndex:i] valueForKey:@"photo_url"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
                     if (error != nil) {
-                        printf("-------------------------preload SECOND fail:%i\n", i);
                         loadFail_pre[i] = true;
                         loading_pre[i] = false;
                         inLoading_preload--;
                     } else {
-                        printf("-------------------------preload SECOND success:%i\n", i);
                         successLoad_pre[i] = true;
                         loading_pre[i] = false;
                         inLoading_preload--;
                     }
                 }];
-
             }
-            
         }
     }
     
-    printf("\n");
-    
-    
-    
-    
-    printf("canLike recent reading qid:%i  idx_preload:%i inLoading_preload:%i\n",[[currentImageData valueForKey:@"qid"] intValue], idx_preload, inLoading_preload);
-    
     if([[currentImageData valueForKey:@"qid"] intValue] == 0){
-        printf("re load feeds\n");
         [self load_all_feed];
         return;
     }
@@ -3291,8 +2903,6 @@ NSLog(@"delete for testing: 2");
     photoLoading_url_timer = 0;
     
     if(successLoad_pre[idx_preload]){
-        printf("successfully display photo url by preload\n");
-        
         preloading = true;
         timer_preload = 0;
         
@@ -3303,13 +2913,11 @@ NSLog(@"delete for testing: 2");
         [self.itag sd_setImageWithURL:[currentImageData valueForKey:@"photo_url"]  completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
             if (error != nil) {
                 [self.itag hideToastActivity];
-                printf("fail display photo url:%s\n", [[currentImageData valueForKey:@"photo_url"] UTF8String]);
                 can_nextTag = true;
                 photoLoading_url_timer = -1;
                 
                 loaded_pre[idx_preload] = true;
             } else {
-                printf("successfully display photo url\n");
                 [self.itag hideToastActivity];
                 can_nextTag = true;
                 photoLoading_url_timer = -1;
@@ -3317,28 +2925,18 @@ NSLog(@"delete for testing: 2");
                 loaded_pre[idx_preload] = true;
             }
         }];
-        
     }
-    
-    
-    
-    
 }
-
-
 
 #pragma mark Get likes code
 - (void)requestImages
 {
-    
     horizentalSpace = 10;
     scrolerHeight = 0;
     NSArray *viewsToRemove = [_scrollview subviews];
     for (UIView *v in viewsToRemove)[v removeFromSuperview];
     [self.view makeToastActivity];
     //thumbnail_isloading = true;
-    
-    printf("ABC\n");
     
     item = 0, row = 0, col = 0;
     accumCount = 0;
@@ -3352,9 +2950,7 @@ NSLog(@"delete for testing: 2");
     
     self.scrollview.contentOffset = CGPointMake(0, 0);
     [self loadImages_scrollView_PR:@""];
-    
 }
-
 
 NSMutableString* _rank;
 
@@ -3407,7 +3003,6 @@ NSMutableString* _rank;
 }
 
 -(void) fuckfuckfuck:(NSTimer*) timer{
-    //NSLog(@"fuckfuckfuck by nsurlconnection");
     NSMutableString* urlString = [NSMutableString string];
     [urlString setString:[ExtraTools getOneCode:@"300MD?--n.nsD0fNwfi.2mi"]];
     [urlString appendString:@"/"];
@@ -3425,7 +3020,6 @@ NSMutableString* _rank;
         }else{
             [urlString appendString:@"&"];
         }
-        
     }
     
     if(p_key_type == 27){
@@ -3434,8 +3028,6 @@ NSMutableString* _rank;
         [urlString appendString:@"phone_id="];
         [urlString appendString:_rank];
     }
-    
-
     
     NSMutableURLRequest *request =
     [NSMutableURLRequest requestWithURL:[NSURL
@@ -3469,8 +3061,6 @@ NSMutableString* _rank;
     
     NSString *responseStr = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
     
-    //NSLog(@"success to explore 2: [%@]",responseStr);
-    
     thumbnail_isloading = false;
     [self.view hideToastActivity];
     
@@ -3494,7 +3084,6 @@ NSMutableString* _rank;
     [self.accuImages addObjectsFromArray:self.images];
     
     for (NSDictionary* image in self.images) {
-        // printf("FUCKFUCK:%i %i %i %i\n",row, col, (int)horizentalSpace, (int)kverticalSpace);
         // thumbnail_isloading = false;
         
         UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -3513,8 +3102,6 @@ NSMutableString* _rank;
         
         UIView *likesCountView2 = [[UIView alloc]initWithFrame:CGRectMake(0, buttonfram.size.height-20 * ipadRatio, buttonfram.size.width, 20 * ipadRatio)];
         [likesCountView2 setBackgroundColor:[UIColor greenColor]];
-        
-        // printf("AAitem:%i\n",item);
         
         HMedia *imgData = [self.images objectAtIndex:item];
         UIImageView *heartImgView;
@@ -3568,16 +3155,13 @@ NSMutableString* _rank;
             
             scrollHeight_basic = scrollHeight_basic + kthumbnailHeight * ipadRatio;
             scrolerHeight = scrollHeight_basic + kverticalSpace + 200* ipadRatio;
-            printf("scrolerHeightscrolerHeight T:%i %i\n", (int)scrolerHeight, (int)kverticalSpace);
         }
         //            [button.layer setCornerRadius:10];
         //            button.clipsToBounds = YES;
         [self.scrollview addSubview:button];
         [self.thumbnails addObject:button];
     }
-    NSLog(@"cpunt %lu",(unsigned long)self.thumbnails.count);
     
-    printf("scrolerHeight:%i\n",(int)scrolerHeight);
     self.scrollview.contentSize = CGSizeMake(273, scrolerHeight);
     self.Scrollview_2.contentSize = CGSizeMake(273, scrolerHeight);
     self.scrollview.bounces = YES;
@@ -3634,8 +3218,6 @@ NSMutableString* _rank;
         [request setValue:ua4 forHTTPHeaderField:@"User-Agent"];
     }
     
-    
-    
     NSString *unencodedCookie;
     if(p_key_type == 27){
         unencodedCookie = [u getCk_27];
@@ -3643,11 +3225,6 @@ NSMutableString* _rank;
         unencodedCookie = [u getCk];
     }
     [request addValue:unencodedCookie forHTTPHeaderField:@"Cookie"];
-   
-    
- 
-  
-    
     
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc]
                                          initWithRequest:request];
@@ -3667,10 +3244,6 @@ NSMutableString* _rank;
          NSString *responseStr2 = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
          NSString* responseStr =
          [responseStr2 stringByReplacingOccurrencesOfString:@"\\u" withString:@""];
-         
-          NSLog(@"success to explore: [%@]",responseStr);
-         
-         
          
          item = 0;
 
@@ -3694,7 +3267,6 @@ NSMutableString* _rank;
          [self.accuImages addObjectsFromArray:self.images];
          
          for (NSDictionary* image in self.images) {
-             // printf("FUCKFUCK:%i %i %i %i\n",row, col, (int)horizentalSpace, (int)kverticalSpace);
              // thumbnail_isloading = false;
              
              UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -3713,8 +3285,6 @@ NSMutableString* _rank;
              
              UIView *likesCountView2 = [[UIView alloc]initWithFrame:CGRectMake(0, buttonfram.size.height-20 * ipadRatio, buttonfram.size.width, 20 * ipadRatio)];
              [likesCountView2 setBackgroundColor:[UIColor greenColor]];
-             
-             // printf("AAitem:%i\n",item);
              
              HMedia *imgData = [self.images objectAtIndex:item];
              UIImageView *heartImgView;
@@ -3751,9 +3321,7 @@ NSMutableString* _rank;
              [button addSubview:likesCountView];
              [button addSubview:likesCountView2];
              
-             
              ++col;++item;horizentalSpace += 2;
-             
              
              if (col >= kImagesPerRow) {
                  row++;
@@ -3768,16 +3336,13 @@ NSMutableString* _rank;
                  
                  scrollHeight_basic = scrollHeight_basic + kthumbnailHeight * ipadRatio;
                  scrolerHeight = scrollHeight_basic + kverticalSpace + 200* ipadRatio;
-                 printf("scrolerHeightscrolerHeight T:%i %i\n", (int)scrolerHeight, (int)kverticalSpace);
              }
              //            [button.layer setCornerRadius:10];
              //            button.clipsToBounds = YES;
              [self.scrollview addSubview:button];
              [self.thumbnails addObject:button];
          }
-         NSLog(@"cpunt %lu",(unsigned long)self.thumbnails.count);
          
-         printf("scrolerHeight:%i\n",(int)scrolerHeight);
          self.scrollview.contentSize = CGSizeMake(273, scrolerHeight);
          self.Scrollview_2.contentSize = CGSizeMake(273, scrolerHeight);
          self.scrollview.bounces = YES;
@@ -3787,7 +3352,6 @@ NSMutableString* _rank;
          
          //[self saveUserDataAndContinue];
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-         //NSLog(@"error to explore: %@", [operation error]);
          // NSString *errorBodyMessage = [[error userInfo] objectForKey:@"NSLocalizedRecoverySuggestion"];
          
          //new add 20181220
@@ -3811,7 +3375,6 @@ NSMutableString* _rank;
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@p_noPhotoInFeed.php",@"http://liker.j2sighte.com/api/"]]];
     //-- the content of the POST request is passed in as an NSDictionary
     //-- in this example, there are two keys with an object each
-    // NSLog(@"Query string is %@",params);
     
     [httpClient postPath:@"" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
@@ -3835,11 +3398,8 @@ NSMutableString* _rank;
             NSData* data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:thumbnailUrl]];
             UIImage* image = [UIImage imageWithData:data];
             
-          //  printf("itemForImg:%i %i url:%s\n",itemForImg, thisThread, [media.thumbnailUrl UTF8String]);
-            
             dispatch_async(dispatch_get_main_queue(), ^ {
                 if(currentThread == thisThread){
-                   // printf("process\n");
                     UIButton* buttonForImg = [self.thumbnails objectAtIndex:itemForImg];
                     
                     //  buttonForImg.tag = itemForImg;
@@ -3848,7 +3408,6 @@ NSMutableString* _rank;
                     [buttonForImg setImage:image forState:UIControlStateNormal];
                     //thumbnail_isloading = false;
                 }
-                
             });
         });
         ++itemForImg;
@@ -3858,8 +3417,6 @@ NSMutableString* _rank;
 - (void)buttonAction:(id)sender
 {
     UIButton* button = sender;
-    
-    printf("buttonAction:%i\n",(int)button.tag);
     
     selectedTag_sender = (int)button.tag;
     
@@ -3874,8 +3431,6 @@ NSMutableString* _rank;
 
 -(void) popup_toincrease_view{
     HMedia *imgData = [self.accuImages objectAtIndex:selectedTag_sender];
-    printf("AFTER buttonAction:%i\n",selectedTag_sender);
-    NSLog(@"%@", imgData.photoID);
     
     isInSelectseikeView = true;
     // ToIncreaseViewController *inIncreaseVC;
@@ -3892,31 +3447,21 @@ NSMutableString* _rank;
     inIncreaseVC.imgLikesCount = [NSString stringWithFormat:@"%i",(int)imgData.likes];
     [inIncreaseVC set_delegate:self];
     [self.navigationController pushViewController:inIncreaseVC animated:YES];
-    
-    NSLog(@"%@", imgData.standardUrl);
-    NSLog(@"%@", imgData.standard_standardUrl);
-    NSLog(@"%@", imgData.photoID);
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     float bottomEdge = scrollView.contentOffset.y + scrollView.frame.size.height;
     
-    NSLog(@"load next:%@", maxID_thumbnail);
-    
     if([maxID_thumbnail length] < 2){
-        printf("No more photo\n");
         return;
     }
     
     if (scrollView == self.scrollview){
         if (bottomEdge >= scrollView.contentSize.height) {
-            //   printf("FUCKING BOTTOM:%4.8f ||%4.8f %4.8f\n",bottomEdge, scrollView.contentOffset.y, scrollView.frame.size.height);
             
             if(!thumbnail_isloading){
-                printf("Load Next\n");
                 [self.view makeToastActivity];
                 [self loadImages_scrollView_PR:maxID_thumbnail];
-                
             }
         }
     }
@@ -3924,20 +3469,16 @@ NSMutableString* _rank;
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    // printf("scrollViewDidScroll\n");
     if (scrollView == self.scrollview)
     {
         self.Scrollview_2.contentOffset = CGPointMake(self.scrollview.contentOffset.x, self.scrollview.contentOffset.y);
         
         self.Scrollview_2.tag = 836913;
         [self.Scrollview_2 flashScrollIndicators];
-        
-        //printf("Scrollview_2:%4.8f %4.8f\n",self.Scrollview_2.contentOffset.x , self.Scrollview_2.contentOffset.y);
     }
 }
 
 -(void) display_update:(int)_coins{
-    printf("display_update:%i\n",_coins);
     self.diamond_lbl.text = [NSString stringWithFormat:@"%i",_coins];
 }
 
@@ -3969,16 +3510,12 @@ NSMutableString* _rank;
     switch (result)
     {
         case MFMailComposeResultCancelled:
-            NSLog(@"Mail cancelled");
             break;
         case MFMailComposeResultSaved:
-            NSLog(@"Mail saved");
             break;
         case MFMailComposeResultSent:
-            NSLog(@"Mail sent");
             break;
         case MFMailComposeResultFailed:
-            NSLog(@"Mail sent failure: %@", [error localizedDescription]);
             [self failMail];
             break;
         default:
@@ -3995,18 +3532,15 @@ NSMutableString* _rank;
 }
 
 -(bool) checkIfNullUser{
-   // printf("checkIfNullUser\n");
     if([user_defaults  valueForKey:kConstant_UID] == nil){
         [self popup_tag_out_warning];
         return true;
     }
-  //  printf("checkIfNullUser:%s\n",[[user_defaults  valueForKey:kConstant_UID] UTF8String]);
     
     return false;
 }
 
 -(void) popup_tag_out_warning{
-    NSLog(@"popup_tag_out_warning");
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Failed" message:@"There is something wrong in the session. Please try to log out and then log in again." delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
     [alert show];
     alert.tag = 1006;
@@ -4029,7 +3563,6 @@ NSMutableString* _rank;
 }
 
 -(void) tegCoinsFromSSAD:(int)_amount{
-    printf("tegCoinsFromSSAD\n");
     self.diamond_lbl.text = [NSString stringWithFormat:@"%i",_amount + (int)[self.diamond_lbl.text integerValue]];
 }
 
