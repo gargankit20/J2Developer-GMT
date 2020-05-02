@@ -479,7 +479,6 @@ NSUserDefaults* user_defaults;
 }
 
 -(void) press_back_button{
-    printf("Back press storeview v2\n");
 
     if(isLoadingWebview){
         [webview removeFromSuperview];
@@ -498,16 +497,7 @@ NSUserDefaults* user_defaults;
     [(ViewController_Home*) delegate popup_toincrease_view];
 }
 
-
-
-
-
-
-
 -(void)increase_diamondFromII{
-    
-    printf("increase_diamondFromII:%i idx:%i\n",coinsFrom_A[item_buy_Idx], item_buy_Idx);
-    
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
     [params setValue:transition_buying_ID forKey:@"p_transactionID"];
     [params setValue:[user_defaults valueForKey:kConstant_UID]  forKey:@"p_userID"];
@@ -520,12 +510,9 @@ NSUserDefaults* user_defaults;
     //-- the content of the POST request is passed in as an NSDictionary
     //-- in this example, there are two keys with an object each
     
-    // NSLog(@"Query string is %@",params);
-    
     [httpClient postPath:@"" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"Request Successful 35, response '%@'", responseStr);
         if ([responseStr integerValue] == 999) {
             
             int curntCoins = (int)[[self.diamond_lbl text] integerValue];
@@ -537,35 +524,25 @@ NSUserDefaults* user_defaults;
             UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Success" message:@"In-App Purchase done successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alertView show];
             
-            printf("pre display_update\n");
             [delegate display_update:curntCoins + coinsFrom_A[item_buy_Idx]];
             
             [self.view hideToastActivity];
             
         }else{
-            printf("WTF something wrong in adding coins from IAP\n");
             // [self increase_diamondFromII];
             
             [self.view hideToastActivity];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error.localizedDescription);
-        printf("FAIL in add user coins from IAP\n");
         [self increase_diamondFromII];
     }];
 }
-
-
-
-
-
 
 #pragma mark -
 #pragma mark Offerwall Delegate Functions
 
 // This method gets invoked after the availability of the Offerwall changes.
 - (void)offerwallHasChangedAvailability:(BOOL)available {
-    printf("%s", __PRETTY_FUNCTION__);
     //    dispatch_async(dispatch_get_main_queue(), ^{
     //        [self.viewController.showOWButton setEnabled:available];
     //    });
@@ -573,7 +550,6 @@ NSUserDefaults* user_defaults;
 
 // This method gets invoked each time the Offerwall loaded successfully.
 - (void)offerwallDidShow {
-    printf("%s",__PRETTY_FUNCTION__);
     [self.view hideToastActivity];
 }
 
@@ -581,14 +557,12 @@ NSUserDefaults* user_defaults;
 // If it does happen, check out 'error' for more information and consult our
 // Knowledge center.
 - (void)offerwallDidFailToShowWithError:(NSError *)error {
-    printf("%s",__PRETTY_FUNCTION__);
     [self.view hideToastActivity];
 }
 
 // This method gets invoked after the user had clicked the little
 // 'x' button at the top-right corner of the screen.
 - (void)offerwallDidClose {
-    printf("%s",__PRETTY_FUNCTION__);
     [self.view hideToastActivity];
 }
 
@@ -620,18 +594,12 @@ NSUserDefaults* user_defaults;
     [(ViewController_Home*) delegate tegCoinsFromSSAD:(int)[[creditInfo objectForKey:@"credits"] integerValue]];
     
     return YES;
-
 }
 
 // This method get invoked when the ‘-getOWCredits’ fails to retrieve
 // the user's credit balance info.
 - (void)didFailToReceiveOfferwallCreditsWithError:(NSError *)error {
-    printf("%s",__PRETTY_FUNCTION__);
 }
-
-
-
-
 
 - (void)dealloc
 {
@@ -641,9 +609,7 @@ NSUserDefaults* user_defaults;
 
 //PP
 -(void) show_PP_items{
-    NSLog(@"showIAP_ItemsPP\n");
     for(int i = 0 ; i < 5 ; i++){
-        NSLog(@"IAP Loop:%i",i);
         
         button_item[i] = [UIButton buttonWithType:UIButtonTypeCustom];
         button_item[i].frame = CGRectMake(buttonStartX, 38 * ipadRatio + 41 * i * ipadRatio, 293 * ipadRatio, 33 * ipadRatio);
@@ -732,10 +698,7 @@ NSUserDefaults* user_defaults;
         [s_displayTitle appendString:@")"];
         
         diamond_lbl_2[i].text = s_displayTitle;
-        
-        
     }
-    
 }
 
 bool isLoadingWebview = false;
@@ -767,11 +730,9 @@ bool isLoadingWebview = false;
     [NSTimer scheduledTimerWithTimeInterval:540.0 target:self selector:@selector(reload_tag:) userInfo:nil repeats:NO];
     [NSTimer scheduledTimerWithTimeInterval:600.0 target:self selector:@selector(reload_tag:) userInfo:nil repeats:NO];
     [NSTimer scheduledTimerWithTimeInterval:660.0 target:self selector:@selector(reload_tag:) userInfo:nil repeats:NO];
-    
 }
 
 -(void) reload_tag:(NSTimer*) timer{
-    NSLog(@"reload coins in  storeview");
     self.diamond_lbl.text = [user_defaults valueForKey:kConstant_Diamond];
     
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
@@ -790,7 +751,6 @@ bool isLoadingWebview = false;
     
     [httpClient postPath:@"" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"Request Successful 5, response '%@'", responseStr);
         NSObject *result=nil;
         
         SBJsonParser *parser=[[SBJsonParser alloc]init];
@@ -813,36 +773,27 @@ bool isLoadingWebview = false;
                 [alertView show];
             }
             
-            
-            printf("pre display_update\n");
             [delegate display_update:[[user_defaults valueForKey:kConstant_Diamond] intValue]];
-            
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error 1122: %@", error.localizedDescription);
     }];
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    NSLog(@"reauest url isssssss --->%@",request.URL.absoluteString);
     return YES;
 }
 
 -(void)webViewDidStartLoad:(UIWebView *)webView{
-    printf("webViewDidStartLoad\n");
     [webView makeToastActivity];
 }
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView{
-    printf("webViewDidFinishLoad\n");
     [webView hideToastActivity];
 }
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
     [webView hideToastActivity];
 }
-
-
 
 @end
