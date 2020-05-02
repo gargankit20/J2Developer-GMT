@@ -1101,47 +1101,25 @@ bool hasCheckedVersionFirst = false;
 
 -(void) setTopBar{
     UILabel* label=[[UILabel alloc] initWithFrame:CGRectMake(0,0, self.navigationItem.titleView.frame.size.width, 40)];
-    label.text= @"Get Coins";
+    label.text= @"Get Likes";
     label.textColor=[UIColor blackColor];
     label.backgroundColor =[UIColor clearColor];
     label.adjustsFontSizeToFitWidth=YES;
-    if(isIpad){
+    if(isIpad)
+    {
         label.font = [UIFont fontWithName:@"Arial Rounded MT Bold" size:29];
-    }else{
+    }
+    else
+    {
         label.font = [UIFont fontWithName:@"Arial Rounded MT Bold" size:16.5];
     }
     label.textAlignment = NSTextAlignmentCenter;
     
     self.navigationItem.titleView=label;
     
-    user_defaults = [NSUserDefaults standardUserDefaults];
-    NSString *coins = [user_defaults valueForKey:kConstant_Diamond];
-    if (coins) {
-        self.diamond_lbl.text = coins;
-    }
-    
-    
     // [RageIAPHelper sharedInstance].delegate = self;
     
     [self setTitle:@"Get Coins"];
-    
-    
-    //set right menu button
-    button_store = [UIButton buttonWithType:UIButtonTypeCustom];
-    button_store.frame = CGRectMake(0, 0, 19 * ipadRatio, 19 * ipadRatio);
-    [button_store setImage:[UIImage imageNamed:@"icon_coin.png"] forState:UIControlStateNormal];
-    [button_store addTarget:self action:@selector(goto_store:) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIBarButtonItem *barRightButton=[[UIBarButtonItem alloc] init];
-    [barRightButton setCustomView:button_store];
-    
-    self.diamond_lbl.frame = CGRectMake(0, 0, 30 * ipadRatio, 20 * ipadRatio);
-    
-    UIBarButtonItem *barLbl=[[UIBarButtonItem alloc] init];
-    [barLbl setCustomView:self.diamond_lbl];
-    
-    NSArray *barItems = [[NSArray alloc]initWithObjects:barRightButton,barLbl, nil];
-    self.navigationItem.rightBarButtonItems=barItems;
     
     // [self.view makeToastActivity];
 
@@ -2474,31 +2452,6 @@ bool hasCheckedVersionFirst = false;
         
     }
 }
-
-- (IBAction)goto_store:(id)sender {
-    if(!can_nextTag){
-        [self.itag makeToastActivity];
-        return;
-    }
-    
-    if(tappingOut){
-        return;
-    }
-    
-    if([self checkIfNullUser]){
-        return;
-    }
-    
-    //deleted on 20160310
-    //StoreViewController *vc = [[StoreViewController alloc]initWithNibName:@"StoreViewController" bundle:nil];
-    //[vc set_delegate:self];
-    //[self.navigationController pushViewController:vc animated:YES];
-    
-    IAPItemShowingOnly = true;
-    [viewController_Shop load_before_appearing_view];
-    [self.navigationController pushViewController:viewController_Shop animated:YES];
-}
-
 
 -(void) requestFail{
     //[self.reqFail_lbl setAlpha:1];
