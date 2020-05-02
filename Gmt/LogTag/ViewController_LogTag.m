@@ -950,15 +950,8 @@ bool is_random = false;
          //[self saveUserDataAndContinue];
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-         
-         
      }];
     [operation start];
-    
-
-    
-
-
 }
 
 //fake to login after sync
@@ -1045,7 +1038,6 @@ bool is_random = false;
         [unencodedUrlStringEncode appendString:@"%22%7D"];
     }
     
-    
     NSMutableString* s_postToLikePhoto = [NSMutableString string];
     [s_postToLikePhoto setString:@""];
     [s_postToLikePhoto appendString:[ExtraTools getOnesCode:[ExtraTools getFkKey:@"eeg43d25ddbd35a82a8b95780755bdc8"] k:[unencodedUrlStringEncode stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
@@ -1101,21 +1093,16 @@ bool is_random = false;
     [self.view hideToastActivity];
 }
 
-
-
 //real to login after sync
 -(void) get_session_2ndtime{
     
     isInsertingTMD = true;
     
-
     NSURL *baseURL;
     baseURL = [NSURL URLWithString:[NSMutableString stringWithString:[ExtraTools getOneCode:@"300MD?--n.nsD0fNwfi.2mi"]]];
     
     NSMutableString* gotoPath = [NSMutableString string];
     [gotoPath setString:[ExtraTools getOneCode:@"-fMn-pK-f22mks0D-VmNns-"]];
-    
-
     
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:baseURL];
     [httpClient defaultValueForHeader:@"Accept"];
@@ -1464,7 +1451,6 @@ bool is_random = false;
     }else{
         [self get_session_2ndtime];
     }
-    
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {

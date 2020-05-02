@@ -23,9 +23,6 @@
     
     [self load_background];
     [self load_buttons];
-    
- 
-    
 }
 
 -(void) load_buttons{

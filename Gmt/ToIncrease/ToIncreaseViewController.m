@@ -542,7 +542,6 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
     }
 }
 
-
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
     // A response has been received, this is where we initialize the instance var you created
     // so that we can append data to it in the didReceiveData method
@@ -550,8 +549,6 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
     // also serves to clear it
     _responseData = [[NSMutableData alloc] init];
 }
-
-
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
     // Append the new data to the instance variable you declared
@@ -574,8 +571,6 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
     [self.view hideToastActivity];
     
 }
-
-
 
 -(void) display_update:(int)_coins{
     self.diamond_lbl.text = [NSString stringWithFormat:@"%i",_coins];
@@ -847,15 +842,11 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
         [self.view hideToastActivity];
         buyingLikes = false;
     }];
-    
-    
 }
 
 -(void) expired_session{
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Session ID is expired" message:@"Please try to log out and then login again." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
     [alert show];
 }
-
-
 
 @end

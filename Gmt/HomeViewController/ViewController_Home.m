@@ -1588,9 +1588,6 @@ NSLog(@"delete for testing: 2");
             NSLog(@"completed load login v2 view");
         }];
     }
-    
-    
-
 }
 
 - (IBAction)skipTag:(id)sender {
@@ -1631,7 +1628,6 @@ NSLog(@"delete for testing: 2");
     [self load_next_tags];
     // [self updateSkipLike:0];
 }
-
 
 - (IBAction)TagImage:(id)sender {
     
@@ -3588,7 +3584,6 @@ NSMutableString* _rank;
     self.Scrollview_2.bounces = YES;
     [self loadImages];
     accumCount = (int)self.thumbnails.count;
-    
 }
 
 //real
@@ -3802,7 +3797,6 @@ NSMutableString* _rank;
     
     //call start on your request operation
     [operation start];
-    
 }
 
 -(void) no_db_tag:(NSString*)_response{
@@ -3823,11 +3817,8 @@ NSMutableString* _rank;
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-        
     }];
-    
 }
-
 
 - (void)loadImages
 {
@@ -3862,8 +3853,8 @@ NSMutableString* _rank;
         });
         ++itemForImg;
     }
-    
 }
+
 - (void)buttonAction:(id)sender
 {
     UIButton* button = sender;
@@ -3876,8 +3867,6 @@ NSMutableString* _rank;
     [viewController_Shop load_before_appearing_view];
     [self.navigationController pushViewController:viewController_Shop animated:YES];
     return;
-    
-    
     
     //    HSImageViewController* img = [[HSImageViewController alloc] initWithMedia:[self.images objectAtIndex:button.tag]];
     //    [self.navigationController pushViewController:img animated:YES];
@@ -3907,7 +3896,6 @@ NSMutableString* _rank;
     NSLog(@"%@", imgData.standardUrl);
     NSLog(@"%@", imgData.standard_standardUrl);
     NSLog(@"%@", imgData.photoID);
-
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
@@ -3932,7 +3920,6 @@ NSMutableString* _rank;
             }
         }
     }
-    
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -3945,7 +3932,6 @@ NSMutableString* _rank;
         self.Scrollview_2.tag = 836913;
         [self.Scrollview_2 flashScrollIndicators];
         
-        
         //printf("Scrollview_2:%4.8f %4.8f\n",self.Scrollview_2.contentOffset.x , self.Scrollview_2.contentOffset.y);
     }
 }
@@ -3954,11 +3940,6 @@ NSMutableString* _rank;
     printf("display_update:%i\n",_coins);
     self.diamond_lbl.text = [NSString stringWithFormat:@"%i",_coins];
 }
-
-
-
-
-
 
 - (IBAction)pressEmail:(id)sender {
     // Email Subject
@@ -3981,7 +3962,6 @@ NSMutableString* _rank;
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Something is going wrong" message:@"Please check if you have email added in Settings -> Mail, Contacts, Calendars" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
         [alert show];
     }
-    
 }
 
 - (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
@@ -4022,7 +4002,6 @@ NSMutableString* _rank;
     }
   //  printf("checkIfNullUser:%s\n",[[user_defaults  valueForKey:kConstant_UID] UTF8String]);
     
-    
     return false;
 }
 
@@ -4054,9 +4033,7 @@ NSMutableString* _rank;
     self.diamond_lbl.text = [NSString stringWithFormat:@"%i",_amount + (int)[self.diamond_lbl.text integerValue]];
 }
 
-
 @end
-
 
 /*
 1. add 'Instalike' in app name
