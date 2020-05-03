@@ -105,7 +105,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *itag;
 @property (weak, nonatomic) IBOutlet UIImageView *itagThumnail;
 @property (weak, nonatomic) IBOutlet UIImageView *lineImgv;
-@property (strong, nonatomic) IBOutlet UILabel *diamond_lbl;
 @property (strong, nonatomic) IBOutlet UILabel *reqFail_lbl;
 @property (strong, nonatomic) IBOutlet UILabel *null_lbl;
 @property (strong, nonatomic) IBOutlet UILabel *reqFailCounter_lbl;
@@ -133,7 +132,6 @@
 
 - (IBAction)pressDiamond:(id)sender;
 - (IBAction)pressCenter:(id)sender;
-- (IBAction)pressPageLeft:(id)sender;
 - (IBAction)pressTagOut:(id)sender;
 - (IBAction)pressStore:(id)sender;
 - (IBAction)pressRate:(id)sender;

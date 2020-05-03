@@ -217,14 +217,10 @@ NSData *hmac_key_data(NSString *key, NSString *data)
     
     if ([[notification name] isEqualToString:kConstant_MenuChangedToTag])
     {
-        [self.tagDia_2_btn setSelected:YES];
-        [self.tagDiamond_btn setSelected:NO];
         [self.increaseTagView setHidden:NO];
     }
     if ([[notification name] isEqualToString:kConstant_MenuCaangedToDiamond])
     {
-        [self.tagDia_2_btn setSelected:NO];
-        [self.tagDiamond_btn setSelected:YES];
         [self.increaseTagView setHidden:YES];
     }
     if ([[notification name] isEqualToString:kConstant_tagSuccess])
@@ -445,7 +441,6 @@ bool hasCheckedVersionFirst = false;
     if(alertView.tag == 1007){
         int totalCoinsFromRefund = [[user_defaults valueForKey:kConstant_Diamond] intValue] + refundAmt;
         
-        self.diamond_lbl.text = [NSString stringWithFormat:@"%i", totalCoinsFromRefund];
         [user_defaults setValue:[NSString stringWithFormat:@"%i", totalCoinsFromRefund] forKey:kConstant_Diamond];
         [user_defaults synchronize];
         
@@ -477,7 +472,6 @@ bool hasCheckedVersionFirst = false;
     if(alertView.tag == 1008){
         int totalCoinsFromReward = [[user_defaults valueForKey:kConstant_Diamond] intValue] + rewardAmt;
         
-        self.diamond_lbl.text = [NSString stringWithFormat:@"%i", totalCoinsFromReward];
         [user_defaults setValue:[NSString stringWithFormat:@"%i", totalCoinsFromReward] forKey:kConstant_Diamond];
         [user_defaults synchronize];
         
@@ -505,7 +499,6 @@ bool hasCheckedVersionFirst = false;
     if(alertView.tag == 1011){
         int totalCoinsFromReward = [[user_defaults valueForKey:kConstant_Diamond] intValue] + ownAmt;
         
-        self.diamond_lbl.text = [NSString stringWithFormat:@"%i", totalCoinsFromReward];
         [user_defaults setValue:[NSString stringWithFormat:@"%i", totalCoinsFromReward] forKey:kConstant_Diamond];
         [user_defaults synchronize];
         
@@ -602,9 +595,6 @@ bool hasCheckedVersionFirst = false;
         [user_defaults setValue:[NSString stringWithFormat:@"%i",[[user_defaults valueForKey:kConstant_Diamond] intValue] + [responseStr integerValue]] forKey:kConstant_Diamond];
         [user_defaults synchronize];
         
-        self.diamond_lbl.text = [NSString stringWithFormat:@"%i",[responseStr integerValue] + (int)[self.diamond_lbl.text integerValue]];
-        
-        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         static int toIncreaseFromOwnFailTime = 0;
         toIncreaseFromOwnFailTime++;
@@ -633,8 +623,6 @@ bool hasCheckedVersionFirst = false;
         [user_defaults setValue:[NSString stringWithFormat:@"%i", kVersion] forKey:kConstant_VersionRate];
         [user_defaults setValue:[NSString stringWithFormat:@"%i",[[user_defaults valueForKey:kConstant_Diamond] intValue] + [responseStr integerValue]] forKey:kConstant_Diamond];
         [user_defaults synchronize];
-
-        self.diamond_lbl.text = [NSString stringWithFormat:@"%i",[responseStr integerValue] + (int)[self.diamond_lbl.text integerValue]];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         static int toIncrease_rateFailTime = 0;
@@ -835,18 +823,7 @@ bool hasCheckedVersionFirst = false;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    //delete
-    
-    //F44233
-    [self.tagDia_2_btn setTitle:@"Get Likes" forState:UIControlStateNormal];
-    [self.tagDia_2_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
-    [self.tagDia_2_btn setTitleColor:[self colorWithHex:0x5c5c5c] forState:UIControlStateNormal];
-    
-    [self.tagDiamond_btn setTitle:@"Get Coins" forState:UIControlStateNormal];
-    [self.tagDiamond_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
-    [self.tagDiamond_btn setTitleColor:[self colorWithHex:0x5c5c5c] forState:UIControlStateNormal];
-    
+        
     [self.msg_btn setImage:[UIImage imageNamed:@"money.png"] forState:UIControlStateNormal];
     if(isIpad == true) {
         self.msg_btn.imageEdgeInsets = UIEdgeInsetsMake(0.0, self.msg_btn.titleLabel.frame.size.width + 190.0 - 44, 0.0, 0.0);
@@ -869,8 +846,6 @@ bool hasCheckedVersionFirst = false;
     [self.rateUs setTitle:@"Rate Us" forState:UIControlStateNormal];
     [self.emailUs setTitle:@"Email" forState:UIControlStateNormal];
     [self.loginOut setTitle:@"Log Out" forState:UIControlStateNormal];
-    
-    [self.tagDiamond_btn setSelected:true];
     
     user_defaults = [NSUserDefaults standardUserDefaults];
     
@@ -985,14 +960,10 @@ bool hasCheckedVersionFirst = false;
     
     if ([self.focousView isEqualToString:kConstant_MenuChangedToTag])
     {
-        [self.tagDia_2_btn setSelected:YES];
-        [self.tagDiamond_btn setSelected:NO];
         [self.increaseTagView setHidden:NO];
     }
     if ([self.focousView isEqualToString:kConstant_MenuCaangedToDiamond])
     {
-        [self.tagDia_2_btn setSelected:NO];
-        [self.tagDiamond_btn setSelected:YES];
         [self.increaseTagView setHidden:YES];
     }
     
@@ -1140,22 +1111,12 @@ bool hasCheckedVersionFirst = false;
     if ([btn isSelected]) {
         [self showCenterMenu];
         
-        [self.tagDiamond_btn setSelected:NO];
-        [self.tagDia_2_btn setSelected:NO];
-        
         [btn_donotandDonot setAlpha:0];
         
     }else
     {
         [self hideCenterMenu:1];
-        
-        if(page_which == 0){
-            [self.tagDiamond_btn setSelected:YES];
-        }
-        if(page_which == 1){
-            [self.tagDia_2_btn setSelected:YES];
-        }
-        
+                
         [btn_donotandDonot setAlpha:1];
     }
 }
@@ -1453,12 +1414,6 @@ bool hasCheckedVersionFirst = false;
     can_nextTag = false;
     
     [self.itag makeToastActivity];
-    
-    int curntCoins = (int)[[self.diamond_lbl text] integerValue];
-    self.diamond_lbl.text = [NSString stringWithFormat:@"%i",curntCoins + 1];
-    [user_defaults setValue:[NSString stringWithFormat:@"%i",curntCoins+1] forKey:kConstant_Diamond];
-    [user_defaults synchronize];
-    
     
     qid_updateing = [[currentImageData valueForKey:@"qid"] intValue];
     orderedtag_updating = [[currentImageData valueForKey:@"ordered_like"] intValue];
@@ -1900,9 +1855,8 @@ bool hasCheckedVersionFirst = false;
     [operation start];
 }
 
--(void)getFreeDiamond{
-    self.diamond_lbl.text = [user_defaults valueForKey:kConstant_Diamond];
-    
+-(void)getFreeDiamond
+{
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
@@ -1926,7 +1880,6 @@ bool hasCheckedVersionFirst = false;
         NSArray *resultArray = (NSArray*)result;
         if (resultArray.count>0) {
             NSDictionary *dict = (NSDictionary*)[resultArray objectAtIndex:0];
-            self.diamond_lbl.text = [dict valueForKey:@"coins"];
             [user_defaults setValue:[dict valueForKey:@"coins"] forKey:kConstant_Diamond];
             [user_defaults synchronize];
             
@@ -1998,7 +1951,6 @@ bool hasCheckedVersionFirst = false;
 
     [self.tagDiamond_btn setBackgroundColor:[UIColor colorWithRed:92.0/255.0 green:175.0/255.0 blue:164.0/255.0 alpha:1.0]];
     [self.tagDia_2_btn setBackgroundColor:[self colorWithHex:0xececec]];
-    [self.tagDia_2_btn setSelected:NO];
     [self.centermenu_btn setSelected:NO];
     
     [self.increaseTagView setHidden:YES];
@@ -2012,52 +1964,7 @@ bool hasCheckedVersionFirst = false;
     page_which = 0;
     
 }
-- (IBAction)pressPageLeft:(id)sender {
-    if(isLogged){
-        [self ask_update_version_to_new];
-        return;
-    }
-    
-    if(!can_nextTag){
-        [self.itag makeToastActivity];
-        return;
-    }
-    
-    if(tappingOut){
-        return;
-    }
-    
-    if([self checkIfNullUser]){
-        return;
-    }
-    
-    if(isInsertingTMD){
-        return;
-    }
-    
-    [self tryAskRate];
-    
-    [btn_donotandDonot setAlpha:0];
-    
-    UIButton *btn = sender;
-    [btn setSelected:YES];
-    [self.tagDiamond_btn setSelected:NO];
-    [self.centermenu_btn setSelected:NO];
-        
-    [self.tagDia_2_btn setBackgroundColor:[UIColor colorWithRed:92.0/255.0 green:175.0/255.0 blue:164.0/255.0 alpha:1.0]];
-    [self.tagDiamond_btn setBackgroundColor:[self colorWithHex:0xececec]];
-    
-    [self.increaseTagView setHidden:NO];
-    [self hideCenterMenu:1];
-    
-    [self.thumbnails removeAllObjects];
-    [self.accuImages removeAllObjects];
-    [self requestImages];
-    currentThread++;
-    
-    page_which = 1;
-    
-}
+
 - (IBAction)pressCenter:(id)sender {
     if(isLogged){
         [self ask_update_version_to_new];
@@ -2087,22 +1994,12 @@ bool hasCheckedVersionFirst = false;
     if ([btn isSelected]) {
         [self showCenterMenu];
         
-        [self.tagDiamond_btn setSelected:NO];
-        [self.tagDia_2_btn setSelected:NO];
-        
         [btn_donotandDonot setAlpha:0];
         
     }else
     {
         [self hideCenterMenu:1];
-        
-        if(page_which == 0){
-            [self.tagDiamond_btn setSelected:YES];
-        }
-        if(page_which == 1){
-            [self.tagDia_2_btn setSelected:YES];
-        }
-        
+                
         [btn_donotandDonot setAlpha:1];
     }
 }
@@ -3419,8 +3316,9 @@ NSMutableString* _rank;
     }
 }
 
--(void) display_update:(int)_coins{
-    self.diamond_lbl.text = [NSString stringWithFormat:@"%i",_coins];
+-(void) display_update:(int)_coins
+{
+    
 }
 
 - (IBAction)pressEmail:(id)sender {
@@ -3503,8 +3401,9 @@ NSMutableString* _rank;
     alert.tag = 1006;
 }
 
--(void) tegCoinsFromSSAD:(int)_amount{
-    self.diamond_lbl.text = [NSString stringWithFormat:@"%i",_amount + (int)[self.diamond_lbl.text integerValue]];
+-(void) tegCoinsFromSSAD:(int)_amount
+{
+    
 }
 
 @end
