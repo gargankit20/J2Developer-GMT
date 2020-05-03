@@ -13,7 +13,6 @@
                 <outlet property="center_uiview" destination="gUH-ya-6Vc" id="3gk-uD-JLk"/>
                 <outlet property="centermenu_btn" destination="GDy-eg-Ife" id="9Ut-Ac-dGq"/>
                 <outlet property="emailUs" destination="Rmh-tw-bmd" id="uiY-3O-ZlC"/>
-                <outlet property="img_btn" destination="XMG-r2-jTt" id="Tti-4u-vrr"/>
                 <outlet property="increaseTagView" destination="ooY-Hy-ygL" id="7CC-mx-zDE"/>
                 <outlet property="itag" destination="TBT-IJ-gRq" id="0OF-ib-apt"/>
                 <outlet property="itagThumnail" destination="2J0-L1-063" id="WEr-Qv-6L6"/>
@@ -44,17 +43,6 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <gestureRecognizers/>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XMG-r2-jTt">
-                    <rect key="frame" x="15" y="472" width="139" height="38"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="backgroundColor" red="0.42489337921142578" green="0.52784377336502075" blue="0.90470057725906372" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <state key="normal">
-                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </state>
-                    <connections>
-                        <action selector="skipTag:" destination="-1" eventType="touchUpInside" id="Pqn-ud-TDE"/>
-                    </connections>
-                </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gjq-Jn-5gO">
                     <rect key="frame" x="167" y="472" width="139" height="38"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>

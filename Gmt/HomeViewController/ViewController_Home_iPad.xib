@@ -13,7 +13,6 @@
                 <outlet property="center_uiview" destination="XYI-Cp-Ayz" id="gVB-lT-S78"/>
                 <outlet property="centermenu_btn" destination="ToM-j7-Z9C" id="z17-Ge-OrJ"/>
                 <outlet property="emailUs" destination="DQd-wA-INy" id="Ugi-vH-V8X"/>
-                <outlet property="img_btn" destination="K7H-Sc-kPK" id="6aU-Nb-fV5"/>
                 <outlet property="increaseTagView" destination="NTE-cj-ItO" id="Es8-I0-3g6"/>
                 <outlet property="itag" destination="fGG-Pg-h9B" id="jTY-VY-hyQ"/>
                 <outlet property="itagThumnail" destination="xlD-eD-Yq7" id="BfY-kF-O7l"/>
@@ -44,18 +43,6 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <gestureRecognizers/>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K7H-Sc-kPK">
-                    <rect key="frame" x="86" y="642" width="278" height="75"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="backgroundColor" red="0.45386683940887451" green="0.56348961591720581" blue="0.9653286337852478" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                    <state key="normal">
-                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </state>
-                    <connections>
-                        <action selector="skipTag:" destination="-1" eventType="touchUpInside" id="laq-lh-c6Q"/>
-                    </connections>
-                </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="27N-jJ-gGD">
                     <rect key="frame" x="404" y="642" width="278" height="75"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>

@@ -836,11 +836,8 @@ bool hasCheckedVersionFirst = false;
     
     [self.msg_btn setTitle:@"Like +1" forState:UIControlStateNormal];
     [self.msg_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.img_btn setTitle:@"Skip" forState:UIControlStateNormal];
-    [self.img_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
     self.msg_btn.adjustsImageWhenHighlighted = NO;
-    self.img_btn.adjustsImageWhenHighlighted = YES;
     [self.msg_btn setTitleColor:[UIColor colorWithWhite:1.0 alpha:0.3] forState:UIControlStateHighlighted];
     
     [self.rateUs setTitle:@"Rate Us" forState:UIControlStateNormal];
@@ -977,12 +974,6 @@ bool hasCheckedVersionFirst = false;
                                         self.msg_btn.frame.origin.y - 34,
                                         self.msg_btn.frame.size.width,
                                         self.msg_btn.frame.size.height);
-        
-        self.img_btn.frame = CGRectMake(self.img_btn.frame.origin.x + 27,
-                                        self.img_btn.frame.origin.y - 34 ,
-                                        self.img_btn.frame.size.width,
-                                        self.img_btn.frame.size.height);
-        
     }else if(isIphone6P){
         self.itag.frame = CGRectMake(32 + 47, 40, 256, 256);
         self.itagThumnail.frame = CGRectMake(32 + 47, 40, 256, 256);
@@ -991,11 +982,6 @@ bool hasCheckedVersionFirst = false;
                                         self.msg_btn.frame.origin.y - 104,
                                         self.msg_btn.frame.size.width,
                                         self.msg_btn.frame.size.height);
-        
-        self.img_btn.frame = CGRectMake(self.img_btn.frame.origin.x + 47,
-                                        self.img_btn.frame.origin.y - 104,
-                                        self.img_btn.frame.size.width,
-                                        self.img_btn.frame.size.height);
     }else if(isOldIphone){
         self.itag.frame = CGRectMake(32, 6, 256, 256);
         self.itagThumnail.frame = CGRectMake(32, 6, 256, 256);
@@ -1005,11 +991,6 @@ bool hasCheckedVersionFirst = false;
                                         self.msg_btn.frame.origin.y + 14,
                                         self.msg_btn.frame.size.width,
                                         self.msg_btn.frame.size.height);
-        
-        self.img_btn.frame = CGRectMake(self.img_btn.frame.origin.x,
-                                        self.img_btn.frame.origin.y + 14,
-                                        self.img_btn.frame.size.width,
-                                        self.img_btn.frame.size.height);
     }
     
     if(isIphone6)
@@ -1330,39 +1311,6 @@ bool hasCheckedVersionFirst = false;
         [self presentViewController:viewController_LogTag animated:NO completion:^{
         }];
     }
-}
-
-- (IBAction)skipTag:(id)sender {
-    if(isLogged){
-        [self ask_update_version_to_new];
-        return;
-    }
-    
-    if(!can_nextTag){
-        [self.itag makeToastActivity];
-        return;
-    }
-    
-    if(tappingOut){
-        return;
-    }
-    
-    if([self checkIfNullUser]){
-        return;
-    }
-    
-    if(isBlocked){
-        return;
-    }
-    
-    if(isInsertingTMD){
-        return;
-    }
-    
-    can_nextTag = false;
-    
-    [self load_next_tags];
-    // [self updateSkipLike:0];
 }
 
 - (IBAction)TagImage:(id)sender {

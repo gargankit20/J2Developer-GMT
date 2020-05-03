@@ -114,7 +114,6 @@
 @property (weak, nonatomic) IBOutlet UIView *center_uiview;
 @property (weak, nonatomic) IBOutlet UIButton *centermenu_btn;
 @property (weak, nonatomic) IBOutlet UIButton *msg_btn;
-@property (weak, nonatomic) IBOutlet UIButton *img_btn;
 @property (weak, nonatomic) IBOutlet UIButton *rateUs;
 @property (weak, nonatomic) IBOutlet UIButton *emailUs;
 @property (weak, nonatomic) IBOutlet UIButton *loginOut;
@@ -126,7 +125,6 @@
 @property (nonatomic, strong) NSMutableArray* accuImages;
 @property (nonatomic, strong) NSMutableArray* thumbnails;
 
-- (IBAction)skipTag:(id)sender;
 - (IBAction)TagImage:(id)sender;
 - (IBAction)load_next_tags:(id)sender;
 
