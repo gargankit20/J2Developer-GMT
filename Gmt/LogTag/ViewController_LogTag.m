@@ -211,7 +211,7 @@ int tmdTime_V2 = 0;
     [btn_tag setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2 - 150 * ipadRatio, 280 * ipadRatio, 300 * ipadRatio, 43 * ipadRatio)];
     [btn_tag setTitle:@"Login with Instagram" forState:UIControlStateNormal];
     
-    [btn_tag addTarget:self action:@selector(goto_tag_in:) forControlEvents:UIControlEventTouchUpInside];
+    [btn_tag addTarget:self action:@selector(getUserID) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn_tag];
     
     textfield_name = [[UITextField alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2 - 150 * ipadRatio, 130 * ipadRatio, 300 * ipadRatio, 43 * ipadRatio)];
@@ -234,7 +234,38 @@ int tmdTime_V2 = 0;
     textfield_name.autocorrectionType = UITextAutocorrectionTypeNo;
     textfield_name.autocapitalizationType = UITextAutocapitalizationTypeNone;
     
-    //textfield_name.text=@"rj1923";
+    textfield_name.text=@"rj1923";
+}
+
+// Code written by Ankit Garg
+
+-(void)getUserID
+{
+    NSString *urlString=[NSString stringWithFormat:@"https://www.instagram.com/%@/?__a=1", textfield_name.text];
+    NSURL *baseURL=[NSURL URLWithString:urlString];
+    
+    AFHTTPClient *httpClient=[[AFHTTPClient alloc] initWithBaseURL:baseURL];
+    NSMutableURLRequest *request=[httpClient requestWithMethod:@"GET" path:urlString parameters:nil];
+
+    AFHTTPRequestOperation *operation=[[AFHTTPRequestOperation alloc] initWithRequest:request];
+
+    [httpClient registerHTTPOperationClass:[AFHTTPRequestOperation class]];
+
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject)
+    {
+        NSDictionary *responseDic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSString *userID=responseDic[@"graphql"][@"user"][@"id"];
+        if(userID.length>0)
+        {
+            [[NSUserDefaults standardUserDefaults] setObject:userID forKey:@"userID"];
+            [self dismissViewControllerAnimated:YES completion:NULL];
+        }
+    }
+    failure:^(AFHTTPRequestOperation *operation, NSError *error)
+    {
+        
+    }];
+    [operation start];
 }
 
 bool is_random = false;
