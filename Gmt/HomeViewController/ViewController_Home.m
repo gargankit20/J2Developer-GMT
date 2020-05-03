@@ -823,22 +823,6 @@ bool hasCheckedVersionFirst = false;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-        
-    [self.msg_btn setImage:[UIImage imageNamed:@"money.png"] forState:UIControlStateNormal];
-    if(isIpad == true) {
-        self.msg_btn.imageEdgeInsets = UIEdgeInsetsMake(0.0, self.msg_btn.titleLabel.frame.size.width + 190.0 - 44, 0.0, 0.0);
-        [self.msg_btn setTitleEdgeInsets:UIEdgeInsetsMake(0, -44, 0, 0)];
-    } else {
-        self.msg_btn.imageEdgeInsets = UIEdgeInsetsMake(0.0, self.msg_btn.titleLabel.frame.size.width + 90.0, 0.0, 0.0);
-        self.msg_btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        //[self.msg_btn setTitleEdgeInsets:UIEdgeInsetsMake(46, 44, 0, 0)];
-    }
-    
-    [self.msg_btn setTitle:@"Like +1" forState:UIControlStateNormal];
-    [self.msg_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    
-    self.msg_btn.adjustsImageWhenHighlighted = NO;
-    [self.msg_btn setTitleColor:[UIColor colorWithWhite:1.0 alpha:0.3] forState:UIControlStateHighlighted];
     
     [self.rateUs setTitle:@"Rate Us" forState:UIControlStateNormal];
     [self.emailUs setTitle:@"Email" forState:UIControlStateNormal];
@@ -969,28 +953,12 @@ bool hasCheckedVersionFirst = false;
     if(isIphone6){
         self.itag.frame = CGRectMake(32 + 27, 40, 256, 256);
         self.itagThumnail.frame = CGRectMake(32 + 27, 40, 256, 256);
-        
-        self.msg_btn.frame = CGRectMake(self.msg_btn.frame.origin.x + 27,
-                                        self.msg_btn.frame.origin.y - 34,
-                                        self.msg_btn.frame.size.width,
-                                        self.msg_btn.frame.size.height);
     }else if(isIphone6P){
         self.itag.frame = CGRectMake(32 + 47, 40, 256, 256);
         self.itagThumnail.frame = CGRectMake(32 + 47, 40, 256, 256);
-        
-        self.msg_btn.frame = CGRectMake(self.msg_btn.frame.origin.x + 47,
-                                        self.msg_btn.frame.origin.y - 104,
-                                        self.msg_btn.frame.size.width,
-                                        self.msg_btn.frame.size.height);
     }else if(isOldIphone){
         self.itag.frame = CGRectMake(32, 6, 256, 256);
         self.itagThumnail.frame = CGRectMake(32, 6, 256, 256);
-        
-        
-        self.msg_btn.frame = CGRectMake(self.msg_btn.frame.origin.x,
-                                        self.msg_btn.frame.origin.y + 14,
-                                        self.msg_btn.frame.size.width,
-                                        self.msg_btn.frame.size.height);
     }
     
     if(isIphone6)

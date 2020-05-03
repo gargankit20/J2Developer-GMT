@@ -17,7 +17,6 @@
                 <outlet property="itag" destination="TBT-IJ-gRq" id="0OF-ib-apt"/>
                 <outlet property="itagThumnail" destination="2J0-L1-063" id="WEr-Qv-6L6"/>
                 <outlet property="loginOut" destination="P0R-EN-7g2" id="aKt-Q0-579"/>
-                <outlet property="msg_btn" destination="Gjq-Jn-5gO" id="hze-hP-LVg"/>
                 <outlet property="null_lbl" destination="EQT-Sh-BFH" id="oet-Ic-Zh1"/>
                 <outlet property="rateUs" destination="W0O-9C-fXZ" id="IDe-j7-ram"/>
                 <outlet property="reqFailCounter_lbl" destination="GjG-7A-tqe" id="mNB-F0-wEe"/>
@@ -43,17 +42,6 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <gestureRecognizers/>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gjq-Jn-5gO">
-                    <rect key="frame" x="167" y="472" width="139" height="38"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="backgroundColor" red="0.95686274509803915" green="0.25882352941176467" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <state key="normal">
-                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </state>
-                    <connections>
-                        <action selector="TagImage:" destination="-1" eventType="touchUpInside" id="bF9-5t-67m"/>
-                    </connections>
-                </button>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Like Failed..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="GjG-7A-tqe" userLabel="Label - Timer">
                     <rect key="frame" x="85" y="125" width="150" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
