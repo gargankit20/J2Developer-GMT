@@ -1012,16 +1012,11 @@ bool hasCheckedVersionFirst = false;
                                         self.img_btn.frame.size.height);
     }
     
-    if(isIphone6){
-        self.tagDia_2_btn.frame = CGRectMake(196,
-                                             self.tagDia_2_btn.frame.origin.y,
-                                             self.tagDia_2_btn.frame.size.width + 0,
-                                             self.tagDia_2_btn.frame.size.height);
+    if(isIphone6)
+    {
+        self.tagDia_2_btn.frame=CGRectMake(196, self.tagDia_2_btn.frame.origin.y, self.tagDia_2_btn.frame.size.width+0, self.tagDia_2_btn.frame.size.height);
         
-        self.tagDiamond_btn.frame = CGRectMake(0,
-                                               self.tagDiamond_btn.frame.origin.y,
-                                               self.tagDiamond_btn.frame.size.width + 18,
-                                               self.tagDiamond_btn.frame.size.height);
+        self.tagDiamond_btn.frame=CGRectMake(0, self.tagDiamond_btn.frame.origin.y, self.tagDiamond_btn.frame.size.width+18, self.tagDiamond_btn.frame.size.height);
         
         self.centermenu_btn.frame = CGRectMake(154,
                                                self.centermenu_btn.frame.origin.y,
@@ -1030,16 +1025,11 @@ bool hasCheckedVersionFirst = false;
         
     }
     
-    if(isIphone6P){
-        self.tagDia_2_btn.frame = CGRectMake(220,
-                                             self.tagDia_2_btn.frame.origin.y,
-                                             self.tagDia_2_btn.frame.size.width + 10,
-                                             self.tagDia_2_btn.frame.size.height);
+    if(isIphone6P)
+    {
+        self.tagDia_2_btn.frame=CGRectMake(220, self.tagDia_2_btn.frame.origin.y, self.tagDia_2_btn.frame.size.width+10, self.tagDia_2_btn.frame.size.height);
         
-        self.tagDiamond_btn.frame = CGRectMake(0,
-                                               self.tagDiamond_btn.frame.origin.y,
-                                               self.tagDiamond_btn.frame.size.width + 30,
-                                               self.tagDiamond_btn.frame.size.height);
+        self.tagDiamond_btn.frame=CGRectMake(0, self.tagDiamond_btn.frame.origin.y, self.tagDiamond_btn.frame.size.width+30, self.tagDiamond_btn.frame.size.height);
         
         self.centermenu_btn.frame = CGRectMake(175,
                                                self.centermenu_btn.frame.origin.y,
@@ -1234,9 +1224,14 @@ bool hasCheckedVersionFirst = false;
     }];
 }
 
--(void)viewWillAppear:(BOOL)animated{
+-(void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
     //[self check_tag_status];
+    
+    [self.tagDia_2_btn setBackgroundColor:[UIColor colorWithRed:92.0/255.0 green:175.0/255.0 blue:164.0/255.0 alpha:1.0]];
+    [self.tagDiamond_btn setBackgroundColor:[self colorWithHex:0xececec]];
+
     [self hideCenterMenu:0.1];
 }
 
