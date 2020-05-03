@@ -102,8 +102,6 @@
 
 @property (nonatomic, strong) NSString* accessToken;
 @property (nonatomic, strong) NSString* focousView;
-@property (weak, nonatomic) IBOutlet UIImageView *itag;
-@property (weak, nonatomic) IBOutlet UIImageView *itagThumnail;
 @property (weak, nonatomic) IBOutlet UIImageView *lineImgv;
 @property (strong, nonatomic) IBOutlet UILabel *reqFail_lbl;
 @property (strong, nonatomic) IBOutlet UILabel *null_lbl;

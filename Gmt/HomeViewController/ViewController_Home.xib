@@ -14,8 +14,6 @@
                 <outlet property="centermenu_btn" destination="GDy-eg-Ife" id="9Ut-Ac-dGq"/>
                 <outlet property="emailUs" destination="Rmh-tw-bmd" id="uiY-3O-ZlC"/>
                 <outlet property="increaseTagView" destination="ooY-Hy-ygL" id="7CC-mx-zDE"/>
-                <outlet property="itag" destination="TBT-IJ-gRq" id="0OF-ib-apt"/>
-                <outlet property="itagThumnail" destination="2J0-L1-063" id="WEr-Qv-6L6"/>
                 <outlet property="loginOut" destination="P0R-EN-7g2" id="aKt-Q0-579"/>
                 <outlet property="null_lbl" destination="EQT-Sh-BFH" id="oet-Ic-Zh1"/>
                 <outlet property="rateUs" destination="W0O-9C-fXZ" id="IDe-j7-ram"/>
@@ -32,16 +30,6 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2J0-L1-063">
-                    <rect key="frame" x="0.0" y="4" width="320" height="320"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <gestureRecognizers/>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TBT-IJ-gRq">
-                    <rect key="frame" x="0.0" y="4" width="320" height="320"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <gestureRecognizers/>
-                </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Like Failed..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="GjG-7A-tqe" userLabel="Label - Timer">
                     <rect key="frame" x="85" y="125" width="150" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

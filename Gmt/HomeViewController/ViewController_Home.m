@@ -418,7 +418,6 @@ bool hasCheckedVersionFirst = false;
             NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
             
             [self.view hideToastActivity];
-            [self.itag hideToastActivity];
             
             if ([title isEqualToString:@"SURE"]) {
                 
@@ -906,11 +905,6 @@ bool hasCheckedVersionFirst = false;
     saveArray = [[NSMutableArray alloc] initWithArray:[user_defaults objectForKey:kConstant_saveTagID]];
     [self delete_print_history];
     
-
-    //set corner radious of image view
-    //    [self.itag.layer setCornerRadius:15];
-    //    self.itag.clipsToBounds = YES;
-    //
     //get likes
     self.scrollview.contentSize = CGSizeMake(273, 350);
     [self.scrollview setDelegate:self];
@@ -949,18 +943,7 @@ bool hasCheckedVersionFirst = false;
     }
     
     self.Scrollview_2.contentSize=CGSizeMake(320, 10);
-    
-    if(isIphone6){
-        self.itag.frame = CGRectMake(32 + 27, 40, 256, 256);
-        self.itagThumnail.frame = CGRectMake(32 + 27, 40, 256, 256);
-    }else if(isIphone6P){
-        self.itag.frame = CGRectMake(32 + 47, 40, 256, 256);
-        self.itagThumnail.frame = CGRectMake(32 + 47, 40, 256, 256);
-    }else if(isOldIphone){
-        self.itag.frame = CGRectMake(32, 6, 256, 256);
-        self.itagThumnail.frame = CGRectMake(32, 6, 256, 256);
-    }
-    
+        
     if(isIphone6)
     {
         self.tagDia_2_btn.frame=CGRectMake(196, self.tagDia_2_btn.frame.origin.y, self.tagDia_2_btn.frame.size.width+0, self.tagDia_2_btn.frame.size.height);
@@ -1096,32 +1079,16 @@ bool hasCheckedVersionFirst = false;
             photoLoading_url_timer++;
             
             if(photoLoading_url_timer == 3){
-                [self.itag hideToastActivity];
                 can_nextTag = true;
                 photoLoading_url_timer = -1;
                 
                 loaded_pre[idx_preload] = true;
-            }else{
-                [self.itag makeToastActivity];
-            }
-            
-            if(photoLoading_url_timer == 1){
-                
-                /*
-                self.itagThumnail.frame = CGRectMake(32, 6, 256, 256);
-                
-                [self.itagThumnail setImageWithURL:[currentImageData valueForKey:@"photo_thumnailurl"] success:^(UIImage *image, BOOL cached) {
-                } failure:^(NSError *error) {
-                }];*/
             }
         }
     }else{
         timer_preload++;
         
         if(timer_preload >= timeAim_preload){
-            
-            self.itag.image = loadtagImg_pre[idx_preload].image;
-            [self.itag hideToastActivity];
             photoLoading_url_timer = -1;
             loaded_pre[idx_preload] = true;
             can_nextTag = true;
@@ -1163,14 +1130,9 @@ bool hasCheckedVersionFirst = false;
     }
 }
 
--(void) thumbnail_load_for_mainimg{
-    //[self.itagThumnail setImageWithURL:@"liker.j2sighte.com/api/IMG_SMALL.png" success:^(UIImage *image, BOOL cached) {
-//    [self.itagThumnail sd_setImageWithURL:[currentImageData valueForKey:@"photo_url"] success:^(UIImage *image, BOOL cached) {
-//    } failure:^(NSError *error) {
-//    }];   old
+-(void) thumbnail_load_for_mainimg
+{
     
-    [self.itagThumnail sd_setImageWithURL:[currentImageData valueForKey:@"photo_url"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-    }];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -1216,14 +1178,12 @@ bool hasCheckedVersionFirst = false;
         if (feedsArry.count <= 0)
         {
             [self.view hideToastActivity];
-            [self.itag hideToastActivity];
             [self popup_nofeed_alert];
             
         }else{
             
             if([self checkCanLikeEitherPhotoInFeed]){
                 self->noTagFeed = false;
-                [self.itag makeToastActivity];
                 [self checkAndLoadThisImg];
             }else{
                 [self.view hideToastActivity];
@@ -1289,7 +1249,6 @@ bool hasCheckedVersionFirst = false;
     }
     
     if(!can_nextTag){
-        [self.itag makeToastActivity];
         return;
     }
     
@@ -1323,8 +1282,6 @@ bool hasCheckedVersionFirst = false;
     }
     
     can_nextTag = false;
-    
-    [self.itag makeToastActivity];
     
     qid_updateing = [[currentImageData valueForKey:@"qid"] intValue];
     orderedtag_updating = [[currentImageData valueForKey:@"ordered_like"] intValue];
@@ -1837,7 +1794,6 @@ bool hasCheckedVersionFirst = false;
     }
     
     if(!can_nextTag){
-        [self.itag makeToastActivity];
         return;
     }
     
@@ -1883,7 +1839,6 @@ bool hasCheckedVersionFirst = false;
     }
     
     if(!can_nextTag){
-        [self.itag makeToastActivity];
         return;
     }
     
@@ -2336,7 +2291,6 @@ bool hasCheckedVersionFirst = false;
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     // The request has failed for some reason!
     // Check the error var
-    [self.itag hideToastActivity];
     [self load_next_tags];
 }
 
@@ -2393,7 +2347,6 @@ bool hasCheckedVersionFirst = false;
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [self.itag hideToastActivity];
         [self load_next_tags];
     }];*/
 }
@@ -2441,7 +2394,6 @@ bool hasCheckedVersionFirst = false;
             
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [self.itag hideToastActivity];
             [self load_next_tags];
         }];
     }
@@ -2648,7 +2600,6 @@ bool hasCheckedVersionFirst = false;
         return;
     }
     
-    [self.itag makeToastActivity];
     photoLoading_url_timer = 0;
     
     if(successLoad_pre[idx_preload]){
@@ -2658,22 +2609,6 @@ bool hasCheckedVersionFirst = false;
     }else{
         
         preloading = false;
-        
-        [self.itag sd_setImageWithURL:[currentImageData valueForKey:@"photo_url"]  completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-            if (error != nil) {
-                [self.itag hideToastActivity];
-                self->can_nextTag = true;
-                self->photoLoading_url_timer = -1;
-                
-                self->loaded_pre[self->idx_preload] = true;
-            } else {
-                [self.itag hideToastActivity];
-                self->can_nextTag = true;
-                self->photoLoading_url_timer = -1;
-                
-                self->loaded_pre[self->idx_preload] = true;
-            }
-        }];
     }
 }
 
