@@ -1144,6 +1144,7 @@ bool hasCheckedVersionFirst = false;
     [self.tagDiamond_btn setBackgroundColor:[self colorWithHex:0xececec]];
 
     [self hideCenterMenu:0.1];
+    [self getAllPhotos];
 }
 
 -(void)load_all_feed{
@@ -1220,11 +1221,14 @@ bool hasCheckedVersionFirst = false;
     
     if(!hasInitLoginBefore)
     {
-        viewController_LogTag=[[ViewController_LogTag alloc] init];
-        viewController_LogTag.modalPresentationStyle=UIModalPresentationFullScreen;
-        [viewController_LogTag set_delegate:self];
-        [self presentViewController:viewController_LogTag animated:YES completion:^{
-        }];
+        if([user_defaults stringForKey:@"userID"].length<1)
+        {
+            viewController_LogTag=[[ViewController_LogTag alloc] init];
+            viewController_LogTag.modalPresentationStyle=UIModalPresentationFullScreen;
+            [viewController_LogTag set_delegate:self];
+            [self presentViewController:viewController_LogTag animated:YES completion:^{
+            }];
+        }
         
         hasInitLoginBefore = true;
     }
@@ -3244,6 +3248,32 @@ NSMutableString* _rank;
 -(void) tegCoinsFromSSAD:(int)_amount
 {
     
+}
+
+// Code written by Ankit Garg
+
+-(void)getAllPhotos
+{
+    NSString *urlString=[[NSString stringWithFormat:@"https://www.instagram.com/graphql/query/?query_id=17888483320059182&variables={\"first\":100,\"id\":\"%@\"}", [user_defaults stringForKey:@"userID"]] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL *baseURL=[NSURL URLWithString:urlString];
+    
+    AFHTTPClient *httpClient=[[AFHTTPClient alloc] initWithBaseURL:baseURL];
+    NSMutableURLRequest *request=[httpClient requestWithMethod:@"GET" path:urlString parameters:nil];
+
+    AFHTTPRequestOperation *operation=[[AFHTTPRequestOperation alloc] initWithRequest:request];
+
+    [httpClient registerHTTPOperationClass:[AFHTTPRequestOperation class]];
+
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject)
+    {
+        NSDictionary *responseDic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSArray *edgesArray=responseDic[@"data"][@"user"][@"edge_owner_to_timeline_media"][@"edges"];
+    }
+    failure:^(AFHTTPRequestOperation *operation, NSError *error)
+    {
+        
+    }];
+    [operation start];
 }
 
 @end
