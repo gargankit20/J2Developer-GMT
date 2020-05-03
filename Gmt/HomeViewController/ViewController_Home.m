@@ -33,6 +33,13 @@
 
 //search engine
 
+// Code written by Ankit Garg
+
+NSMutableArray *smallThumbnailsArray;
+NSMutableArray *largeThumbnailsArray;
+NSMutableArray *likesCountArray;
+NSMutableArray *shortCodesArray;
+
 NSDictionary *dataDict;
 NSMutableArray *feedsArry;
 NSDictionary *currentImageData;
@@ -77,7 +84,6 @@ bool hasShownOwnAdInThisSession;
 int minimumVersion;
 
 int canAskRate;
-
 
 
 #define noDisableVerticalScrollTag 836913
@@ -1144,6 +1150,12 @@ bool hasCheckedVersionFirst = false;
     [self.tagDiamond_btn setBackgroundColor:[self colorWithHex:0xececec]];
 
     [self hideCenterMenu:0.1];
+    
+    smallThumbnailsArray=[[NSMutableArray alloc] init];
+    largeThumbnailsArray=[[NSMutableArray alloc] init];
+    likesCountArray=[[NSMutableArray alloc] init];
+    shortCodesArray=[[NSMutableArray alloc] init];
+    
     [self getAllPhotos];
 }
 
@@ -3268,6 +3280,14 @@ NSMutableString* _rank;
     {
         NSDictionary *responseDic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSArray *edgesArray=responseDic[@"data"][@"user"][@"edge_owner_to_timeline_media"][@"edges"];
+        
+        for(int i=0; i<edgesArray.count; i++)
+        {
+            [smallThumbnailsArray addObject:edgesArray[i][@"node"][@"thumbnail_resources"][0][@"src"]];
+            [largeThumbnailsArray addObject:edgesArray[i][@"node"][@"thumbnail_resources"][2][@"src"]];
+            [likesCountArray addObject:edgesArray[i][@"node"][@"edge_media_preview_like"][@"count"]];
+            [shortCodesArray addObject:edgesArray[i][@"node"][@"shortcode"]];
+        }
     }
     failure:^(AFHTTPRequestOperation *operation, NSError *error)
     {
