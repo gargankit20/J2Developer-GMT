@@ -995,7 +995,6 @@ bool hasCheckedVersionFirst = false;
     hasIniit_tag_VC = false;
     [self getFirstVersion];
     //[NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(getFirstVersion) userInfo:nil repeats:NO];
-    [self.view makeToastActivity];
 }
 
 -(void) setTopBar{
@@ -3217,7 +3216,6 @@ NSMutableString* _rank;
             break;
     }
     
-    // Close the Mail Interface
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
@@ -3235,31 +3233,18 @@ NSMutableString* _rank;
     return false;
 }
 
--(void) popup_tag_out_warning{
+-(void) popup_tag_out_warning
+{
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Failed" message:@"There is something wrong in the session. Please try to log out and then log in again." delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
     [alert show];
     alert.tag = 1006;
 }
 
--(void) warning_noPhoto{
-    /*UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Failed" message:@"You haven't any photos in your Instagram account" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
-    [alert show];*/
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Failed" message:@"Something wrong in the session. Please try to log out and then log in again." delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
-    [alert show];
-    alert.tag = 1006;
-}
-
--(void) warning2_noPhoto{
-    /*UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Failed" message:@"You haven't any photos in your Instagram account" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
-     [alert show];*/
+-(void) warning2_noPhoto
+{
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Failed" message:@"Something wrong in generating the photos. Please try to log out and then log in again." delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
     [alert show];
     alert.tag = 1006;
-}
-
--(void) tegCoinsFromSSAD:(int)_amount
-{
-    
 }
 
 // Code written by Ankit Garg
