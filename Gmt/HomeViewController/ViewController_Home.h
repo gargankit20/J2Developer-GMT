@@ -114,10 +114,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *rateUs;
 @property (weak, nonatomic) IBOutlet UIButton *emailUs;
 @property (weak, nonatomic) IBOutlet UIButton *loginOut;
-
-//get likes
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollview;
-@property (weak, nonatomic) IBOutlet UIScrollView *Scrollview_2;
 @property (nonatomic, strong) NSArray* images;
 @property (nonatomic, strong) NSMutableArray* accuImages;
 @property (nonatomic, strong) NSMutableArray* thumbnails;

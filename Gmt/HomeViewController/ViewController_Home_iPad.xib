@@ -9,7 +9,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewController_Home">
             <connections>
-                <outlet property="Scrollview_2" destination="Vf7-bw-EZJ" id="S4a-P6-N5g"/>
                 <outlet property="center_uiview" destination="XYI-Cp-Ayz" id="gVB-lT-S78"/>
                 <outlet property="centermenu_btn" destination="ToM-j7-Z9C" id="z17-Ge-OrJ"/>
                 <outlet property="emailUs" destination="DQd-wA-INy" id="Ugi-vH-V8X"/>
@@ -19,7 +18,6 @@
                 <outlet property="rateUs" destination="Myo-oC-AIk" id="LRX-6g-jT1"/>
                 <outlet property="reqFailCounter_lbl" destination="803-aG-dgj" id="Z2O-SL-DZJ"/>
                 <outlet property="reqFail_lbl" destination="5k3-cc-FzZ" id="awV-B7-iNj"/>
-                <outlet property="scrollview" destination="3m7-Fg-FzU" id="cuU-WK-ceR"/>
                 <outlet property="tagDia_2_btn" destination="8Fj-p8-Led" id="F8y-l4-qYA"/>
                 <outlet property="tagDiamond_btn" destination="TQM-yd-pDU" id="G4l-Td-K29"/>
                 <outlet property="view" destination="YHd-EZ-XYA" id="eEJ-Q8-cae"/>
@@ -64,16 +62,6 @@
                             <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vf7-bw-EZJ" userLabel="Scrollview_2">
-                            <rect key="frame" x="23" y="60" width="719" height="970"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                        </scrollView>
-                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3m7-Fg-FzU">
-                            <rect key="frame" x="16" y="12" width="709" height="887"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                        </scrollView>
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>

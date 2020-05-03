@@ -721,8 +721,6 @@ bool hasCheckedVersionFirst = false;
             
             self->unsaveHistoryArray = [[NSMutableArray alloc] initWithArray:[user_defaults objectForKey:kConstant_unsaveTagID]];
             self->saveArray = [[NSMutableArray alloc] initWithArray:[user_defaults objectForKey:kConstant_saveTagID]];
-            
-            [self delete_print_history];
         }else{
             [user_defaults setObject:[NSArray array] forKey:kConstant_saveTagID];
             [user_defaults setObject:[NSArray array] forKey:kConstant_unsaveTagID];
@@ -730,8 +728,6 @@ bool hasCheckedVersionFirst = false;
             
             self->unsaveHistoryArray = [[NSMutableArray alloc] initWithArray:[user_defaults objectForKey:kConstant_unsaveTagID]];
             self->saveArray = [[NSMutableArray alloc] initWithArray:[user_defaults objectForKey:kConstant_saveTagID]];
-            
-            [self delete_print_history];
         }
         
         [self load_all_feed];
@@ -782,35 +778,10 @@ bool hasCheckedVersionFirst = false;
             [user_defaults setObject:self->saveArray forKey:kConstant_saveTagID];
             [user_defaults setObject:self->unsaveHistoryArray forKey:kConstant_unsaveTagID];
             [user_defaults synchronize];
-            
-            [self delete_print_history];
-            
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         }];
         
     }
-    
-    [self delete_print_history];
-}
-
--(void) delete_print_history{
-    
-    //if(responseVersion != 2){
-        return;
-   // }
-    /*
-    for(int i = 0 ; i < [unsaveHistoryArray count] ; i++){
-    }
-    
-    for(int i = 0 ; i < [saveArray count] ; i++){
-    }*/
-    
-}
-
--(void) viewDidAppear:(BOOL)animated{
-    // self.Scrollview_2.tag = 836913;
-    // [self.Scrollview_2 flashScrollIndicators];
-    
 }
 
 -(void) remove_shop_view{
@@ -909,17 +880,8 @@ bool hasCheckedVersionFirst = false;
     
     unsaveHistoryArray = [[NSMutableArray alloc] initWithArray:[user_defaults objectForKey:kConstant_unsaveTagID]];
     saveArray = [[NSMutableArray alloc] initWithArray:[user_defaults objectForKey:kConstant_saveTagID]];
-    [self delete_print_history];
     
-    //get likes
-    self.scrollview.contentSize = CGSizeMake(273, 350);
-    [self.scrollview setDelegate:self];
-    [self.Scrollview_2 setDelegate:self];
-    // [self.scrollview showsVerticalScrollIndicator];
-    self.scrollview.showsVerticalScrollIndicator = YES;
-    [self.scrollview flashScrollIndicators];
     self.thumbnails = [[NSMutableArray alloc]init];
-    
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
@@ -936,7 +898,6 @@ bool hasCheckedVersionFirst = false;
         }else{
             [self getVersion:false];
         }
-        
     }
     
     if ([self.focousView isEqualToString:kConstant_MenuChangedToTag])
@@ -948,8 +909,6 @@ bool hasCheckedVersionFirst = false;
         [self.increaseTagView setHidden:YES];
     }
     
-    self.Scrollview_2.contentSize=CGSizeMake(320, 10);
-        
     if(isIphone6)
     {
         self.tagDia_2_btn.frame=CGRectMake(196, self.tagDia_2_btn.frame.origin.y, self.tagDia_2_btn.frame.size.width+0, self.tagDia_2_btn.frame.size.height);
@@ -1954,7 +1913,6 @@ bool hasCheckedVersionFirst = false;
             [user_defaults setObject:self->unsaveHistoryArray forKey:kConstant_unsaveTagID];
             [user_defaults synchronize];
             
-            [self delete_print_history];
             [self tag_out];
             
             self->tappingOut = false;
@@ -2626,10 +2584,7 @@ bool hasCheckedVersionFirst = false;
 {
     horizentalSpace = 10;
     scrolerHeight = 0;
-    NSArray *viewsToRemove = [_scrollview subviews];
-    for (UIView *v in viewsToRemove)[v removeFromSuperview];
     [self.view makeToastActivity];
-    //thumbnail_isloading = true;
     
     item = 0, row = 0, col = 0;
     accumCount = 0;
@@ -2641,7 +2596,6 @@ bool hasCheckedVersionFirst = false;
         horizentalSpace = 47;
     }
     
-    self.scrollview.contentOffset = CGPointMake(0, 0);
     [self loadImages_scrollView_PR:@""];
 }
 
@@ -2851,14 +2805,9 @@ NSMutableString* _rank;
         }
         //            [button.layer setCornerRadius:10];
         //            button.clipsToBounds = YES;
-        [self.scrollview addSubview:button];
         [self.thumbnails addObject:button];
     }
     
-    self.scrollview.contentSize = CGSizeMake(273, scrolerHeight);
-    self.Scrollview_2.contentSize = CGSizeMake(273, scrolerHeight);
-    self.scrollview.bounces = YES;
-    self.Scrollview_2.bounces = YES;
     [self loadImages];
     accumCount = (int)self.thumbnails.count;
 }
@@ -3032,14 +2981,9 @@ NSMutableString* _rank;
              }
              //            [button.layer setCornerRadius:10];
              //            button.clipsToBounds = YES;
-             [self.scrollview addSubview:button];
              [self.thumbnails addObject:button];
          }
          
-         self.scrollview.contentSize = CGSizeMake(273, scrolerHeight);
-         self.Scrollview_2.contentSize = CGSizeMake(273, scrolerHeight);
-         self.scrollview.bounces = YES;
-         self.Scrollview_2.bounces = YES;
          [self loadImages];
         self->accumCount = (int)self.thumbnails.count;
          
@@ -3148,27 +3092,11 @@ NSMutableString* _rank;
     if([maxID_thumbnail length] < 2){
         return;
     }
-    
-    if (scrollView == self.scrollview){
-        if (bottomEdge >= scrollView.contentSize.height) {
-            
-            if(!thumbnail_isloading){
-                [self.view makeToastActivity];
-                [self loadImages_scrollView_PR:maxID_thumbnail];
-            }
-        }
-    }
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (scrollView == self.scrollview)
-    {
-        self.Scrollview_2.contentOffset = CGPointMake(self.scrollview.contentOffset.x, self.scrollview.contentOffset.y);
-        
-        self.Scrollview_2.tag = 836913;
-        [self.Scrollview_2 flashScrollIndicators];
-    }
+    
 }
 
 -(void) display_update:(int)_coins
