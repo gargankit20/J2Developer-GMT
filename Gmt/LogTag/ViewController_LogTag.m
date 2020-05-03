@@ -174,18 +174,12 @@ int tmdTime_V2 = 0;
     [view setBackgroundColor:[UIColor whiteColor]];
     self.view = view;
     
-    
-    f_name = @"aaa";
-    f_password = @"bbb";
-    
     formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat: @"yyyy-MM-dd"];
     
     userAccountArray = [[NSMutableArray alloc]init];
     
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
-    
- 
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSData *data = [defaults objectForKey:kConstant_AccountsKey];
@@ -203,7 +197,6 @@ int tmdTime_V2 = 0;
     [self load_button];
     
     //NSTimer* _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(LoopingTimer:) userInfo:nil repeats:YES];
-    
 }
 
 -(void) load_background{
@@ -253,28 +246,7 @@ int tmdTime_V2 = 0;
     textfield_name.autocorrectionType = UITextAutocorrectionTypeNo;
     textfield_name.autocapitalizationType = UITextAutocapitalizationTypeNone;
     
-    
-    textfield_password = [[UITextField alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2 - 150 * ipadRatio, 190 * ipadRatio, 300 * ipadRatio, 43 * ipadRatio)];
-    textfield_password.backgroundColor = [UIColor colorWithWhite:1.0f alpha:0.7];
-    textfield_password.layer.cornerRadius = 18;
-    [self.view addSubview:textfield_password];
-    textfield_password.delegate = self;
-    [textfield_password setTextColor:[UIColor colorWithRed:90.0/255.0 green:90.0/255.0 blue:90.0/255.0 alpha:1.0]];
-    textfield_password.tag = 2;
-    
-    textfield_password.placeholder = @"Password";
-    
-    
-    UIView *paddingView2 = [[UIView alloc] initWithFrame:CGRectMake(0,
-                                                                    0,
-                                                                    20,
-                                                                    20)];
-    textfield_password.leftView = paddingView2;
-    textfield_password.leftViewMode = UITextFieldViewModeAlways;
-    textfield_password.secureTextEntry = YES;
-    
-    textfield_name.text=@"gargankit2020";
-    textfield_password.text=@"Ankit123@";
+    textfield_name.text=@"rj1923";
 }
 
 bool is_random = false;
@@ -1236,19 +1208,10 @@ bool is_random = false;
     if(textfield_name.text.length < 1){
         return 1;
     }
-    
-    if(textfield_password.text.length < 1){
-        return 2;
-    }
-
-    
+        
     return 0;
 }
 
--(void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-//    self.webView.delegate=Nil;
-}
 - (IBAction)goto_tag_in:(id)sender{
     
     int verifityPassResult = [self is_pass_verify];
@@ -1257,23 +1220,14 @@ bool is_random = false;
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"Please enter your user name"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alertView show];
         }
-        
-        if(verifityPassResult == 2){
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"Please enter your password"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alertView show];
-        }
-        
+                
         return;
     }
     
     if(textfield_name.isFirstResponder){
         [textfield_name resignFirstResponder];
     }
-    
-    if(textfield_password.isFirstResponder){
-        [textfield_password resignFirstResponder];
-    }
-    
+        
     [self.view makeToastActivity];
     
     if(responseVersion == 0){
@@ -1288,7 +1242,6 @@ bool is_random = false;
     [btn_tag setEnabled:NO];
     
     f_name = [NSString stringWithString:textfield_name.text];
-    f_password = [NSString stringWithString:textfield_password.text];
 
     [self get_session_init];
     if(!isSessionExpired){
@@ -1312,19 +1265,12 @@ bool is_random = false;
         [textField resignFirstResponder];
     }
     
-    if(textField.tag == 1){
-        [textfield_password becomeFirstResponder];
-    }
-
     if(textField.tag == 2){
         if( verifityPassResult == 1){
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"Please enter your user name"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alertView show];
         }
-        if( verifityPassResult == 2){
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"Please enter your password"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alertView show];
-        }
+        
         if(verifityPassResult == 0){
             [self goto_tag_in:nil];
         }

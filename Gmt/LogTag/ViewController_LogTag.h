@@ -20,9 +20,7 @@
     UIButton* btn_tag;
     
     UITextField* textfield_name;
-    UITextField* textfield_password;
 }
-
 
 -(void) set_delegate:(id)_id;
 -(void) get_session_1sttime;
