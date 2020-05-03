@@ -16,7 +16,7 @@
 #import "ViewController_LogTag.h"
 #import "HMedia.h"
 #import "ToIncreaseViewController.h"
-
+#import "ImageCell.h"
 //#import "SDImageCache.h"
 
 #import "NSObject+SBJSON.h"
@@ -800,6 +800,9 @@ bool hasCheckedVersionFirst = false;
 {
     [super viewDidLoad];
     
+    _collectionView.frame=CGRectMake(10, 46, self.view.frame.size.width-20, self.view.frame.size.height-280);
+    [_collectionView registerNib:[UINib nibWithNibName:@"ImageCell" bundle:nil] forCellWithReuseIdentifier:@"Cell"];
+    
     [self.rateUs setTitle:@"Rate Us" forState:UIControlStateNormal];
     [self.emailUs setTitle:@"Email" forState:UIControlStateNormal];
     [self.loginOut setTitle:@"Log Out" forState:UIControlStateNormal];
@@ -1114,7 +1117,10 @@ bool hasCheckedVersionFirst = false;
     likesCountArray=[[NSMutableArray alloc] init];
     shortCodesArray=[[NSMutableArray alloc] init];
     
-    [self getAllPhotos];
+    if([user_defaults stringForKey:@"userID"].length>0)
+    {
+        [self getAllPhotos];
+    }
 }
 
 -(void)load_all_feed{
@@ -3201,6 +3207,8 @@ NSMutableString* _rank;
             [likesCountArray addObject:edgesArray[i][@"node"][@"edge_media_preview_like"][@"count"]];
             [shortCodesArray addObject:edgesArray[i][@"node"][@"shortcode"]];
         }
+        
+        [self->_collectionView reloadData];
     }
     failure:^(AFHTTPRequestOperation *operation, NSError *error)
     {
@@ -3209,10 +3217,24 @@ NSMutableString* _rank;
     [operation start];
 }
 
-@end
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return smallThumbnailsArray.count;
+}
 
-/*
-1. add 'Instalike' in app name
-2. check all p_key_type, now is p_key_type == 3
-3. check if check_tag_result function works probably from connectionDidFinishLoading from old key type (p_key_type == 0 , p_key_type == 1)
-*/
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    ImageCell *cell=(ImageCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
+    
+    [cell.imageView sd_setImageWithURL:smallThumbnailsArray[indexPath.row]];
+    cell.likesLbl.text=[NSString stringWithFormat:@"%@", likesCountArray[indexPath.row]];
+    
+    return cell;
+}
+
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeMake((_collectionView.frame.size.width-10)/3, 130);
+}
+
+@end

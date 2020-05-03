@@ -10,10 +10,8 @@
 
 @class ToIncreaseViewController, ViewController_Shop,ViewController_LogTag;
 
-@interface ViewController_Home : UIViewController<NSURLConnectionDelegate, UIScrollViewDelegate, MFMailComposeViewControllerDelegate, UIAlertViewDelegate>
+@interface ViewController_Home : UIViewController<NSURLConnectionDelegate, MFMailComposeViewControllerDelegate, UIAlertViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource>
 {
-    
-    //add on 20190112
     NSTimer* get_session_1sttime_timer;
 
     ViewController_LogTag *viewController_LogTag;
@@ -103,6 +101,7 @@
 @property (nonatomic, strong) NSString* accessToken;
 @property (nonatomic, strong) NSString* focousView;
 @property (weak, nonatomic) IBOutlet UIImageView *lineImgv;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) IBOutlet UILabel *reqFail_lbl;
 @property (strong, nonatomic) IBOutlet UILabel *null_lbl;
 @property (strong, nonatomic) IBOutlet UILabel *reqFailCounter_lbl;

@@ -11,6 +11,7 @@
             <connections>
                 <outlet property="center_uiview" destination="gUH-ya-6Vc" id="3gk-uD-JLk"/>
                 <outlet property="centermenu_btn" destination="GDy-eg-Ife" id="9Ut-Ac-dGq"/>
+                <outlet property="collectionView" destination="wPZ-Je-A6Z" id="YPN-tJ-7Ke"/>
                 <outlet property="emailUs" destination="Rmh-tw-bmd" id="uiY-3O-ZlC"/>
                 <outlet property="increaseTagView" destination="ooY-Hy-ygL" id="7CC-mx-zDE"/>
                 <outlet property="loginOut" destination="P0R-EN-7g2" id="aKt-Q0-579"/>
@@ -51,19 +52,35 @@
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ooY-Hy-ygL">
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ooY-Hy-ygL">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="580"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pick one of your photo to add Likes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="m8z-py-tAk">
                             <rect key="frame" x="33" y="0.0" width="253" height="46"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="13"/>
                             <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="wPZ-Je-A6Z">
+                            <rect key="frame" x="20" y="46" width="335" height="480"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="5" minimumInteritemSpacing="5" id="Ug6-ck-4Kr">
+                                <size key="itemSize" width="100" height="130"/>
+                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </collectionViewFlowLayout>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="RgZ-e1-rtA"/>
+                                <outlet property="delegate" destination="-1" id="TdE-JR-VfF"/>
+                            </connections>
+                        </collectionView>
                     </subviews>
-                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gUH-ya-6Vc">
                     <rect key="frame" x="-1" y="79" width="321" height="140"/>
@@ -151,7 +168,7 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
-            <point key="canvasLocation" x="48.550724637681164" y="61.272321428571423"/>
+            <point key="canvasLocation" x="47.200000000000003" y="60.719640179910051"/>
         </view>
     </objects>
     <resources>
