@@ -1214,28 +1214,22 @@ bool hasCheckedVersionFirst = false;
 }
 
 -(void) load_tagview{
-    //LoginViewController *vc;
     hasIniit_tag_VC = true;
     
     static bool hasInitLoginBefore = false;
     
-    if(!hasInitLoginBefore){
-        if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad){
-            viewController_LogTag = [[ViewController_LogTag alloc] init];
-            [viewController_LogTag set_delegate:self];
-            //[self.view addSubview:ViewController_LogTag.view];
-            [self presentViewController:viewController_LogTag animated:YES completion:^{
-            }];
-        }else{
-            viewController_LogTag = [[ViewController_LogTag alloc] init];
-            [viewController_LogTag set_delegate:self];
-            //[self.view addSubview:ViewController_LogTag.view];
-            [self presentViewController:viewController_LogTag animated:YES completion:^{
-            }];
-        }
+    if(!hasInitLoginBefore)
+    {
+        viewController_LogTag=[[ViewController_LogTag alloc] init];
+        viewController_LogTag.modalPresentationStyle=UIModalPresentationFullScreen;
+        [viewController_LogTag set_delegate:self];
+        [self presentViewController:viewController_LogTag animated:YES completion:^{
+        }];
         
         hasInitLoginBefore = true;
-    }else{
+    }
+    else
+    {
         [self presentViewController:viewController_LogTag animated:NO completion:^{
         }];
     }

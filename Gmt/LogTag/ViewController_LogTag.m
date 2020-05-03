@@ -19,14 +19,11 @@
 #import "AFHTTPClient.h"
 #import "AFHTTPRequestOperation.h"
 
-
 NSString *userAccessToken;
 NSDateFormatter *formatter;
 NSMutableArray *userAccountArray;
 NSMutableData *_responseData;
 
-//NSString* f_name;
-//NSString* f_password;
 int tmdTime_V2 = 0;
 
 @interface ViewController_LogTag ()
@@ -71,8 +68,6 @@ int tmdTime_V2 = 0;
     //return flags_process & P_TRACED  ;      // value of the debug flag
 }
 
-
-
 - (NSString *)escapeQueryString:(id)string {
     
     // convert to string if not.
@@ -91,7 +86,6 @@ int tmdTime_V2 = 0;
                                             kCFStringEncodingUTF8);
     return CFBridgingRelease(escaped);
 }
-
 
 -(NSString*) ran_hex:(int)_number{
     NSString* dexString = [NSString stringWithFormat:@"%i", _number];
@@ -112,7 +106,6 @@ int tmdTime_V2 = 0;
     
     return hexString;
 }
-
 
 -(NSString*) random_dev{
     NSMutableString* ranDeviceString = [NSMutableString string];
@@ -150,7 +143,6 @@ int tmdTime_V2 = 0;
     [ranDeviceString appendString:fuckString[7]];
     
     return ranDeviceString;
-    
 }
 
 -(void) viewDidAppear:(BOOL)animated{
@@ -162,7 +154,6 @@ int tmdTime_V2 = 0;
         [btn_tag setEnabled:YES];
     }
     appearBefore = true;
-    
 }
 
 - (void)viewDidLoad
@@ -212,7 +203,6 @@ int tmdTime_V2 = 0;
     [self.view addSubview:bg];
 }
 
-
 -(void) load_button{
     btn_tag = [UIButton buttonWithType:UIButtonTypeCustom];
     btn_tag.adjustsImageWhenHighlighted = NO;
@@ -221,10 +211,8 @@ int tmdTime_V2 = 0;
     [btn_tag setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2 - 150 * ipadRatio, 280 * ipadRatio, 300 * ipadRatio, 43 * ipadRatio)];
     [btn_tag setTitle:@"Login with Instagram" forState:UIControlStateNormal];
     
-    
     [btn_tag addTarget:self action:@selector(goto_tag_in:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn_tag];
-    
     
     textfield_name = [[UITextField alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2 - 150 * ipadRatio, 130 * ipadRatio, 300 * ipadRatio, 43 * ipadRatio)];
     textfield_name.backgroundColor = [UIColor colorWithWhite:1.0f alpha:0.7];
@@ -246,7 +234,7 @@ int tmdTime_V2 = 0;
     textfield_name.autocorrectionType = UITextAutocorrectionTypeNo;
     textfield_name.autocapitalizationType = UITextAutocapitalizationTypeNone;
     
-    textfield_name.text=@"rj1923";
+    //textfield_name.text=@"rj1923";
 }
 
 bool is_random = false;
@@ -278,8 +266,6 @@ bool is_random = false;
     }else{
         cc_sync = [NSMutableString stringWithString:[[NSUserDefaults standardUserDefaults]  valueForKey:kConstant_Code]];
     }
-    
-    
 }
 
 -(void) get_session_1sttime{
@@ -325,7 +311,6 @@ bool is_random = false;
     [ct appendString:[u getFkBoundary]];
     [request addValue:ct forHTTPHeaderField: @"Content-Type"];
     
-    
     NSString* ranDevice;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if([defaults valueForKey:kConstant_DevID] == nil){
@@ -337,7 +322,6 @@ bool is_random = false;
     }else{
         ranDevice = [defaults valueForKey:kConstant_DevID];
     }
-    
     
     NSMutableString *unencodedUrlStringEncode = [NSMutableString string];
     [unencodedUrlStringEncode setString:@"%7B%22id%22%3A%22"];
@@ -418,10 +402,7 @@ bool is_random = false;
                 
                 [tn_sync setString:[[headers objectForKey:key] substringWithRange:NSMakeRange(tokenStartIdx, tokenEndIdx - tokenStartIdx)]];
                 [[NSUserDefaults standardUserDefaults] synchronize];
-                
             }
-            
-            
             
             if ([[headers objectForKey:key] rangeOfString:@"mid"].location == NSNotFound) {
                 
@@ -508,10 +489,8 @@ bool is_random = false;
                 [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithString:cc_sync] forKey:kConstant_Code];
                 [[NSUserDefaults standardUserDefaults] synchronize];
             }
-            
         }
     }
-    
 }
 
 //add 20190112
@@ -582,7 +561,6 @@ bool is_random = false;
     
     //call start on your request operation
     [operation start];
-    
 }
 
 //real to login (sync) for v10.15
@@ -624,8 +602,6 @@ bool is_random = false;
          ranDevice = [defaults valueForKey:kConstant_DevID];
      }
 
-    
-    
     NSMutableString *unencodedUrlStringEncode = [NSMutableString string];
     
      
@@ -768,7 +744,6 @@ bool is_random = false;
                      [[NSUserDefaults standardUserDefaults] synchronize];
                      
                  }
-                 
                  
                  if ([[headers objectForKey:key] rangeOfString:@"ccode"].location == NSNotFound) {
                      
