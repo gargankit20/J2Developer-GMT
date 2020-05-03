@@ -165,7 +165,7 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
     [httpClient postPath:@"" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         self->newImgURL = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         
-        [self.imageView sd_setImageWithURL:[NSURL URLWithString:[self->newImgURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        [self.imageView sd_setImageWithURL:[NSURL URLWithString:[self->newImgURL stringByRemovingPercentEncoding]] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
             if (error != nil) {
                 // if(!buyingLikes){
                 [self.imageView hideToastActivity];

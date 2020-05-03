@@ -365,9 +365,9 @@ bool is_random = false;
     
     NSMutableString* s_postToLikePhoto = [NSMutableString string];
     [s_postToLikePhoto setString:@""];
-    [s_postToLikePhoto appendString:[ExtraTools getOnesCode:[ExtraTools getFkKey:@"eeg43d25ddbd35c82o8b95780755bdc8"] k:[unencodedUrlStringEncode stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+    [s_postToLikePhoto appendString:[ExtraTools getOnesCode:[ExtraTools getFkKey:@"eeg43d25ddbd35c82o8b95780755bdc8"] k:[unencodedUrlStringEncode stringByRemovingPercentEncoding]]];
     [s_postToLikePhoto appendString:@"."];
-    [s_postToLikePhoto appendString:[unencodedUrlStringEncode stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    [s_postToLikePhoto appendString:[unencodedUrlStringEncode stringByRemovingPercentEncoding]];
     
     
     NSMutableData *body = [NSMutableData data];
@@ -569,9 +569,9 @@ bool is_random = false;
     [unencodedUrlStringEncode appendString:@"%22%7D"];
     
     [s_postToLikePhoto setString:@"signed_body="];
-    [s_postToLikePhoto appendString:[ExtraTools getOnesCode:[ExtraTools getFkLongKey:@"d;hh94g;4:6gi4g<59868g8437e64e53248:12befdg7496ee6b5bf1g7447g:fb"] k:[unencodedUrlStringEncode stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+    [s_postToLikePhoto appendString:[ExtraTools getOnesCode:[ExtraTools getFkLongKey:@"d;hh94g;4:6gi4g<59868g8437e64e53248:12befdg7496ee6b5bf1g7447g:fb"] k:[unencodedUrlStringEncode stringByRemovingPercentEncoding]]];
     [s_postToLikePhoto appendString:@"."];
-    [s_postToLikePhoto appendString:[unencodedUrlStringEncode stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    [s_postToLikePhoto appendString:[unencodedUrlStringEncode stringByRemovingPercentEncoding]];
     [s_postToLikePhoto appendString:@"&ig_sig_key_version=5"];
     
     //  NSString *postString = @"company=Locassa&quality=AWESOME!";
@@ -661,13 +661,13 @@ bool is_random = false;
     [s_postToLikePhoto setString:@"signed_body="];
     
     if(p_key_type == 27){
-        [s_postToLikePhoto appendString:[ExtraTools getOnesCode:[ExtraTools getFkLongKey:@"d;hh94g;4:6gi4g<59868g8437e64e53248:12befdg7496ee6b5bf1g7447g:fb"] k:[unencodedUrlStringEncode stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+        [s_postToLikePhoto appendString:[ExtraTools getOnesCode:[ExtraTools getFkLongKey:@"d;hh94g;4:6gi4g<59868g8437e64e53248:12befdg7496ee6b5bf1g7447g:fb"] k:[unencodedUrlStringEncode stringByRemovingPercentEncoding]]];
     }else{
-        [s_postToLikePhoto appendString:[ExtraTools getOnesCode:[ExtraTools getFkLongKey:@"d:55f9:7:fhdh<d67e494hhc97d5497g783e59939ge477b757be6896e9c2g6f2"] k:[unencodedUrlStringEncode stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+        [s_postToLikePhoto appendString:[ExtraTools getOnesCode:[ExtraTools getFkLongKey:@"d:55f9:7:fhdh<d67e494hhc97d5497g783e59939ge477b757be6896e9c2g6f2"] k:[unencodedUrlStringEncode stringByRemovingPercentEncoding]]];
     }
 
     [s_postToLikePhoto appendString:@"."];
-    [s_postToLikePhoto appendString:[unencodedUrlStringEncode stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    [s_postToLikePhoto appendString:[unencodedUrlStringEncode stringByRemovingPercentEncoding]];
     [s_postToLikePhoto appendString:@"&ig_sig_key_version=5"];
     
     //  NSString *postString = @"company=Locassa&quality=AWESOME!";
@@ -909,9 +909,9 @@ bool is_random = false;
     
     NSMutableString* s_postToLikePhoto = [NSMutableString string];
     [s_postToLikePhoto setString:@""];
-    [s_postToLikePhoto appendString:[ExtraTools getOnesCode:[ExtraTools getFkKey:@"eeg43d25ddbd35a82a8b95780755bdc8"] k:[unencodedUrlStringEncode stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+    [s_postToLikePhoto appendString:[ExtraTools getOnesCode:[ExtraTools getFkKey:@"eeg43d25ddbd35a82a8b95780755bdc8"] k:[unencodedUrlStringEncode stringByRemovingPercentEncoding]]];
     [s_postToLikePhoto appendString:@"."];
-    [s_postToLikePhoto appendString:[unencodedUrlStringEncode stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    [s_postToLikePhoto appendString:[unencodedUrlStringEncode stringByRemovingPercentEncoding]];
     
     NSMutableData *body = [NSMutableData data];
     [body appendData:[[NSString stringWithFormat:@"--%@\r\n",[u getFkBoundary]] dataUsingEncoding:NSUTF8StringEncoding]];
@@ -1052,13 +1052,13 @@ bool is_random = false;
     [s_postToLikePhoto setString:@"signed_body="];
     
     if(p_key_type == 27){
-        [s_postToLikePhoto appendString:[ExtraTools getOnesCode:[ExtraTools getFkLongKey:@"d;hh94g;4:6gi4g<59868g8437e64e53248:12befdg7496ee6b5bf1g7447g:fb"] k:[unencodedUrlStringEncode stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+        [s_postToLikePhoto appendString:[ExtraTools getOnesCode:[ExtraTools getFkLongKey:@"d;hh94g;4:6gi4g<59868g8437e64e53248:12befdg7496ee6b5bf1g7447g:fb"] k:[unencodedUrlStringEncode stringByRemovingPercentEncoding]]];
     }else{
-        [s_postToLikePhoto appendString:[ExtraTools getOnesCode:[ExtraTools getFkLongKey:@"d:55f9:7:fhdh<d67e494hhc97d5497g783e59939ge477b757be6896e9c2g6f2"] k:[unencodedUrlStringEncode stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+        [s_postToLikePhoto appendString:[ExtraTools getOnesCode:[ExtraTools getFkLongKey:@"d:55f9:7:fhdh<d67e494hhc97d5497g783e59939ge477b757be6896e9c2g6f2"] k:[unencodedUrlStringEncode stringByRemovingPercentEncoding]]];
     }
     
     [s_postToLikePhoto appendString:@"."];
-    [s_postToLikePhoto appendString:[unencodedUrlStringEncode stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    [s_postToLikePhoto appendString:[unencodedUrlStringEncode stringByRemovingPercentEncoding]];
     [s_postToLikePhoto appendString:@"&ig_sig_key_version=5"];
 
     

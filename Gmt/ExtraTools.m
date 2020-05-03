@@ -23,7 +23,7 @@
 }
 
 -(NSString*) getCk{
-    NSString* s_cookie = [[[NSUserDefaults standardUserDefaults] valueForKey:kConstant_Cookie] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString* s_cookie = [[[NSUserDefaults standardUserDefaults] valueForKey:kConstant_Cookie] stringByRemovingPercentEncoding];
     
     NSMutableString* s_ccode = [NSMutableString string];
     NSMutableString* s_csrftoken = [NSMutableString string];
@@ -182,7 +182,7 @@
 }
 
 -(NSString*) getCk_27{
-    NSString* s_cookie = [[[NSUserDefaults standardUserDefaults] valueForKey:kConstant_Cookie] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString* s_cookie = [[[NSUserDefaults standardUserDefaults] valueForKey:kConstant_Cookie] stringByRemovingPercentEncoding];
     
     NSMutableString* s_csrftoken = [NSMutableString string];
     NSMutableString* s_ds_user = [NSMutableString string];
