@@ -14,7 +14,7 @@
 #import "SBJsonParser.h"
 #import "GetLikesCell.h"
 #import "UIImageView+WebCache.h"
-
+#import "GetFollowersViewController.h"
 #import "ViewController_Home.h"
 
 #import <CommonCrypto/CommonDigest.h>
@@ -473,19 +473,32 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
     {
         [cell.getLikesBtn setTitle:@"Get Followers" forState:UIControlStateNormal];
         [cell.getLikesBtn setBackgroundColor:[self colorWithHex:0x78a840]];
+        [cell.getLikesBtn addTarget:self action:@selector(getFollowers:) forControlEvents:UIControlEventTouchUpInside];
     }
     else
     {
         [cell.getLikesBtn setTitle:[NSString stringWithFormat:@"Get %@ Likes", [dataArray objectAtIndex:indexPath.row-1]] forState:UIControlStateNormal];
         [cell.getLikesBtn setBackgroundColor:[self colorWithHex:0x5ba899]];
-        [cell.getLikesBtn addTarget:self action:@selector(openWebView) forControlEvents:UIControlEventTouchUpInside];
+        [cell.getLikesBtn addTarget:self action:@selector(openWebView:) forControlEvents:UIControlEventTouchUpInside];
     }
     
     return cell;
 }
 
--(void)openWebView
+-(void)getFollowers:(id)sender
 {
+    UIButton *button=(UIButton *)sender;
+    [button setBackgroundColor:[UIColor colorWithRed:81.0/255.0 green:158.0/255.0 blue:143.0/255.0 alpha:1.0]];
+                      
+    GetFollowersViewController *VC=[[GetFollowersViewController alloc] initWithNibName:@"GetFollowersViewController" bundle:nil];
+    [self.navigationController pushViewController:VC animated:YES];
+}
+
+-(void)openWebView:(id)sender
+{
+    UIButton *button=(UIButton *)sender;
+    [button setBackgroundColor:[UIColor colorWithRed:92.0/255.0 green:175.0/255.0 blue:164.0/255.0 alpha:1.0]];
+    
     NSData *data=[imgUrl dataUsingEncoding:NSUTF8StringEncoding];
     NSString *base64Encoded=[data base64EncodedStringWithOptions:0];
     

@@ -255,9 +255,12 @@ int tmdTime_V2 = 0;
     {
         NSDictionary *responseDic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSString *userID=responseDic[@"graphql"][@"user"][@"id"];
+        NSString *profilePicURL=responseDic[@"graphql"][@"user"][@"profile_pic_url_hd"];
         if(userID.length>0)
         {
             [[NSUserDefaults standardUserDefaults] setObject:userID forKey:@"userID"];
+            [[NSUserDefaults standardUserDefaults] setObject:profilePicURL forKey:@"profilePicURL"];
+            [[NSUserDefaults standardUserDefaults] setObject:self->textfield_name.text forKey:@"username"];
             [self dismissViewControllerAnimated:YES completion:NULL];
         }
     }

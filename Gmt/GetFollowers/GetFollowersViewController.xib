@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GetFollowersViewController">
+            <connections>
+                <outlet property="followersLbl" destination="0hs-IG-yHz" id="z90-Y9-mzn"/>
+                <outlet property="tableView" destination="RXM-En-S44" id="WG1-O1-HbN"/>
+                <outlet property="userImageView" destination="iqA-D9-6tl" id="i8l-13-arx"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iqA-D9-6tl">
+                    <rect key="frame" x="85" y="30" width="150" height="150"/>
+                    <color key="backgroundColor" red="0.9137254901960784" green="0.9137254901960784" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="150" id="dMR-Ve-b82"/>
+                        <constraint firstAttribute="width" constant="150" id="ygJ-w6-rXF"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="75"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </imageView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0hs-IG-yHz">
+                    <rect key="frame" x="0.0" y="200" width="320" height="38"/>
+                    <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="38" id="y8F-j0-12D"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="RXM-En-S44">
+                    <rect key="frame" x="0.0" y="238" width="320" height="330"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="WHW-uB-Vp0"/>
+                        <outlet property="delegate" destination="-1" id="MtG-x2-iJ1"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="0hs-IG-yHz" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="2DH-vc-BoD"/>
+                <constraint firstItem="0hs-IG-yHz" firstAttribute="top" secondItem="iqA-D9-6tl" secondAttribute="bottom" constant="20" id="5b4-5s-fQR"/>
+                <constraint firstItem="RXM-En-S44" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="9OK-gh-NVU"/>
+                <constraint firstItem="RXM-En-S44" firstAttribute="top" secondItem="0hs-IG-yHz" secondAttribute="bottom" id="Cex-mm-4lW"/>
+                <constraint firstItem="RXM-En-S44" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="GkU-8I-aVj"/>
+                <constraint firstItem="iqA-D9-6tl" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="30" id="Otv-h6-6n7"/>
+                <constraint firstItem="0hs-IG-yHz" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="Xef-Mw-DnU"/>
+                <constraint firstItem="iqA-D9-6tl" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="ecW-AJ-WWf"/>
+                <constraint firstItem="RXM-En-S44" firstAttribute="bottom" secondItem="Q5M-cg-NOt" secondAttribute="bottom" id="nYt-hk-ljZ"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="132" y="110"/>
+        </view>
+    </objects>
+</document>

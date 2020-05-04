@@ -11,6 +11,8 @@
 		3E66AE47245EE19300786FD3 /* ImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E66AE45245EE19300786FD3 /* ImageCell.xib */; };
 		3E93D30E245FE535007F3ACA /* GetLikesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E93D30C245FE535007F3ACA /* GetLikesCell.m */; };
 		3E93D30F245FE536007F3ACA /* GetLikesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E93D30D245FE535007F3ACA /* GetLikesCell.xib */; };
+		3E93D31424600C0D007F3ACA /* GetFollowersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E93D31224600C0D007F3ACA /* GetFollowersViewController.m */; };
+		3E93D31524600C0D007F3ACA /* GetFollowersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E93D31324600C0D007F3ACA /* GetFollowersViewController.xib */; };
 		401310BC21E7814A0082C0F4 /* HomeVer_Final.m in Sources */ = {isa = PBXBuildFile; fileRef = 4013109621E7814A0082C0F4 /* HomeVer_Final.m */; };
 		401310BD21E7814A0082C0F4 /* ExtraTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 4013109921E7814A0082C0F4 /* ExtraTools.m */; };
 		401310BE21E7814A0082C0F4 /* ViewController_Shop.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4013109F21E7814A0082C0F4 /* ViewController_Shop.xib */; };
@@ -147,6 +149,9 @@
 		3E93D30B245FE535007F3ACA /* GetLikesCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetLikesCell.h; sourceTree = "<group>"; };
 		3E93D30C245FE535007F3ACA /* GetLikesCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetLikesCell.m; sourceTree = "<group>"; };
 		3E93D30D245FE535007F3ACA /* GetLikesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GetLikesCell.xib; sourceTree = "<group>"; };
+		3E93D31124600C0D007F3ACA /* GetFollowersViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetFollowersViewController.h; sourceTree = "<group>"; };
+		3E93D31224600C0D007F3ACA /* GetFollowersViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetFollowersViewController.m; sourceTree = "<group>"; };
+		3E93D31324600C0D007F3ACA /* GetFollowersViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GetFollowersViewController.xib; sourceTree = "<group>"; };
 		4013109621E7814A0082C0F4 /* HomeVer_Final.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeVer_Final.m; sourceTree = "<group>"; };
 		4013109721E7814A0082C0F4 /* Global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Global.h; sourceTree = "<group>"; };
 		4013109921E7814A0082C0F4 /* ExtraTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtraTools.m; sourceTree = "<group>"; };
@@ -391,6 +396,9 @@
 		3E93D310245FF698007F3ACA /* GetFollowers */ = {
 			isa = PBXGroup;
 			children = (
+				3E93D31124600C0D007F3ACA /* GetFollowersViewController.h */,
+				3E93D31224600C0D007F3ACA /* GetFollowersViewController.m */,
+				3E93D31324600C0D007F3ACA /* GetFollowersViewController.xib */,
 			);
 			path = GetFollowers;
 			sourceTree = "<group>";
@@ -869,6 +877,7 @@
 				401310F321E7815A0082C0F4 /* center_menu_on@3x.png in Resources */,
 				401310F521E7815A0082C0F4 /* heart_i_White@3x.png in Resources */,
 				401310C621E7814A0082C0F4 /* ToIncreaseViewController.xib in Resources */,
+				3E93D31524600C0D007F3ACA /* GetFollowersViewController.xib in Resources */,
 				401310F921E7815A0082C0F4 /* heart_i.png in Resources */,
 				401310FD21E7815A0082C0F4 /* background@2x.png in Resources */,
 				401310EF21E7815A0082C0F4 /* icon_coin@3x.png in Resources */,
@@ -966,6 +975,7 @@
 				4013119421E781660082C0F4 /* NSString+MJExtension.m in Sources */,
 				401311B421E781660082C0F4 /* UIImageView+HighlightedWebCache.m in Sources */,
 				401311B721E781660082C0F4 /* SDWebImageCodersManager.m in Sources */,
+				3E93D31424600C0D007F3ACA /* GetFollowersViewController.m in Sources */,
 				4013119021E781660082C0F4 /* NSObject+MJCoding.m in Sources */,
 				40ECCF1521C10D9A008B32CB /* main.m in Sources */,
 				4013118F21E781660082C0F4 /* MJProperty.m in Sources */,
