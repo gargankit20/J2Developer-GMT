@@ -31,9 +31,8 @@
                                     <constraint firstAttribute="height" constant="24" id="gUY-Oy-L1o"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qJy-FB-HyD">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qJy-FB-HyD">
                                 <rect key="frame" x="30" y="3" width="70" height="24"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -42,11 +41,13 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="qJy-FB-HyD" firstAttribute="top" secondItem="kgH-dt-DjK" secondAttribute="top" constant="3" id="4mR-WF-vsn"/>
                             <constraint firstAttribute="bottom" secondItem="n3X-Em-8W7" secondAttribute="bottom" constant="3" id="Dlw-48-x0Q"/>
                             <constraint firstItem="n3X-Em-8W7" firstAttribute="leading" secondItem="kgH-dt-DjK" secondAttribute="leading" constant="3" id="Hun-j0-lsu"/>
+                            <constraint firstAttribute="bottom" secondItem="qJy-FB-HyD" secondAttribute="bottom" constant="3" id="auw-Oq-CLQ"/>
                             <constraint firstItem="n3X-Em-8W7" firstAttribute="top" secondItem="kgH-dt-DjK" secondAttribute="top" constant="3" id="d9V-wp-BGF"/>
                             <constraint firstItem="qJy-FB-HyD" firstAttribute="leading" secondItem="n3X-Em-8W7" secondAttribute="trailing" constant="3" id="ed9-Ma-Bdx"/>
-                            <constraint firstItem="qJy-FB-HyD" firstAttribute="centerY" secondItem="n3X-Em-8W7" secondAttribute="centerY" id="hks-gP-6SQ"/>
+                            <constraint firstAttribute="trailing" secondItem="qJy-FB-HyD" secondAttribute="trailing" id="tFl-v7-Nl8"/>
                             <constraint firstAttribute="height" constant="30" id="zTj-93-Vpq"/>
                         </constraints>
                     </view>
@@ -62,12 +63,12 @@
                 <constraint firstItem="kgH-dt-DjK" firstAttribute="top" secondItem="NG5-bG-APT" secondAttribute="bottom" id="zmI-iB-qRh"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="qFu-rb-dpt"/>
-            <size key="customSize" width="100" height="130"/>
+            <size key="customSize" width="102" height="130"/>
             <connections>
                 <outlet property="imageView" destination="NG5-bG-APT" id="Zvc-bz-lOM"/>
                 <outlet property="likesLbl" destination="qJy-FB-HyD" id="YDk-AC-QP7"/>
             </connections>
-            <point key="canvasLocation" x="168.11594202898553" y="141.29464285714286"/>
+            <point key="canvasLocation" x="169.56521739130437" y="141.29464285714286"/>
         </collectionViewCell>
     </objects>
     <resources>

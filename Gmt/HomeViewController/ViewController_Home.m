@@ -800,7 +800,7 @@ bool hasCheckedVersionFirst = false;
 {
     [super viewDidLoad];
     
-    _collectionView.frame=CGRectMake(10, 46, self.view.frame.size.width-20, self.view.frame.size.height-280);
+    _collectionView.frame=CGRectMake(10, 46, self.view.frame.size.width-70, self.view.frame.size.height-280);
     [_collectionView registerNib:[UINib nibWithNibName:@"ImageCell" bundle:nil] forCellWithReuseIdentifier:@"Cell"];
     
     [self.rateUs setTitle:@"Rate Us" forState:UIControlStateNormal];
@@ -3230,6 +3230,21 @@ NSMutableString* _rank;
     cell.likesLbl.text=[NSString stringWithFormat:@"%@", likesCountArray[indexPath.row]];
     
     return cell;
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPad)
+    {
+        inIncreaseVC=[[ToIncreaseViewController alloc] initWithNibName:@"ToIncreaseViewController_iPad" bundle:nil];
+    }
+    else
+    {
+        inIncreaseVC=[[ToIncreaseViewController alloc] initWithNibName:@"ToIncreaseViewController" bundle:nil];
+    }
+    
+    inIncreaseVC.imgUrl=largeThumbnailsArray[indexPath.row];
+    [self.navigationController pushViewController:inIncreaseVC animated:YES];
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath

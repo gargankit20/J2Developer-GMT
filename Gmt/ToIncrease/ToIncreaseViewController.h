@@ -6,7 +6,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ToIncreaseViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,NSURLConnectionDelegate,UIAlertViewDelegate>
+@interface ToIncreaseViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,NSURLConnectionDelegate,UIAlertViewDelegate, UIWebViewDelegate>
 {
     UIButton *button_store;
     
@@ -28,6 +28,7 @@
     int failToUpdateCoins;
     
     NSString* newImgURL;
+    UIWebView *webView;
 }
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) UIImage *img;
@@ -37,7 +38,6 @@
 @property (nonatomic, strong) NSString *imgLikesCount;
 @property (weak, nonatomic) IBOutlet UITableView *selectLikesTable;
 @property (weak, nonatomic) IBOutlet UILabel *status_lbl;
-@property (strong, nonatomic) IBOutlet UILabel *diamond_lbl;
 
 -(void) set_delegate:(id)_id;
 

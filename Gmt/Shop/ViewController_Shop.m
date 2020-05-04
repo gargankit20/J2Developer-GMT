@@ -106,9 +106,6 @@ NSUserDefaults* user_defaults;
         
         success_loadedItem = false;
         
-        //deleted on 20160310
-        //[self loading_items];
-        
         allowSuperS = false;
         hasSuperS = true ;
         isLoadSuperS = false;
@@ -246,9 +243,6 @@ NSUserDefaults* user_defaults;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(press_back_button)];
     
     [self load_buttons];
-    
-    //deleted on 20160310
-    //[self loading_items];
     
     [self load_conversation];
 }

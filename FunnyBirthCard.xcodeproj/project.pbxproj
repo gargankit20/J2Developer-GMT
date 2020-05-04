@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3E66AE46245EE19300786FD3 /* ImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E66AE44245EE19300786FD3 /* ImageCell.m */; };
 		3E66AE47245EE19300786FD3 /* ImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E66AE45245EE19300786FD3 /* ImageCell.xib */; };
+		3E93D30E245FE535007F3ACA /* GetLikesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E93D30C245FE535007F3ACA /* GetLikesCell.m */; };
+		3E93D30F245FE536007F3ACA /* GetLikesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E93D30D245FE535007F3ACA /* GetLikesCell.xib */; };
 		401310BC21E7814A0082C0F4 /* HomeVer_Final.m in Sources */ = {isa = PBXBuildFile; fileRef = 4013109621E7814A0082C0F4 /* HomeVer_Final.m */; };
 		401310BD21E7814A0082C0F4 /* ExtraTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 4013109921E7814A0082C0F4 /* ExtraTools.m */; };
 		401310BE21E7814A0082C0F4 /* ViewController_Shop.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4013109F21E7814A0082C0F4 /* ViewController_Shop.xib */; };
@@ -20,10 +22,7 @@
 		401310C421E7814A0082C0F4 /* ViewController_Home_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 401310AC21E7814A0082C0F4 /* ViewController_Home_iPad.xib */; };
 		401310C521E7814A0082C0F4 /* ViewController_Home.m in Sources */ = {isa = PBXBuildFile; fileRef = 401310AD21E7814A0082C0F4 /* ViewController_Home.m */; };
 		401310C621E7814A0082C0F4 /* ToIncreaseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 401310B121E7814A0082C0F4 /* ToIncreaseViewController.xib */; };
-		401310C721E7814A0082C0F4 /* ToIncreaseCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 401310B221E7814A0082C0F4 /* ToIncreaseCell_iPad.xib */; };
 		401310C821E7814A0082C0F4 /* ToIncreaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 401310B321E7814A0082C0F4 /* ToIncreaseViewController.m */; };
-		401310C921E7814A0082C0F4 /* ToIncreaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 401310B421E7814A0082C0F4 /* ToIncreaseCell.m */; };
-		401310CA21E7814A0082C0F4 /* ToIncreaseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 401310B521E7814A0082C0F4 /* ToIncreaseCell.xib */; };
 		401310CB21E7814A0082C0F4 /* ToIncreaseViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 401310B821E7814A0082C0F4 /* ToIncreaseViewController_iPad.xib */; };
 		401310CC21E7814A0082C0F4 /* HomeVer.m in Sources */ = {isa = PBXBuildFile; fileRef = 401310BB21E7814A0082C0F4 /* HomeVer.m */; };
 		401310E821E7815A0082C0F4 /* red_btn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 401310CF21E7815A0082C0F4 /* red_btn@3x.png */; };
@@ -145,6 +144,9 @@
 		3E66AE43245EE19300786FD3 /* ImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageCell.h; sourceTree = "<group>"; };
 		3E66AE44245EE19300786FD3 /* ImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageCell.m; sourceTree = "<group>"; };
 		3E66AE45245EE19300786FD3 /* ImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCell.xib; sourceTree = "<group>"; };
+		3E93D30B245FE535007F3ACA /* GetLikesCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetLikesCell.h; sourceTree = "<group>"; };
+		3E93D30C245FE535007F3ACA /* GetLikesCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetLikesCell.m; sourceTree = "<group>"; };
+		3E93D30D245FE535007F3ACA /* GetLikesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GetLikesCell.xib; sourceTree = "<group>"; };
 		4013109621E7814A0082C0F4 /* HomeVer_Final.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeVer_Final.m; sourceTree = "<group>"; };
 		4013109721E7814A0082C0F4 /* Global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Global.h; sourceTree = "<group>"; };
 		4013109921E7814A0082C0F4 /* ExtraTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtraTools.m; sourceTree = "<group>"; };
@@ -163,12 +165,8 @@
 		401310AE21E7814A0082C0F4 /* ExtraTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtraTools.h; sourceTree = "<group>"; };
 		401310AF21E7814A0082C0F4 /* HomeVer_Final.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeVer_Final.h; sourceTree = "<group>"; };
 		401310B121E7814A0082C0F4 /* ToIncreaseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToIncreaseViewController.xib; sourceTree = "<group>"; };
-		401310B221E7814A0082C0F4 /* ToIncreaseCell_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToIncreaseCell_iPad.xib; sourceTree = "<group>"; };
 		401310B321E7814A0082C0F4 /* ToIncreaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToIncreaseViewController.m; sourceTree = "<group>"; };
-		401310B421E7814A0082C0F4 /* ToIncreaseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToIncreaseCell.m; sourceTree = "<group>"; };
-		401310B521E7814A0082C0F4 /* ToIncreaseCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToIncreaseCell.xib; sourceTree = "<group>"; };
 		401310B621E7814A0082C0F4 /* ToIncreaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToIncreaseViewController.h; sourceTree = "<group>"; };
-		401310B721E7814A0082C0F4 /* ToIncreaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToIncreaseCell.h; sourceTree = "<group>"; };
 		401310B821E7814A0082C0F4 /* ToIncreaseViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToIncreaseViewController_iPad.xib; sourceTree = "<group>"; };
 		401310BA21E7814A0082C0F4 /* HomeVer_PRE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeVer_PRE.h; sourceTree = "<group>"; };
 		401310BB21E7814A0082C0F4 /* HomeVer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeVer.m; sourceTree = "<group>"; };
@@ -390,9 +388,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E93D310245FF698007F3ACA /* GetFollowers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = GetFollowers;
+			sourceTree = "<group>";
+		};
 		4013109421E7814A0082C0F4 /* Gmt */ = {
 			isa = PBXGroup;
 			children = (
+				3E93D310245FF698007F3ACA /* GetFollowers */,
 				4013109E21E7814A0082C0F4 /* Shop */,
 				401310A621E7814A0082C0F4 /* LogTag */,
 				401310A921E7814A0082C0F4 /* HomeViewController */,
@@ -447,14 +453,13 @@
 		401310B021E7814A0082C0F4 /* ToIncrease */ = {
 			isa = PBXGroup;
 			children = (
-				401310B121E7814A0082C0F4 /* ToIncreaseViewController.xib */,
-				401310B221E7814A0082C0F4 /* ToIncreaseCell_iPad.xib */,
-				401310B321E7814A0082C0F4 /* ToIncreaseViewController.m */,
-				401310B421E7814A0082C0F4 /* ToIncreaseCell.m */,
-				401310B521E7814A0082C0F4 /* ToIncreaseCell.xib */,
 				401310B621E7814A0082C0F4 /* ToIncreaseViewController.h */,
-				401310B721E7814A0082C0F4 /* ToIncreaseCell.h */,
+				401310B321E7814A0082C0F4 /* ToIncreaseViewController.m */,
+				401310B121E7814A0082C0F4 /* ToIncreaseViewController.xib */,
 				401310B821E7814A0082C0F4 /* ToIncreaseViewController_iPad.xib */,
+				3E93D30B245FE535007F3ACA /* GetLikesCell.h */,
+				3E93D30C245FE535007F3ACA /* GetLikesCell.m */,
+				3E93D30D245FE535007F3ACA /* GetLikesCell.xib */,
 			);
 			path = ToIncrease;
 			sourceTree = "<group>";
@@ -868,11 +873,10 @@
 				401310FD21E7815A0082C0F4 /* background@2x.png in Resources */,
 				401310EF21E7815A0082C0F4 /* icon_coin@3x.png in Resources */,
 				40ECCF0F21C10D9A008B32CB /* Assets.xcassets in Resources */,
-				401310C721E7814A0082C0F4 /* ToIncreaseCell_iPad.xib in Resources */,
 				401310F021E7815A0082C0F4 /* red_btn ~ipad.png in Resources */,
-				401310CA21E7814A0082C0F4 /* ToIncreaseCell.xib in Resources */,
 				401310BE21E7814A0082C0F4 /* ViewController_Shop.xib in Resources */,
 				401310FA21E7815A0082C0F4 /* heart_i@3x.png in Resources */,
+				3E93D30F245FE536007F3ACA /* GetLikesCell.xib in Resources */,
 				401310C421E7814A0082C0F4 /* ViewController_Home_iPad.xib in Resources */,
 				401310EE21E7815A0082C0F4 /* icon_coin@2x.png in Resources */,
 				401310CB21E7814A0082C0F4 /* ToIncreaseViewController_iPad.xib in Resources */,
@@ -895,7 +899,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				401310C921E7814A0082C0F4 /* ToIncreaseCell.m in Sources */,
 				401311A521E781660082C0F4 /* AbstractFetcher.m in Sources */,
 				401311A321E781660082C0F4 /* SBJsonWriter.m in Sources */,
 				401310BD21E7814A0082C0F4 /* ExtraTools.m in Sources */,
@@ -930,6 +933,7 @@
 				4013119221E781660082C0F4 /* NSObject+MJProperty.m in Sources */,
 				3E66AE46245EE19300786FD3 /* ImageCell.m in Sources */,
 				401311BE21E781660082C0F4 /* SDWebImagePrefetcher.m in Sources */,
+				3E93D30E245FE535007F3ACA /* GetLikesCell.m in Sources */,
 				4013118D21E781660082C0F4 /* MJPropertyType.m in Sources */,
 				401311AE21E781660082C0F4 /* UIImageView+AFNetworking.m in Sources */,
 				401311C721E781660082C0F4 /* UIView+WebCacheOperation.m in Sources */,

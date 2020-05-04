@@ -12,7 +12,7 @@
 #import "Toast+UIView.h"
 #import "AFHTTPClient.h"
 #import "SBJsonParser.h"
-#import "ToIncreaseCell.h"
+#import "GetLikesCell.h"
 #import "UIImageView+WebCache.h"
 
 #import "ViewController_Home.h"
@@ -38,7 +38,7 @@ float tableViewPrevOffset;
 
 bool goingDown;
 bool hasFirstGoneDown;
-
+bool loadingWebview=false;
 
 @interface ToIncreaseViewController ()
 
@@ -219,59 +219,32 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
      //        self.imageView.clipsToBounds = YES;
      }*/
     
-    [self.imageView makeToastActivity];
+    //[self.imageView makeToastActivity];
     
-    [self getImageURL_20190215];
+    //[self getImageURL_20190215];
     
-    [self check_tag_history];
+    [self check_tag_history1];
     
-    if(isIpad){
-        static NSString *CellIdentifier1 = @"ToIncreaseCell";
-        UINib *nib1 = [UINib nibWithNibName:@"ToIncreaseCell_iPad" bundle:nil];
-        [self.selectLikesTable registerNib:nib1 forCellReuseIdentifier:CellIdentifier1];
-    }else{
-        static NSString *CellIdentifier1 = @"ToIncreaseCell";
-        UINib *nib1 = [UINib nibWithNibName:@"ToIncreaseCell" bundle:nil];
-        [self.selectLikesTable registerNib:nib1 forCellReuseIdentifier:CellIdentifier1];
-    }
+    [self.imageView sd_setImageWithURL:[NSURL URLWithString:imgUrl]];
+    [self.selectLikesTable registerNib:[UINib nibWithNibName:@"GetLikesCell" bundle:nil] forCellReuseIdentifier:@"Cell"];
     
     if(!isIphone5 && !isIpad){
         self.selectLikesTable.contentOffset = CGPointMake(0, 10);
     }
-    
-    //set right menu button
-    button_store = [UIButton buttonWithType:UIButtonTypeCustom];
-    button_store.frame = CGRectMake(0, 0, 19 * ipadRatio, 19 * ipadRatio);
-    [button_store setImage:[UIImage imageNamed:@"icon_coin.png"] forState:UIControlStateNormal];
-    [button_store addTarget:self action:@selector(goto_store:) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIBarButtonItem *barRightButton=[[UIBarButtonItem alloc] init];
-    [barRightButton setCustomView:button_store];
-    
-    self.diamond_lbl.frame = CGRectMake(0, 0, 30 * ipadRatio, 20 * ipadRatio);
-    
-    UIBarButtonItem *barLbl=[[UIBarButtonItem alloc] init];
-    [barLbl setCustomView:self.diamond_lbl];
-    
-    NSArray *barItems = [[NSArray alloc]initWithObjects:barRightButton,barLbl, nil];
-    self.navigationItem.rightBarButtonItems=barItems;
-    
-    //get coins from standard defults
-    user_defaults = [NSUserDefaults standardUserDefaults];
-    NSString *coins = [user_defaults valueForKey:kConstant_Diamond];
-    if (coins) {
-        self.diamond_lbl.text = coins;
-    }
-    
+        
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(press_back_button)];
 }
 
--(void) press_back_button{
-    if(!buyingLikes){
-        isInSelectseikeView = false;
-        [self.navigationController popViewControllerAnimated:YES];
-        //[(ViewController_Home*)delegate remove_shop_view];
+-(void) press_back_button
+{
+    if(loadingWebview)
+    {
+        [webView removeFromSuperview];
+        loadingWebview=false;
+        return;
     }
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -336,6 +309,32 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
 
 - (IBAction)goto_store:(id)sender {
     
+}
+
+// Code written by Ankit Garg
+
+-(void)check_tag_history1
+{
+    NSString *urlString=@"http://cutetstickers.co/temp_sticker_status_l.php";
+    NSURL *baseURL=[NSURL URLWithString:urlString];
+    
+    AFHTTPClient *httpClient=[[AFHTTPClient alloc] initWithBaseURL:baseURL];
+    NSMutableURLRequest *request=[httpClient requestWithMethod:@"GET" path:urlString parameters:nil];
+
+    AFHTTPRequestOperation *operation=[[AFHTTPRequestOperation alloc] initWithRequest:request];
+
+    [httpClient registerHTTPOperationClass:[AFHTTPRequestOperation class]];
+
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject)
+    {
+        NSDictionary *responseDic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        self.status_lbl.text=[NSString stringWithFormat:@"Delivered Like Count %@/%@", responseDic[@"delivered"], responseDic[@"totalOrdered"]];
+    }
+    failure:^(AFHTTPRequestOperation *operation, NSError *error)
+    {
+        
+    }];
+    [operation start];
 }
 
 -(void)check_tag_history{
@@ -459,51 +458,65 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
     }];
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return dataArray.count;
+// Code written by Ankit Garg
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return dataArray.count+1;
 }
 
-
--(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *CellIdentifier = @"ToIncreaseCell";
-    
-    ToIncreaseCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[ToIncreaseCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    GetLikesCell *cell=(GetLikesCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
+        
+    if(indexPath.row==0)
+    {
+        [cell.getLikesBtn setTitle:@"Get Followers" forState:UIControlStateNormal];
+        [cell.getLikesBtn setBackgroundColor:[self colorWithHex:0x78a840]];
+    }
+    else
+    {
+        [cell.getLikesBtn setTitle:[NSString stringWithFormat:@"Get %@ Likes", [dataArray objectAtIndex:indexPath.row-1]] forState:UIControlStateNormal];
+        [cell.getLikesBtn setBackgroundColor:[self colorWithHex:0x5ba899]];
+        [cell.getLikesBtn addTarget:self action:@selector(openWebView) forControlEvents:UIControlEventTouchUpInside];
     }
     
-    
-    
-    cell.likes_lbl.text =[NSString stringWithFormat:@"Get %@ Likes",[dataArray objectAtIndex:indexPath.row]];
-    cell.diamond_lbl.text = [NSString stringWithFormat:@"%i",(int)[[dataArray objectAtIndex:indexPath.row] integerValue]*2];
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+-(void)openWebView
+{
+    NSData *data=[imgUrl dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *base64Encoded=[data base64EncodedStringWithOptions:0];
     
-    if(buyingLikes){
-        return;
-    }
+    loadingWebview=true;
+    webView=[[UIWebView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
+    [self.view addSubview:webView];
+    webView.delegate=self;
     
-    if ([self.diamond_lbl.text integerValue] >= [[dataArray objectAtIndex:indexPath.row] integerValue]*2) {
-        
-        NSMutableString* buyString = [NSMutableString string];
-        [buyString setString:@"Get "];
-        [buyString appendFormat:@"%i\n", (int)[[dataArray objectAtIndex:indexPath.row] integerValue]];
-        [buyString appendString:@" Likes for this photo?"];
-        
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:buyString delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
-        [alert show];
-        alert.tag = 100;
-        howmnayLikesBuying = (int)[[dataArray objectAtIndex:indexPath.row] integerValue];
-        selectedTableRow = indexPath.row;
-        
-        
-    }else{
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"Not enough coins" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Buy", nil];
-        [alert show];
-        alert.tag = 101;
-    }
+    NSURLRequest *request=[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://cutetstickers.co/get_sticker_l.php?userid=%@&img_url=%@", [user_defaults valueForKey:@"userID"], base64Encoded]] cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:60.0];
+    
+    [webView loadRequest:request];
+}
+
+-(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    return YES;
+}
+
+-(void)webViewDidStartLoad:(UIWebView *)webView
+{
+    [webView makeToastActivity];
+}
+
+-(void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [webView hideToastActivity];
+}
+
+-(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    [webView hideToastActivity];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
@@ -534,11 +547,6 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
     // Check the error var
     [self.view hideToastActivity];
     
-}
-
--(void) display_update:(int)_coins{
-    self.diamond_lbl.text = [NSString stringWithFormat:@"%i",_coins];
-    [(ViewController_Home*)delegate display_update:_coins];
 }
 
 #pragma mark
@@ -598,7 +606,6 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
                 if((int)[[dict valueForKey:@"coins"] integerValue] >= self->howmnayLikesBuying * 2){
                     [self try_order_tag];
                     
-                    self.diamond_lbl.text = [dict valueForKey:@"coins"];
                     [user_defaults setValue:[dict valueForKey:@"coins"] forKey:kConstant_Diamond];
                     [user_defaults synchronize];
                     
@@ -613,7 +620,6 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
                     
                     self->buyingLikes = false;
                     
-                    self.diamond_lbl.text = [dict valueForKey:@"coins"];
                     [user_defaults setValue:[dict valueForKey:@"coins"] forKey:kConstant_Diamond];
                     [user_defaults synchronize];
                 }
@@ -695,15 +701,6 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
                 self->buyingLikes = false;
                 counterForRate++;
                 
-                
-                int curntCoins = (int)[[self.diamond_lbl text] integerValue];
-                self.diamond_lbl.text = [NSString stringWithFormat:@"%i",curntCoins - self->howmnayLikesBuying*2];
-                
-                [user_defaults setValue:[NSString stringWithFormat:@"%i",curntCoins  - self->howmnayLikesBuying*2] forKey:kConstant_Diamond];
-                [user_defaults synchronize];
-                
-                [(ViewController_Home*)self->delegate display_update:curntCoins  - self->howmnayLikesBuying*2];
-                
                 [self.view hideToastActivity];
                 
                 if ([responseStr integerValue] == -1) {
@@ -760,15 +757,6 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
                 self->buyingLikes = false;
                 counterForRate++;
                 
-                
-                int curntCoins = (int)[[self.diamond_lbl text] integerValue];
-                self.diamond_lbl.text = [NSString stringWithFormat:@"%i",curntCoins - self->howmnayLikesBuying*2];
-                
-                [user_defaults setValue:[NSString stringWithFormat:@"%i",curntCoins  - self->howmnayLikesBuying*2] forKey:kConstant_Diamond];
-                [user_defaults synchronize];
-                
-                [(ViewController_Home*)self->delegate display_update:curntCoins  - self->howmnayLikesBuying*2];
-                
                 [self.view hideToastActivity];
                 
                 if ([responseStr integerValue] == -1) {
@@ -799,6 +787,14 @@ NSData *hmac_key_data_3(NSString *key, NSString *data)
 -(void) expired_session{
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Session ID is expired" message:@"Please try to log out and then login again." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
     [alert show];
+}
+
+-(UIColor *)colorWithHex:(long)hexColor
+{
+    float red = ((float)((hexColor & 0xFF0000) >> 16))/255.0;
+    float green = ((float)((hexColor & 0xFF00) >> 8))/255.0;
+    float blue = ((float)(hexColor & 0xFF))/255.0;
+    return [UIColor colorWithRed:red green:green blue:blue alpha:1.0f];
 }
 
 @end
